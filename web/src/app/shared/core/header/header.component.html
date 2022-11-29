@@ -1,0 +1,30 @@
+<header>
+  <div id="header-content" [@openClose]="toogle ? 'open' : 'closed'">
+    <div id="left">
+      <a id="logo" routerLink="/">
+        <img src="assets/images/logo.png" alt="">
+      </a>
+    </div>
+    <div id="right">
+      <ul>
+        <li >
+          <a routerLink="/auth/login">
+            <img src="assets/images/icon-login.png">
+          </a>
+        </li>
+        <li >
+          <a routerLink="/auth/login">
+            <img src="assets/images/icon-search.png">
+          </a>
+        </li>
+        <li class="mr-0 ml-6">
+          <div id="toogle">
+            <div class="toggle-button" [ngClass]="{'on': toogle}" (click)="toogleMenu()">
+              <span></span>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,12 @@
+<div class="dropdown">
+    <div class="dropdown-title" (click)="openDropdown()">
+        <span>{{ nameSelect | translate}}</span>
+        <i class="fas fa-sort-down"></i>
+    </div>
+    <ul class="dropdown-list text_14 text_w6" *ngIf="isOpen">
+        <li class="item" *ngFor="let option of options,let i = index" (click)="handleSelectOption(option)">
+            {{option['itemName'] | translate}}
+        </li>
+    </ul>
+    <div *ngIf="isOpen" id="modal-alias" (click)="closeDropDown()"></div>
+</div>

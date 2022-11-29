@@ -1,0 +1,12 @@
+@import "./variables.scss";
+
+.btn-blue{
+    background-color: $blue;
+    color: white;
+    border: 0;
+}
+.btn-default{
+    color: #979797;
+    background-color: white;
+    border: 1px solid #E4E4E4;
+}

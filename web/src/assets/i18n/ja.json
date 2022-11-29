@@ -1,0 +1,36 @@
+{
+    "VALIDATION": {
+        "FIEDL_REQUIRED": "必須",
+        "MAX_LENGTH_100": "最大長100文字",
+        "MAIL_REQUIRED": "電子メールが必要です",
+        "MAIL_PATTERN": "電子メールは有効な電子メールでなければなりません",
+        "PASSWORD_REQUIRED": "パスワードが必要。",
+        "PASSWORD_MIN": "パスワードは6文字以上でなければなりません。",
+        "PASSWORD_MAX": "パスワードの長さは40文字を超えることはできません。",
+        "PASSWORD_NOT_MATCH":"パスワードが一致しません"
+    },
+    "AUTHETIONCATION": {
+        "LOGIN": "ログイン",
+        "FORGOT_PASSWORD": "パスワードをお忘れですか？",
+        "REGISTER": "新規登録",
+        "LOGOUT": "ログアウト"
+    },
+    "FORM":{
+        "EMAIL": "メールアドレス",
+        "PASSWORD": "パスワード",
+        "RE_PASSOWRD":"再パスワード"
+    },
+    "UTILS":{
+        "SUBMIT": "送信",
+        "CLOSE": "閉じる",
+        "CANCEL": "キャンセル",
+        "UPLOAD": "アップロード",
+        "SAVE": "セーブ",
+        "TITLE_SUCCESS": "成功",
+        "TITLE_ERROR": "エラー",
+        "TITLE_CONFIRM": "確認",
+        "UPDATE": "更新",
+        "OK": "閉じる",
+        "BACK": "バック"
+    }
+}

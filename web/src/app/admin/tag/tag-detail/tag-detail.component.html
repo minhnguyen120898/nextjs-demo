@@ -1,0 +1,31 @@
+<div id="list">
+    <div id="head">
+        <app-header-page  [data]="pageInfo"></app-header-page>
+    </div>
+    <a class="back" (click)="back()">
+        タグ　＞　新規登録</a>
+    <div class="search-tab">
+    </div>
+    <div id="create-content">
+
+        <div id="right" [formGroup]="formTag">
+            <div class="form-group-box form-group-box-flex">
+                <div class="form-group">
+                    <label>タグ</label>
+                    <div>
+                        <input formControlName="name" type="text">
+                        <p class="errors" class="errors" *ngIf="formErrors.name">
+                            {{
+                            formErrors.name
+                            }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-button">
+                <button (click)="handleReset()" class="btn-default">キャンセル</button>
+                <button (click)="handleCreate()" class="btn-blue">登 録</button>
+            </div>
+        </div>
+    </div>
+</div>

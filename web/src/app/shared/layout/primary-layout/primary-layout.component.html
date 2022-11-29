@@ -1,0 +1,50 @@
+<div class="header">
+  <a routerLink="/" id="head">
+    <!-- <img src="assets/image/logo-header.png"> -->
+    旅ニッチ
+  </a>
+  <div class="content-header ">
+    <a class="nav-item">
+      <img src="assets/images/icon-profile-black.png" alt="">
+      山田 花子
+    </a>
+    <a class="nav-item" (click)="logout()">
+      <img src="assets/images/icon-logout.png" alt="">
+    </a>
+    <div id="toogle" (click)="onToggleNav()">
+      <div class="toggle-button" [ngClass]="{'on': toogle}" (click)="toggleMenu()">
+        <span></span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="layout">
+  <div class="side_layout" [ngClass]="{'toggle-nav': !toggleNav}">
+    <div class="menu">
+      <ul>
+        <li *ngFor="let item of nav, let i =index;" class="nav-item">
+          <a (click)="clickNav(item, i)" class="nav-item-link" [ngClass]="{'router-link-active' : item.active}">
+            <div [innerHTML]="item.img | safeHtml">
+            </div>{{item.name | translate}}
+          </a>
+          <ul class="nav-child" *ngIf="item.sub_nav" id="nav_child_{{i}}">
+            <li *ngFor="let child of item.sub_nav">
+              <a class="nav-item-link-child" routerLink="{{child.url_sub}}" [routerLinkActiveOptions]="{exact: true}"
+                routerLinkActive="router-link-active">{{child.sub_name | translate}}
+              </a>
+            </li>
+          </ul>
+        </li>
+        <!-- <li style="cursor: pointer;" (click)="logout()" class="nav-item">
+          <a class="nav-item-link">
+            <img src="assets/image/log-out.png" alt="">
+            ログアウト
+          </a>
+        </li> -->
+      </ul>
+    </div>
+  </div>
+  <div class="content_layout" [ngClass]="{'expand-menu': toggleNav}">
+    <router-outlet></router-outlet>
+  </div>
+</div>
