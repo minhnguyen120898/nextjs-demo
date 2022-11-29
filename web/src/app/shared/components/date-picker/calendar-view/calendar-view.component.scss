@@ -1,0 +1,51 @@
+:host ::ng-deep {
+    .inner-calendar {
+        margin: 0 auto 5px;
+        font-size: 90%;
+        .captions {
+            margin-bottom: 5px;
+            padding-left: 12px;
+            background: url(../../../../assets/images/ico_arrow_04.gif) no-repeat left;
+            font-size: 120%;
+            width: 150px;
+            margin: 0 auto ;
+            text-align: center;
+        }
+
+        .calendar {
+            display: flex;
+            background: #fff;
+            border: none;
+            margin: 0 auto 5px;
+            width: 150px;
+            .off {
+                p:not(.th) {
+                    color: #f00;
+                }
+            }
+
+            .day-column {
+                font-size: 90%;
+                width: calc(100% / 7);
+
+                .th {
+                    padding: 1px 3px;
+                    background: #fff;
+                    border: none;
+                    text-align: center;
+                    height: 20px;
+                    line-height: 2;
+                }
+
+                #calender_area .off {
+                    color: #f00;
+                }
+
+                .today {
+                    background-color: #FFF99D;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}

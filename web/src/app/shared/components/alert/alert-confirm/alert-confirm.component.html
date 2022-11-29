@@ -1,0 +1,37 @@
+<div class="wrap-modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>{{alert?.title | translate}}</h2>
+        </div>
+        <div class="modal-body">
+            <p *ngIf="alert?.message" style="white-space: pre-wrap;">{{alert?.message | translate}}</p>
+            <p class="messsages" *ngIf="alert?.messages" style="white-space: pre-wrap;">
+                <span *ngFor="let item of alert.messages">
+                    {{item.title}}<button (click)="coppy(item.title)" *ngIf="item.copy">{{item.copy}}
+                    </button>
+                </span>
+            </p>
+            <div class="form" *ngIf="show_input">
+                <input (keyup)="key(text.value)" #text type="text">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn-default" [ngClass]="alert.class" *ngIf="alert?.mode == CrudType.CLOSE" (click)="close()">
+                {{ 'UTILS.CLOSE' | translate }}
+            </button>
+            <button class="btn-default" *ngIf="alert?.mode ==CrudType.CONFIRM" (click)="close()">
+                いいえ
+            </button>
+            <button class="btn-blue" [ngClass]="alert.class"
+                *ngIf="alert?.mode == CrudType.SAVE || alert?.mode == CrudType.CONFIRM" (click)="save()">
+                {{ (alert?.text || 'UTILS.SAVE') | translate }}
+            </button>
+            <button class="btn-blue" [ngClass]="alert.class" *ngIf="alert?.mode == CrudType.SUCCESS"
+                (click)="success()">
+                {{ 'UTILS.OK' | translate }}
+            </button>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,12 @@
+<div id="table-element">
+    <div *ngFor="let item of data,let i=index" class="item">
+        <img src="{{item.avata}}" onerror="this.src='assets/image/staff-default.png'" alt="">
+        <div>
+            登録日：{{item.create_time}} <br>
+            名前：{{item.name}} <br>
+            年齢：{{item.age}}歳 <br>
+            雇用形態：{{item.job}}
+        </div>
+        <button (click)="clickAction(item)" class="btn btn-pink">詳細を見る</button>
+    </div>
+</div>

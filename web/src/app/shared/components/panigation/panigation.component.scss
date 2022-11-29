@@ -1,0 +1,74 @@
+@import "../../../../assets/theme/variables.scss";
+
+#pag {
+
+    .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        list-style: none;
+        margin-top: 2.5rem;
+        padding: 0;
+        li {
+            margin: 0 1rem;
+
+            a {
+                width: 2.9rem;
+                height: 2.9rem;
+                cursor: pointer;
+            }
+        }
+
+        li.page {
+            margin: 0 1rem;
+
+            a {
+
+                border-radius: 5px;
+                border: 1px solid #707070;
+                font-family: 'SourceHanSansJP-Medium';
+                font-size: 1.6rem;
+                display: block;
+                text-align: center;
+                line-height: 1.5;
+            }
+
+        }
+
+        li.active {
+            a {
+                background-color: $purple;
+                color: white;
+            }
+        }
+    }
+
+    .purple {
+        li.active {
+            a {
+                background-color: $purple;
+                color: white;
+                border: 0;
+            }
+        }
+    }
+
+    .pink {
+        li.active {
+            a {
+                background-color: $pink;
+                color: white;
+                border: 0;
+            }
+        }
+    }
+     .yellow {
+        li.active {
+            a {
+                background-color: $yellowBold;
+                color: white;
+                border: 0;
+            }
+        }
+    }
+}

@@ -1,0 +1,72 @@
+// @import "~bootstrap/dist/css/bootstrap.css";
+@import "./assets/theme/commons.scss";
+@import "./assets/theme/responsive.scss";
+/* update your 'styles.css' with */
+/* or your 'styles.scss' with */
+html{
+    font-size: 62.5%;
+    min-width: 320px;
+    scroll-behavior: smooth;
+    body{
+        margin: 0;
+        font-family: 'SourceHanSansJP-Regular', 'Lato', 'Noto Sans JP', 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
+    }
+}
+*{
+    box-sizing: border-box;
+
+}
+
+@font-face {
+    font-family: 'SourceHanSansJP-Bold';
+    src: url(/assets/font/SourceHanSansJP-Bold.otf);
+}
+
+@font-face {
+    font-family: 'SourceHanSansJP-Light';
+    src: url(/assets/font/SourceHanSansJP-Light.otf);
+}
+
+@font-face {
+    font-family: 'SourceHanSansJP-Regular';
+    src: url(/assets/font/SourceHanSansJP-Regular.otf);
+}
+
+@font-face {
+    font-family: 'SourceHanSansJP-Medium';
+    src: url(/assets/font/SourceHanSansJP-Medium.otf);
+}
+
+@font-face {
+    font-family: 'SourceHanSansJP-Normal';
+    src: url(/assets/font/SourceHanSansJP-Normal.otf);
+}
+
+@font-face {
+    font-family: 'SourceHanSansJP-Heavy';
+    src: url(/assets/font/SourceHanSansJP-Heavy.otf);
+}
+
+@font-face {
+    font-family: 'SFCompactDisplay-Bold';
+    src: url(/assets/font/SFCompactDisplay-Bold.ttf);
+}
+
+@font-face {
+    font-family: 'Rounded Mgen+ 1m Medium';
+    src: url(/assets/font/rounded-mgenplus-1m-medium.ttf);
+}
+
+html{
+    font-size: 62.5%;
+    min-width: 320px;
+    scroll-behavior: smooth;
+    body{
+        margin: 0;
+        font-family: 'SourceHanSansJP-Regular', 'Lato', 'Noto Sans JP', 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
+    }
+}
+*{
+    box-sizing: border-box;
+
+}

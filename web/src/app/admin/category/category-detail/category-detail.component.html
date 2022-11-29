@@ -1,0 +1,46 @@
+<div id="list">
+    <div id="head">
+        <app-header-page  [data]="pageInfo"></app-header-page>
+    </div>
+    <a class="back" (click)="back()">
+        タグ　＞　新規登録</a>
+    <div class="search-tab">
+    </div>
+    <div id="create-content">
+
+        <div id="right" [formGroup]="formCategory">
+            <div class="form-group-box">
+                <div class="form-group">
+                    <label>カテゴリー</label>
+                    <div>
+                        <input formControlName="name" type="text">
+                        <p class="errors" class="errors" *ngIf="formErrors.name">
+                            {{
+                            formErrors.name
+                            }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group-box">
+                <div class="form-group">
+                    <label>親カテゴリー</label>
+                    <div>
+                        <app-select-dropdown (selectedOption)="handleSetEmloyment($event)"
+                            [nameSelect]="users.name_select" [options]="users.list"></app-select-dropdown>
+                        <p class="errors" class="errors" *ngIf="formErrors.user">
+                            {{
+                            formErrors.user
+                            }}
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="form-button">
+                <button (click)="handleReset()" class="btn-default">キャンセル</button>
+                <button (click)="handleCreate()" class="btn-blue">登 録</button>
+            </div>
+        </div>
+    </div>
+</div>

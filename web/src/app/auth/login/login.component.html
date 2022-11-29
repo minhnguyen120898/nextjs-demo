@@ -1,0 +1,28 @@
+<div class="form " [formGroup]="formLogin">
+  <div class="form-group">
+    <label class="label">
+      {{ "FORM.EMAIL" | translate }}
+    </label>
+    <input class="form-controls" type="text" formControlName="email" />
+    <p *ngIf="formErrors.email">
+      {{
+        formErrors.email | translate
+      }}
+    </p>
+  </div>
+  <!-- FORM INPUT PASSWORD -->
+  <div class="form-group">
+    <label class="label">
+      {{ "FORM.PASSWORD" | translate }}
+    </label>
+    <input class="form-controls" type="password" formControlName="password" />
+    <p *ngIf="formErrors.password">
+      {{
+        formErrors.password | translate
+      }}
+    </p>
+  </div>
+  <button class="btn-buzz btn-buzz-dark text-bold" (click)="handleLogin()">
+    {{ "AUTHETIONCATION.LOGIN" | translate }}
+  </button>
+</div>
