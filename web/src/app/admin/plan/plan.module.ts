@@ -34,7 +34,7 @@ const routes: Routes = [
     TableModule,
     FormsModule,
     ReactiveFormsModule,
-    SelectDropdDownModule
+    SelectDropdDownModule,
   ]
 })
 export class PlanModule { }

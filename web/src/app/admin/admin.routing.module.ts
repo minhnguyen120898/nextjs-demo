@@ -4,8 +4,11 @@ import { environment as config } from 'src/environments/environment';
 
 export const routes: Routes = [
     {
-        path: '', redirectTo: `/${config.routerLoginAdmin}/plan`,
+        path: '', redirectTo: `/${config.routerLoginAdmin}/members`,
         pathMatch: 'full'
+    },
+    {
+        path: 'members', loadChildren: () => import('./member/member.module').then(m => m.MemberModule)
     },
     {
         path: 'plan', loadChildren: () => import('./plan/plan.module').then(m => m.PlanModule)

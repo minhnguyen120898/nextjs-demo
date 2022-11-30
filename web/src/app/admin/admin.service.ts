@@ -8,6 +8,22 @@ export class AdminService extends BaseService {
         super(httpc)
     }
 
+    getListBuilding(page: number, limit: number, text: string) {
+        return this.getData(`user/admin/list?page=${page}&limit=${limit}&text=${text}`);
+    }
+
+    createBuilding(body: any){
+        return this.postData(``, body);
+    }
+
+    updateBuilding(body: any, id: any){
+        return this.postData(``, body);
+    }
+
+    deleteBuilding(id: string){
+        return this.delete(`id`);
+    }
+
     getListPlan(page: number, limit: number, text: string) {
         return this.getData(`user/admin/list?page=${page}&limit=${limit}&text=${text}`);
     }
@@ -21,6 +37,22 @@ export class AdminService extends BaseService {
     }
 
     deletePlan(id: string){
+        return this.delete(`id`);
+    }
+
+    getListUser(page: number, limit: number, text: string) {
+        return this.getData(`user/admin/list?page=${page}&limit=${limit}&text=${text}`);
+    }
+
+    createUser(body: any){
+        return this.postData(``, body);
+    }
+
+    updateUser(body: any, id: any){
+        return this.postData(``, body);
+    }
+
+    deleteUser(id: string){
         return this.delete(`id`);
     }
 
@@ -69,6 +101,22 @@ export class AdminService extends BaseService {
     }
 
     deleteAd(id: string){
+        return this.delete(`id`);
+    }
+
+    getListNotice(page: number, limit: number, text: string) {
+        return this.getData(`user/admin/list?page=${page}&limit=${limit}&text=${text}`);
+    }
+
+    createNotice(body: any){
+        return this.postData(``, body);
+    }
+
+    updateNotice(body: any, id: any){
+        return this.postData(``, body);
+    }
+
+    deleteNotice(id: string){
         return this.delete(`id`);
     }
 }

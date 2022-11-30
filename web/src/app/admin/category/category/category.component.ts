@@ -114,8 +114,19 @@ export class CategoryComponent implements OnInit {
         },
         { title: 'グルメ' },
         { title: 'グルメ' },
-        { title: '削除', action: ACTION_TYPE.DELETE },
-        { title: '編集', action: ACTION_TYPE.DETAIL }
+        {
+          title: '削除', action: ACTION_TYPE.DELETE,
+          style: {
+            cursor: 'pointer'
+          }
+        },
+        {
+          title: '編集', action: ACTION_TYPE.DETAIL,
+          style: {
+            color: '#979797',
+            cursor: 'pointer'
+          }
+        },
       ];
 
       temp.push(obj);

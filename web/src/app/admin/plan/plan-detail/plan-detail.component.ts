@@ -194,13 +194,23 @@ export class PlanDetailComponent implements OnInit {
   }
 
   handleReset() {
-
+    this.formErrors = {
+      user: '',
+      title: '',
+      first_name: '',
+      spaces: ''
+    };
+    this.formPlan.reset();
   }
 
   handleSetDelivery(event: any, index: number) {
     (this.formPlan.get('spaces') as FormArray).at(index).patchValue({
       delivery: event.value.type
     });
+  }
+
+  removeAt(index: number) {
+    (this.formPlan.get('spaces') as FormArray).removeAt(index);
   }
 
   getControlArray() {
@@ -215,7 +225,9 @@ export class PlanDetailComponent implements OnInit {
     (this.formPlan.get('spaces') as FormArray).push(
       this.formBuilder.group(
         {
-          age: ['', [Validators.required]]
+          time: ['', [Validators.required]],
+          delivery: ['', [Validators.required]],
+          id: ['', [Validators.required]],
         }
       )
     )

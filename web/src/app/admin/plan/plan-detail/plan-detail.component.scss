@@ -55,7 +55,17 @@
 
             .form-group-box {
                 margin-bottom: 2rem;
-
+                position: relative;
+                .delete{
+                    cursor: pointer;
+                    font-size: 1.4rem;
+                    position: absolute;
+                    right: 1rem;
+                    color: #707070;
+                    img{
+                        margin-right: 1rem;
+                    }
+                }
                 p.errors {
                     font-size: 1rem;
                     display: block;
