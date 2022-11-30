@@ -18,23 +18,34 @@
             margin-bottom: 4rem;
 
             .left {
-                border: 1px solid #E4E4E4;
                 width: 40%;
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                position: relative;
 
                 div {
                     margin-left: auto;
                     margin-right: auto;
 
                     img {
-                        max-width: 80%;
+                        width: 100%;
+                        max-width: 25.5rem;
+                        height: 17.3rem;
                     }
 
                     input {
                         display: none;
                     }
+                }
+
+                .caption {
+                    position: absolute;
+                    left: -1rem;
+                    top: 1rem;
+                    font-size: 1.8rem;
+                    font-family: 'SourceHanSansJP-Bold';
+                    color: #707070;
                 }
             }
 
@@ -58,6 +69,12 @@
                         margin-left: 4rem;
                         width: calc(100% - 7rem);
                         position: relative;
+
+                        span {
+                            display: block;
+                            font-size: 1.4rem;
+                            color: #707070;
+                        }
 
                         input[type='text'],
                         input[type='password'] {
@@ -105,5 +122,40 @@
     #list {
         padding-left: 0rem;
         padding-right: 0rem;
+
+        #content {
+            .item-banner {
+                padding: 2rem 1rem;
+                flex-direction: column;
+
+                .left {
+                    width: 100%;
+                    margin-bottom: 2rem;
+
+                    div {}
+
+                    .caption {
+                        left: 1rem;
+                    }
+                }
+
+                .right {
+                    width: 100%;
+                    padding-left: 0;
+
+                    .form-group {
+
+                        label {}
+
+                        div {}
+                    }
+
+                    .form-button {}
+
+
+                }
+            }
+        }
     }
+
 }

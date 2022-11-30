@@ -1,1 +1,416 @@
-<p>building-create works!</p>
+<div id="list">
+    <div id="head">
+        <app-header-page [data]="pageInfo"></app-header-page>
+    </div>
+    <a class="back" (click)="back()">
+        施設一覧　＞　新規登録</a>
+    <div id="create-content">
+
+        <div id="right" [formGroup]="formBuilding">
+            <div class="form-group-box">
+                <div class="form-group">
+                    <label>ステータス</label>
+                    <div class="content-field">
+                        <app-select-dropdown (selectedOption)="handleSetEmloyment($event)"
+                            [nameSelect]="status.name_select" [options]="status.list"></app-select-dropdown>
+                        <p class="errors" class="errors" *ngIf="formErrors.status">
+                            {{
+                            formErrors.status
+                            }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group-box">
+                <div class="form-group">
+                    <label>タイトル</label>
+                    <div class="content-field">
+                        <input formControlName="title" type="text">
+                        <p class="errors" class="errors" *ngIf="formErrors.title">
+                            {{
+                            formErrors.title
+                            }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group-box">
+                <div class="form-group">
+                    <label>アイキャッチ</label>
+                    <div id="loadimage">
+                        <img (click)="handleUpdateImage()" src="" onerror="this.src='assets/images/noimage.png'" alt="">
+                        <input id="input-file-main" type="file" (change)="onChangeImageMain($event)"
+                            accept="image/png,image/gif,image/jpeg,image/jpg">
+                        <p class="errors" class="errors" *ngIf="formErrors.image">
+                            {{
+                            formErrors.image
+                            }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group-box">
+                <div class="form-group">
+                    <label>本文</label>
+                    <div class="content-field">
+                        <textarea formControlName="text" name="" id="" cols="30" rows="10">
+
+                        </textarea>
+                        <p class="errors" class="errors" *ngIf="formErrors.text">
+                            {{
+                            formErrors.text
+                            }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group-box">
+                <div class="form-group">
+                    <label>カテゴリー</label>
+                    <div class="content-field">
+                        <app-select-dropdown (selectedOption)="handleSetCategory($event)"
+                            [nameSelect]="category.name_select" [options]="category.list"></app-select-dropdown>
+                        <p class="errors" class="errors" *ngIf="formErrors.category">
+                            {{
+                            formErrors.category
+                            }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group-box">
+                <div class="form-group">
+                    <label>タグ</label>
+                    <div class="content-field">
+                        <input formControlName="tag" type="text">
+                        <p class="errors" class="errors" *ngIf="formErrors.tag">
+                            {{
+                            formErrors.tag
+                            }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group-box">
+                <div class="form-group">
+                    <label>動画リンク</label>
+                    <div class="content-field">
+                        <input formControlName="video_link" type="text">
+                        <p class="errors" class="errors" *ngIf="formErrors.video_link">
+                            {{
+                            formErrors.video_link
+                            }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group-box">
+                <div class="form-group">
+                    <label>動画UP</label>
+                    <div id="loadimage">
+                        <img (click)="handleUpdateImage2()" src="" onerror="this.src='assets/images/upload-image.png'"
+                            alt="">
+                        <input id="input-file-main" type="file" (change)="onChangeImageMain2($event)"
+                            accept="image/png,image/gif,image/jpeg,image/jpg">
+                        <p class="errors" class="errors" *ngIf="formErrors.video_up">
+                            {{
+                            formErrors.video_up
+                            }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group-box">
+                <div class="form-group">
+                    <label>SEOタイトル<br>
+                        (title) </label>
+                    <div class="content-field">
+                        <input formControlName="seo_title" type="text">
+                        <p class="errors" class="errors" *ngIf="formErrors.seo_title">
+                            {{
+                            formErrors.seo_title
+                            }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group-box" style="border-bottom: 2px dashed #707070;padding-bottom: 2rem">
+                <div class="form-group">
+                    <label>ディスク<br>
+                        リプション<br>
+                        (meta description)</label>
+                    <div class="content-field">
+                        <input formControlName="meta_decription" type="text">
+                        <p class="errors" class="errors" *ngIf="formErrors.meta_decription">
+                            {{
+                            formErrors.meta_decription
+                            }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <h3>施設情報</h3>
+            <div class="form-group-box">
+                <div class="form-group">
+                    <label>コンテンツID</label>
+                    <div class="content-field">
+                        <input formControlName="content_id" type="text">
+                        <p class="errors" class="errors" *ngIf="formErrors.content_id">
+                            {{
+                            formErrors.content_id
+                            }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group-box">
+                <div class="form-group">
+                    <label>スポット名</label>
+                    <div class="content-field">
+                        <input formControlName="spot_name" type="text">
+                        <p class="errors" class="errors" *ngIf="formErrors.spot_name">
+                            {{
+                            formErrors.spot_name
+                            }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group-box">
+                <div class="form-group">
+                    <label>説明文</label>
+                    <div class="content-field">
+                        <textarea  formControlName="explanatory_text" name="" id="" cols="30" rows="10"></textarea>
+                        <p class="errors" class="errors" *ngIf="formErrors.explanatory_text">
+                            {{
+                            formErrors.explanatory_text
+                            }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group-box">
+                <div class="form-group">
+                    <label>URL</label>
+                    <div class="content-field">
+                        <input formControlName="url" type="text">
+                        <p class="errors" class="errors" *ngIf="formErrors.url">
+                            {{
+                            formErrors.url
+                            }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group-box">
+                <div class="form-group">
+                    <label>住所</label>
+                    <div class="content-field">
+                        <div class="dflex">
+                            <input formControlName="address" type="text">
+                            <button class="btn-blue">郵便番号から検索</button>
+                        </div>
+                        <div>
+                            <input formControlName="street_and_apartement" type="text">
+                        </div>
+                        <p class="errors" class="errors" *ngIf="formErrors.address">
+                            {{
+                            formErrors.address
+                            }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group-box">
+                <div class="form-group">
+                    <label>利用時間</label>
+                    <div class="content-field">
+                        <input formControlName="phone_number" type="text">
+                        <p class="errors" class="errors" *ngIf="formErrors.phone_number">
+                            {{
+                            formErrors.phone_number
+                            }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+           
+            <div class="form-group-box">
+                <div class="form-group">
+                    <label>休日</label>
+                    <div class="content-field">
+                        <input formControlName="utilization_time" type="text">
+                        <p class="errors" class="errors" *ngIf="formErrors.utilization_time">
+                            {{
+                            formErrors.utilization_time
+                            }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group-box">
+                <div class="form-group">
+                    <label>利用料金</label>
+                    <div class="content-field">
+                        <input formControlName="holiday" type="text">
+                        <p class="errors" class="errors" *ngIf="formErrors.holiday">
+                            {{
+                            formErrors.holiday
+                            }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group-box">
+                <div class="form-group">
+                    <label>利用料金</label>
+                    <div class="content-field">
+                        <input formControlName="usage_fee" type="text">
+                        <p class="errors" class="errors" *ngIf="formErrors.usage_fee">
+                            {{
+                            formErrors.usage_fee
+                            }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group-box">
+                <div class="form-group">
+                    <label>駐車場</label>
+                    <div class="content-field">
+                        <input formControlName="parking" type="text">
+                        <p class="errors" class="errors" *ngIf="formErrors.parking">
+                            {{
+                            formErrors.parking
+                            }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group-box">
+                <div class="form-group">
+                    <label>備考<br>
+                        (決済情報など)</label>
+                    <div class="content-field">
+                        <textarea formControlName="remake" name="" id="" cols="30" rows="10"></textarea>
+                        <p class="errors" class="errors" *ngIf="formErrors.remake">
+                            {{
+                            formErrors.remake
+                            }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group-box">
+                <div class="form-group">
+                    <label>滞在時間</label>
+                    <div class="content-field">
+                        <input formControlName="stay_time" type="text">
+                        <p class="errors" class="errors" *ngIf="formErrors.stay_time">
+                            {{
+                            formErrors.stay_time
+                            }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group-box">
+                <div class="form-group">
+                    <label>軽度</label>
+                    <div class="content-field">
+                        <input formControlName="longitude" type="text">
+                        <p class="errors" class="errors" *ngIf="formErrors.longitude">
+                            {{
+                            formErrors.longitude
+                            }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group-box">
+                <div class="form-group">
+                    <label>緯度</label>
+                    <div class="content-field">
+                        <input formControlName="latitude" type="text">
+                        <p class="errors" class="errors" *ngIf="formErrors.latitude">
+                            {{
+                            formErrors.latitude
+                            }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group-box">
+                <div class="form-group">
+                    <label>カテゴリー</label>
+                    <div class="content-field">
+                        <input formControlName="category_2" type="text">
+                        <p class="errors" class="errors" *ngIf="formErrors.category_2">
+                            {{
+                            formErrors.category_2
+                            }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group-box">
+                <div class="form-group">
+                    <label>画像</label>
+                    <div class="content-field">
+                        <div>
+                            <div class="collection-image">
+                                <div *ngFor="let item of images">
+                                    <img class="ima" src="assets/images/noimage.png" alt="">
+                                </div>
+                                <img (click)="addImage()" src="assets/images/icon-plus.png">
+                            </div>
+                        </div>
+                        <p class="errors" class="errors" *ngIf="formErrors.image_2">
+                            {{
+                            formErrors.image_2
+                            }}
+                        </p>
+                        <div class="checkbox">
+                            <input type="checkbox">おすすめに掲載する
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group-box">
+                <div class="form-group">
+                    <label>掲載期間</label>
+                    <div class="content-field">
+                        <div class="form-flex-inner">
+                            <div class="flex-item">
+                                <label></label>
+                                <app-date-picker (actionTime)="getTime($event, 'start_at')" [date]="date.start_at"
+                                    [pickerType]="'calendar'" [placeholder]="placeholder.start_at">
+                                </app-date-picker>
+                            </div>～
+                            <div class="flex-item">
+                                <label></label>
+                                <app-date-picker (actionTime)="getTime($event, 'end_at')" [date]="date.end_at"
+                                    [pickerType]="'calendar'" [placeholder]="placeholder.end_at">
+                                </app-date-picker>
+                            </div>
+                        </div>
+                        <p class="errors" class="errors" *ngIf="formErrors.start_at">
+                            {{
+                            formErrors.start_at
+                            }}
+                        </p>
+                        <p class="errors" class="errors" *ngIf="formErrors.end_at">
+                            {{
+                            formErrors.end_at
+                            }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-button">
+                <button (click)="handleReset()" class="btn-default">キャンセル</button>
+                <button (click)="handleCreate()" class="btn-blue">登 録</button>
+            </div>
+        </div>
+    </div>
+</div>

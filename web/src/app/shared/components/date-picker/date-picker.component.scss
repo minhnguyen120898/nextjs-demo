@@ -1,17 +1,17 @@
-.time{
+.time {
     height: 100%;
-   
-    input{
+
+    input {
+        padding-left: 1.5rem;
+        height: 3.3rem;
+        font-size: 1.6rem;
+        background-color: white;
+        border: 1px solid #E4E4E4;
         width: 100%;
-        height: 100%;
-        border: 1px solid #CDD6DD;
-        font-size: 1.2rem;
-        font-weight: bold;
-        font-family: 'SourceHanSansJP-Bold';
-        color: #3B4043;
-        background-image: url(../../../../assets/images/icon/icon-calendar.png);
-        background-position: right 1rem center;
-        background-repeat: no-repeat;
-        padding-left: 1rem;
+        border-radius: 5px;
+        font-family: 'SourceHanSansJP-Regular';
+    }
+    input::placeholder {
+        color: #E4E4E4;
     }
 }

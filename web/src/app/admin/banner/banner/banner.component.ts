@@ -37,7 +37,7 @@ export class BannerComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe(res => {
       console.log(res);
-      
+
       this.getData()
     });
 
@@ -138,7 +138,7 @@ export class BannerComponent implements OnInit {
     if (file) {
       const check = this.uploadService.validate_file(file, this.uploadService.extension.image);
       if (!check.status) {
-       check.error;
+        check.error;
       } else {
         const image = await this.uploadService.getBase64Default(file);
         // this.formStaff.get('image')?.setValue(image)

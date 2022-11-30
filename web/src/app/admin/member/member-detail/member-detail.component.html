@@ -1,0 +1,125 @@
+<div id="list">
+    <div id="head">
+        <app-header-page [data]="pageInfo"></app-header-page>
+    </div>
+    <a class="back" (click)="back()">
+        会員一覧　＞　会員詳細</a>
+    <div class="search-tab">
+    </div>
+    <div id="create-content">
+
+        <div id="right" [formGroup]="formMember">
+            <div class="form-group-box">
+                <div class="form-group">
+                    <label>ステータス</label>
+                    <div>
+                        <app-select-dropdown (selectedOption)="handleSetEmloyment($event)"
+                            [nameSelect]="status.name_select" [options]="status.list"></app-select-dropdown>
+                        <p class="errors" class="errors" *ngIf="formErrors.status">
+                            {{
+                            formErrors.status
+                            }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group-box">
+                <div class="form-group">
+                    <label>姓・名</label>
+                    <div>
+                        <div class="d-flex">
+                            <div>
+                                <input type="text" formControlName="first_name">
+                            </div>
+                            <div>
+                                <input type="text" formControlName="last_name">
+                            </div>
+                        </div>
+                        <p class="errors" class="errors" *ngIf="formErrors.first_name">
+                            {{
+                            formErrors.first_name
+                            }}
+                        </p>
+                        <p class="errors" class="errors" *ngIf="formErrors.last_name">
+                            {{
+                            formErrors.last_name
+                            }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group-box">
+                <div class="form-group">
+                    <label>セイ・メイ</label>
+                    <div>
+                        <div class="d-flex">
+                            <div>
+                                <input type="text" formControlName="first_name_kata">
+                            </div>
+                            <div>
+                                <input type="text" formControlName="last_name_kata">
+                            </div>
+                        </div>
+                        <p class="errors" class="errors" *ngIf="formErrors.first_name_kata">
+                            {{
+                            formErrors.first_name_kata
+                            }}
+                        </p>
+                        <p class="errors" class="errors" *ngIf="formErrors.last_name_kata">
+                            {{
+                            formErrors.last_name_kata
+                            }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group-box ">
+                <div class="form-group">
+                    <label>性別</label>
+                    <div>
+                        <input formControlName="gender" type="text">
+                        <p class="errors" class="errors" *ngIf="formErrors.gender">
+                            {{
+                            formErrors.gender
+                            }}
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="form-group-box ">
+                <div class="form-group">
+                    <label>お住まいの都道府県</label>
+                    <div>
+                        <input formControlName="prefectures" type="text">
+                        <p class="errors" class="errors" *ngIf="formErrors.prefectures">
+                            {{
+                            formErrors.prefectures
+                            }}
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="form-group-box ">
+                <div class="form-group">
+                    <label>メールアドレス</label>
+                    <div>
+                        <input formControlName="email" type="text">
+                        <p class="errors" class="errors" *ngIf="formErrors.email">
+                            {{
+                            formErrors.email
+                            }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group-box-checkbox">
+                <input type="checkbox"  formControlName="term" >メルマガの可否
+            </div>
+            <div class="form-button">
+                <button (click)="handleReset()" class="btn-default">キャンセル</button>
+                <button (click)="handleCreate()" class="btn-blue">登 録</button>
+            </div>
+        </div>
+    </div>

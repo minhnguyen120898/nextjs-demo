@@ -19,7 +19,7 @@ export class PlanComponent implements OnInit {
     is_seacrh: true,
     is_new: true,
     holder_search: '検索する',
-    text_new: 'CSVダウンロード'
+    text_new: 'プラン新規登録'
   }
   headers = [
     'NO.',
@@ -113,8 +113,19 @@ export class PlanComponent implements OnInit {
         {
           title: '山田太郎'
         },
-        { title: '削除', action: ACTION_TYPE.DELETE },
-        { title: '編集', action: ACTION_TYPE.DETAIL },
+        {
+          title: '削除', action: ACTION_TYPE.DELETE,
+          style: {
+            cursor: 'pointer'
+          }
+        },
+        {
+          title: '編集', action: ACTION_TYPE.DETAIL,
+          style: {
+            color: '#979797',
+            cursor: 'pointer'
+          }
+        },
       ];
 
       temp.push(obj);

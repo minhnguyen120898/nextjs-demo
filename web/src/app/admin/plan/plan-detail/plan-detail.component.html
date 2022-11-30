@@ -52,7 +52,6 @@
                                 </p>
                             </div>
                         </div>
-
                     </div>
                     <div class="form-group-box">
                         <div class="form-group">
@@ -68,7 +67,9 @@
                                 </p>
                             </div>
                         </div>
-
+                        <span class="delete" *ngIf="i != 0" (click)="removeAt(i)">
+                            <img src="assets/images/icon-delete.png" alt="">削除
+                        </span>
                     </div>
                     <div class="form-group-box form-group-box-flex">
                         <div class="form-group">
