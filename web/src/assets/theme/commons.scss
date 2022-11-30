@@ -1,12 +1,47 @@
 @import "./variables.scss";
 
-.btn-blue{
+.btn-blue {
     background-color: $blue;
     color: white;
     border: 0;
 }
-.btn-default{
+
+.btn-default {
     color: #979797;
     background-color: white;
     border: 1px solid #E4E4E4;
+}
+
+.menu {
+    a.router-link-active {
+        background-color: #004499 !important;
+        color: white !important;
+
+        svg {
+            fill: white !important;
+
+            path {
+                fill: white !important;
+            }
+        }
+    }
+
+    a.nav-item-link:hover {
+        background-color: #004499 !important;
+        color: white;
+
+        .hovesvg {
+            fill: white !important;
+        }
+
+        div {
+            svg {
+                fill: white !important;
+
+                path {
+                    fill: white !important;
+                }
+            }
+        }
+    }
 }
