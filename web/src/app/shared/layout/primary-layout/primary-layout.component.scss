@@ -157,8 +157,9 @@
 
                         svg {
                             fill: white !important;
-                            path{
-                            fill: white !important;
+
+                            path {
+                                fill: white !important;
                             }
                         }
                     }
@@ -192,9 +193,10 @@
                         div {
                             svg {
                                 fill: white !important;
-                                path{
+
+                                path {
                                     fill: white !important;
-                                    }
+                                }
                             }
                         }
                     }
@@ -302,13 +304,14 @@
 @media (max-width : 768px) {
     .header {
         padding: 0 1rem;
+
         .content-header {
             .nav-item {
                 margin-right: 1rem;
-                img {
-                }
+
+                img {}
             }
-    
+
             span {
                 margin: 0 .5rem;
                 cursor: pointer;

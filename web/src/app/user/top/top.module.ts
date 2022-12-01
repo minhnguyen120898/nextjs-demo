@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TopService } from './top.service';
 import { TopComponent } from './top/top.component';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+
 const routes: Routes = [
   {
     path: '', component: TopComponent
@@ -16,6 +18,7 @@ const routes: Routes = [
   imports: [
     RouterModule.forChild(routes),
     CommonModule,
+    CarouselModule,
   ],
   providers: [
     TopService

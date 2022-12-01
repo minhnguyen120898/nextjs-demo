@@ -1,5 +1,39 @@
 <section id="banner">
     <div id="inner-banner">
-       <img src="assets/images/fv.png" alt="">
+        <img src="assets/images/fv.png" alt="">
     </div>
 </section>
+<div id="sub-banner">
+    <owl-carousel-o [options]="customOptions">
+        <ng-template *ngFor="let item of listBanner" carouselSlide>
+            <div class="element">
+                <span>text</span>
+            </div>
+        </ng-template>
+    </owl-carousel-o>
+</div>
+<div class="tab">
+    <ul>
+        <li>
+            <a>おすすめ</a>
+        </li>
+        <li>
+            <a>グルメ</a>
+        </li>
+        <li>
+            <a>アクティビティ</a>
+        </li>
+    </ul>
+</div>
+<div class="building" *ngFor="let item of listData">
+    <h3>{{item.title}}<span>すべて見る</span></h3>
+    <div class="content">
+        <owl-carousel-o [options]="customOptions2">
+            <ng-template *ngFor="let child of item.datas" carouselSlide>
+                <div class="element">
+                    <span>text</span>
+                </div>
+            </ng-template>
+        </owl-carousel-o>
+    </div>
+</div>

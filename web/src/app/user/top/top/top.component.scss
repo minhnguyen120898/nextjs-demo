@@ -1,7 +1,194 @@
-#banner{
-   #inner-banner{
-        img{
+#banner {
+    #inner-banner {
+        img {
             width: 100%;
         }
-   } 
+    }
+}
+
+#sub-banner {
+    background-color: #10161B;
+    padding: 9rem 5rem 5rem;
+
+    .element {
+        height: 35rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #686868;
+        max-width: 504px;
+
+        span {
+            font-size: 3.5rem;
+            color: white;
+            font-family: 'Notosan';
+        }
+    }
+}
+
+.tab {
+    background-color: #10161B;
+    border-bottom: 1px solid white;
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+    padding-right: 5rem;
+    padding-left: 5rem;
+    ul {
+        margin: 0;
+        padding: 0;
+        display: flex;
+
+        li {
+            margin-right: 2rem;
+            a {
+                font-family: 'Noto Serif JP';
+                font-size: 2.4rem;
+                color: white;
+            }
+        }
+    }
+}
+
+.building {
+    background-color: #10161B;
+    padding: 5rem;
+
+    h3 {
+        font-size: 3.5rem;
+        color: white;
+        font-family: 'Noto Serif JP';
+        margin-top: 0;
+        margin-bottom: 2rem;
+        span {
+            border-radius: 2.4rem;
+            color: #fff;
+            background-color: #c82c2c;
+            line-height: 2;
+            font-size: 2.4rem;
+            display: inline-block;
+            margin-left: 10rem;
+            padding: 0 3rem;
+        }
+    }
+
+    .content {
+        ::ng-deep {
+            owl-carousel-o {
+                .owl-carousel {
+                    .owl-nav {
+
+                        .owl-prev,
+                        .owl-next {
+                            font-size: 5rem;
+                            width: 3.3rem;
+                            height: 5.6rem;
+                            position: absolute;
+                            background-color: transparent;
+                            color: white;
+                            text-align: center;
+                            top: 40%;
+                            cursor: pointer;
+                            line-height: 0.9;
+                        }
+
+                        .owl-prev {
+                            left: 0;
+                        }
+
+                        .owl-next {
+                            right: 0;
+                        }
+                    }
+                }
+            }
+        }
+
+        .element {
+            height: 35rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #686868;
+            max-width: 504px;
+
+            span {
+                font-size: 3.5rem;
+                color: white;
+                font-family: 'Notosan';
+            }
+        }
+    }
+}
+
+@media(max-width: 768px){
+    #sub-banner {
+        padding: 9rem 1.5rem 5rem;
+    
+        
+    }
+    
+    .tab {
+        padding-right: 1.5rem;
+        padding-left: 1.5rem;
+    }
+    
+    .building {
+        padding: 5rem 1.5rem;
+    
+        h3 {
+            span {
+                color: #fff;
+                margin-left: 3rem;
+            }
+        }
+    
+        .content {
+            ::ng-deep {
+                owl-carousel-o {
+                    .owl-carousel {
+                        .owl-nav {
+    
+                            .owl-prev,
+                            .owl-next {
+                                font-size: 5rem;
+                                width: 3.3rem;
+                                height: 5.6rem;
+                                position: absolute;
+                                background-color: transparent;
+                                color: white;
+                                text-align: center;
+                                top: 40%;
+                                cursor: pointer;
+                                line-height: 0.9;
+                            }
+    
+                            .owl-prev {
+                                left: 0;
+                            }
+    
+                            .owl-next {
+                                right: 0;
+                            }
+                        }
+                    }
+                }
+            }
+    
+            .element {
+                height: 35rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #686868;
+                max-width: 504px;
+    
+                span {
+                    font-size: 3.5rem;
+                    color: white;
+                    font-family: 'Notosan';
+                }
+            }
+        }
+    }
+    
 }

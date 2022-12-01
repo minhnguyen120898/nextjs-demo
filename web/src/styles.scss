@@ -4,6 +4,8 @@
 @import "~ng-pick-datetime/assets/style/picker.min.css";
 /* update your 'styles.css' with */
 /* or your 'styles.scss' with */
+@import '~ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
+@import '~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
 html{
     font-size: 62.5%;
     min-width: 320px;
@@ -22,6 +24,12 @@ html{
     font-family: 'SourceHanSansJP-Bold';
     src: url(/assets/font/SourceHanSansJP-Bold.otf);
 }
+
+@font-face {
+    font-family: 'Notosan';
+    src: url(/assets/font/NotoSansJP-Medium.otf);
+}
+
 
 @font-face {
     font-family: 'SourceHanSansJP-Light';
