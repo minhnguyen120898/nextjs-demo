@@ -1,0 +1,108 @@
+.slider {
+  margin: 100px auto;
+}
+
+.slick-slide {
+  margin: 0px 20px;
+}
+
+.slick-slide img {
+  width: 100%;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  color: black;
+}
+
+
+.slick-slide {
+  transition: all ease-in-out .3s;
+  opacity: .2;
+}
+
+.slick-active {
+  opacity: .5;
+}
+
+.slick-current {
+  opacity: 1;
+}
+.slick-dots{
+  margin-top: 2rem!important;
+  margin-bottom: 2rem!important;
+  bottom: unset!important;
+}
+.slick-dots li:not(.slick-active){
+  width: 1.4rem!important;
+  height: 1.4rem!important;
+}
+.slick-dots li:not(.slick-active) button{
+  width: 1.4rem!important;
+  height: 1.4rem!important;
+}
+.slick-dots li button {
+  background-color: white !important;
+  border-radius: 50%;
+}
+.slick-dots li.slick-active button:before {
+  content: '';
+  color: transparent;
+}
+
+.slick-dots li button:before {
+  content: ''!important;
+  color: transparent!important;
+}
+
+.regular2 .element {
+  height: 28rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #686868;
+  max-width: 504px;
+}
+
+
+
+.regular2 .element div {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.regular2 .element span {
+
+  font-size: 3.5rem;
+  color: white;
+  font-family: 'Notosan';
+}
+
+.regular .element {
+  height: 28rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #686868;
+  max-width: 504px;
+}
+
+
+
+.regular .element div {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.regular .element span {
+
+  font-size: 3.5rem;
+  color: white;
+  font-family: 'Notosan';
+}
