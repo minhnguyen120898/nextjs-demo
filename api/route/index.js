@@ -18,6 +18,7 @@ const notificationRouter=require("./notification/notification")
 const categoryRouter=require("./category/category")
 const tagRouter=require("./tag/tag")
 const bannerRouter=require("./banner/banner")
+const workRouter=require("./work/work")
 
 const qaRouter=require("./qa/qa")
 const newRouter=require("./news/news")
@@ -41,6 +42,7 @@ const registerRoutes = (app) => {
     app.use('/category', categoryRouter)
     app.use('/tag', tagRouter)
     app.use('/banner', bannerRouter)
+    app.use('/work', workRouter)
 
 }
 

@@ -88,7 +88,8 @@ module.exports = Object.freeze({
         SOCIAL_NETWORK: 'social_network',
         CATEGORY:"category",
         TAG:"tag",
-        BANNER:"banner"
+        BANNER:"banner",
+        WORK:"work"
     },
     NOTIFICATION:{
         EVENT:1,
