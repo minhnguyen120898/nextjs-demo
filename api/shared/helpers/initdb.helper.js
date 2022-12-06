@@ -27,6 +27,7 @@ const createAdmin = async () => {
     mongoose.model(appConstant.DATA_TABLE.USER).create({
         phone           : configCommon.getAdminConfig().phone,
         password        : password,
+        email:configCommon.getAdminConfig().email,
         role            : appConstant.USER.ROLE.ADMIN,
         type            : appConstant.USER.TYPE.PHONE,
         status          : appConstant.USER.STATUS.UPDATED,

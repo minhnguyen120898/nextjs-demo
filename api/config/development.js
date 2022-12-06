@@ -71,6 +71,7 @@ module.exports = Object.freeze({
     admin: {
         phone: '+84962309906',
         password: 'admin123',
+        email:"admin@gmail.com",
         id: "6059af719689fd168b1eaab0"
     }
 });
