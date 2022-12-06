@@ -4,6 +4,11 @@
     </div>
     <a class="back" (click)="back()">
         施設一覧　＞　新規登録</a>
+        <div class="tab-delete">
+            <span class="delete2" (click)="handleDelete()" *ngIf="id">
+                <img src="assets/images/icon-delete.png" alt="">削除
+            </span>
+        </div>
     <div id="create-content">
 
         <div id="right" [formGroup]="formBuilding">

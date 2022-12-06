@@ -116,7 +116,10 @@ export class BuildingComponent implements OnInit {
           title: '三重県志摩市阿児町神明...'
         },
         {
-          img: 'assets/images/icon-check.svg'
+          img: 'assets/images/icon-check.svg',
+          style: {
+            'margin-left': '3rem',
+          }
         },
         {
           title: '削除', action: ACTION_TYPE.DELETE,

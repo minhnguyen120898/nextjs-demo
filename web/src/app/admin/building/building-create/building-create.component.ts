@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ComponentActions } from 'src/app/shared/components/alert/component-actions';
 import { CrudType } from 'src/app/shared/enums/crud-type.enum';
-import { Utils } from 'src/app/shared/enums/utils';
+import { ACTION_TYPE, Utils } from 'src/app/shared/enums/utils';
 import { TimeService } from 'src/app/shared/services/helpers/time.service';
 import { UploadFileService } from 'src/app/shared/services/helpers/upload-file.service';
 import { ValidationService } from 'src/app/shared/services/helpers/validation.service';
@@ -217,8 +217,11 @@ export class BuildingCreateComponent implements OnInit {
       this.getData();
     }
     this.subject_save = this.componentActions.subject_save.subscribe((res: any) => {
-      if (res.create) {
+      if (res.action == ACTION_TYPE.CREATE) {
         this.create();
+      }
+      if (res.action == ACTION_TYPE.DELETE) {
+        this.delete(res.id);
       }
     });
 
@@ -251,7 +254,7 @@ export class BuildingCreateComponent implements OnInit {
       this.componentActions.showLoading();
       this.adminService.updateBuilding(body, this.id).subscribe(res => {
         this.componentActions.showPopup({
-          message: 'お知らせを投稿しました',
+          message: '施設の更新をしました',
           mode: CrudType.CLOSE,
           class: 'btn-blue',
           back: true
@@ -265,7 +268,7 @@ export class BuildingCreateComponent implements OnInit {
       this.componentActions.showLoading();
       this.adminService.createBuilding(body).subscribe(res => {
         this.componentActions.showPopup({
-          message: 'お知らせを投稿しました',
+          message: '施設の新規登録をしました',
           mode: CrudType.CLOSE,
           class: 'btn-blue',
           back: true
@@ -326,11 +329,42 @@ export class BuildingCreateComponent implements OnInit {
         message: `【${this.formBuilding.value.title}】\n
         このプランで保存しますか？`,
         mode: CrudType.CONFIRM,
-        create: true,
+        action: ACTION_TYPE.CREATE,
         text: 'はい'
       });
     }
   }
+
+  
+  handleDelete(){
+    this.componentActions.showPopup({
+      message: `【${1}】\n削除しますか？`,
+      mode: CrudType.CONFIRM,
+      action: ACTION_TYPE.DELETE,
+      id: this.id,
+      text: 'はい'
+    });
+  }
+
+  delete(id: any) {
+    this.adminService.deleteBuilding(id).subscribe(res => {
+      this.componentActions.showPopup({
+        message: '削除しました',
+        mode: CrudType.CLOSE,
+        class: 'btn-blue',
+        reget: true,
+        text: 'OK'
+      });
+      this.componentActions.hideLoading();
+    }, err => {
+      this.componentActions.showPopup({
+        message: err.errors.message,
+        mode: CrudType.CLOSE
+      });
+      this.componentActions.hideLoading();
+    });
+  }
+
 
   handleSetEmloyment(event: any) {
     this.formBuilding.get('user')?.setValue(event.value.type);

@@ -191,7 +191,7 @@ export class TagComponent implements OnInit {
   delete(id: any) {
     this.adminService.deleteTag(id).subscribe(res => {
       this.componentActions.showPopup({
-        message: '削除しました',
+        message: 'タグを削除しました',
         mode: CrudType.CLOSE,
         class: 'btn-blue',
         reget: true,

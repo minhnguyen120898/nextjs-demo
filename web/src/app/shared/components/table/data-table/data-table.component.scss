@@ -9,7 +9,11 @@
     box-shadow: 0 3px 6px #00000026;
     padding-bottom: 10rem;
 }
-
+@media(max-width: 768px){
+    .portlet-body {
+        padding: 3rem 1rem;
+    }
+}
 .pagesize {
     width: 9rem;
     margin-left: auto;
@@ -23,7 +27,7 @@
             line-height: 2;
             color: white;
             font-size: 1.4rem;
-            padding: 0.5rem 1rem;
+            padding: 0 1rem;
             display: block;
             width: 100%;
             border-radius: 5px;
@@ -80,13 +84,13 @@
             th {
                 color: #707070;
                 border: 0;
-                font-size: 1.5rem;
+                font-size: 1.4rem;
                 text-align: left;
                 padding-bottom: 0.6rem;
                 white-space: nowrap;
                 padding-left: 1rem;
+                font-weight: normal;
                 padding-right: 1rem;
-                font-family: 'SourceHanSansJP-Regular';
             }
         }
     }
@@ -102,7 +106,9 @@
             background: #fff;
             text-align: center;
             transition: all 0.4s ease-in-out;
-
+            background-image: url(../../../../../assets/images/arrow-right.png);
+            background-repeat: no-repeat;
+            background-position: right;
             td.action {
                 width: 10.1rem;
             }
@@ -120,9 +126,6 @@
 
                 .img {
                     display: block;
-                    width: 3.8rem;
-                    height: 3.8rem;
-                    overflow: hidden;
 
                     img {
                         object-fit: contain;
@@ -174,13 +177,6 @@
                 }
             }
 
-
-            td:last-child {
-                background-image: url(../../../../../assets/images/arrow-right.png);
-                background-repeat: no-repeat;
-                background-position: right 2rem top 2rem;
-            }
-
             &.active,
             &:hover {
                 background-color: rgba($color: #2964c6, $alpha: 0.41);
@@ -217,7 +213,7 @@
     padding-left: 0;
 
     li {
-        margin: 0 1rem;
+        margin: 0 .7rem;
 
         a {
             width: 2.9rem;
@@ -227,17 +223,17 @@
     }
 
     li.page {
-        margin: 0 1rem;
+        margin: 0 .7rem;
 
         a {
 
             border-radius: 5px;
-            border: 1px solid #707070;
-            font-family: 'SourceHanSansJP-Medium';
-            font-size: 1.6rem;
+            border: 1px solid #979797;
+            font-size: 1.4rem;
+            color: #979797;
             display: block;
             text-align: center;
-            line-height: 1.5;
+            line-height: 2;
         }
 
     }
@@ -305,3 +301,4 @@
     border: 0;
     cursor: pointer;
 }
+

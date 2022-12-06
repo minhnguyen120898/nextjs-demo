@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ComponentActions } from 'src/app/shared/components/alert/component-actions';
 import { CrudType } from 'src/app/shared/enums/crud-type.enum';
-import { Utils } from 'src/app/shared/enums/utils';
+import { ACTION_TYPE, Utils } from 'src/app/shared/enums/utils';
 import { ValidationService } from 'src/app/shared/services/helpers/validation.service';
 import { environment as config } from 'src/environments/environment';
 import { AdminService } from '../../admin.service';
@@ -75,8 +75,11 @@ export class CategoryDetailComponent implements OnInit {
       this.getData();
     }
     this.subject_save = this.componentActions.subject_save.subscribe((res: any) => {
-      if (res.create) {
+      if (res.action == ACTION_TYPE.CREATE) {
         this.create();
+      }
+      if (res.action == ACTION_TYPE.DELETE) {
+        this.delete(res.id);
       }
     });
 
@@ -103,7 +106,7 @@ export class CategoryDetailComponent implements OnInit {
       this.componentActions.showLoading();
       this.adminService.updateCategory(body, this.id).subscribe(res => {
         this.componentActions.showPopup({
-          message: 'タグの更新をしました',
+          message: 'カテゴリーの更新をしました',
           mode: CrudType.CLOSE,
           class: 'btn-blue',
           back: true
@@ -117,7 +120,7 @@ export class CategoryDetailComponent implements OnInit {
       this.componentActions.showLoading();
       this.adminService.createCategory(body).subscribe(res => {
         this.componentActions.showPopup({
-          message: 'タグの更新をしました',
+          message: 'カテゴリーの新規登録をしました',
           mode: CrudType.CLOSE,
           class: 'btn-blue',
           back: true
@@ -150,11 +153,42 @@ export class CategoryDetailComponent implements OnInit {
       this.componentActions.showPopup({
         message: `カテゴリーの新規登録をしました`,
         mode: CrudType.CONFIRM,
-        create: true,
+        action: ACTION_TYPE.CREATE,
         text: 'はい'
       });
     }
   }
+
+  
+  handleDelete(){
+    this.componentActions.showPopup({
+      message: `【${1}】\nこのカテゴリーを削除してもよろしいですか？`,
+      mode: CrudType.CONFIRM,
+      action: ACTION_TYPE.DELETE,
+      id: this.id,
+      text: 'はい'
+    });
+  }
+
+  delete(id: any) {
+    this.adminService.deleteCategory(id).subscribe(res => {
+      this.componentActions.showPopup({
+        message: 'カテゴリーを削除しました',
+        mode: CrudType.CLOSE,
+        class: 'btn-blue',
+        reget: true,
+        text: 'OK'
+      });
+      this.componentActions.hideLoading();
+    }, err => {
+      this.componentActions.showPopup({
+        message: err.errors.message,
+        mode: CrudType.CLOSE
+      });
+      this.componentActions.hideLoading();
+    });
+  }
+
 
   handleReset() {
 
