@@ -35,7 +35,7 @@ const schema = new Schema({
     image:String,
     is_featured:{type:Boolean,default:true},
     time_start:Number,
-    time_end:Nummber,
+    time_end:Number,
     created_at: Number,
     updated_at: Number,
 })
