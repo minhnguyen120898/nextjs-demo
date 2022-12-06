@@ -6,19 +6,7 @@
 /* or your 'styles.scss' with */
 @import '~ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
 @import '~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
-html{
-    font-size: 62.5%;
-    min-width: 320px;
-    scroll-behavior: smooth;
-    body{
-        margin: 0;
-        font-family: 'SourceHanSansJP-Regular', 'Lato', 'Noto Sans JP', 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
-    }
-}
-*{
-    box-sizing: border-box;
 
-}
 
 @font-face {
     font-family: 'SourceHanSansJP-Bold';
@@ -65,6 +53,7 @@ html{
     font-family: 'Rounded Mgen+ 1m Medium';
     src: url(/assets/font/rounded-mgenplus-1m-medium.ttf);
 }
+
 
 html{
     font-size: 62.5%;

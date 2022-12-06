@@ -1,10 +1,13 @@
 <div id="list">
     <div id="head">
-        <app-header-page  [data]="pageInfo"></app-header-page>
+        <app-header-page [data]="pageInfo"></app-header-page>
     </div>
     <a class="back" (click)="back()">
         プラン設計　＞　新規登録</a>
-    <div class="search-tab">
+    <div class="tab-delete">
+        <span class="delete2" (click)="handleDelete()" *ngIf="id">
+            <img src="assets/images/icon-delete.png" alt="">削除
+        </span>
     </div>
     <div id="create-content">
 
@@ -75,7 +78,7 @@
                         <div class="form-group">
                             <label for="">所要時間</label>
                             <div>
-                                <div class="box-input"  style="display: block;max-width: 20rem" >
+                                <div class="box-input" style="display: block;max-width: 20rem">
                                     <input formControlName="time" type="text">
                                     <span>分</span>
                                 </div>

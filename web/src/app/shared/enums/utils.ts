@@ -15,4 +15,5 @@ export enum TypeHeaderPage {
   export enum ACTION_TYPE {
     DELETE = 1,
     DETAIL = 2,
+    CREATE = 3
   }

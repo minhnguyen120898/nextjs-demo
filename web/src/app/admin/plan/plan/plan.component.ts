@@ -15,10 +15,10 @@ import { AdminService } from '../../admin.service';
 export class PlanComponent implements OnInit {
   pageInfo: any = {
     img: 'assets/images/icon-plan.svg',
-    title: 'プランを検索する',
+    title: 'プラン設計',
     is_seacrh: true,
     is_new: true,
-    holder_search: '検索する',
+    holder_search: 'プランを検索する',
     text_new: 'プラン新規登録'
   }
   headers = [

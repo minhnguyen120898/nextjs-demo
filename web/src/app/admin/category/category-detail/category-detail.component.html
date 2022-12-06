@@ -4,8 +4,11 @@
     </div>
     <a class="back" (click)="back()">
         タグ　＞　新規登録</a>
-    <div class="search-tab">
-    </div>
+        <div class="tab-delete">
+            <span class="delete2" (click)="handleDelete()" *ngIf="id">
+                <img src="assets/images/icon-delete.png" alt="">削除
+            </span>
+        </div>
     <div id="create-content">
 
         <div id="right" [formGroup]="formCategory">

@@ -153,7 +153,7 @@ export class CategoryComponent implements OnInit {
     }
     if (event.action == ACTION_TYPE.DELETE) {
       this.componentActions.showPopup({
-        message: `【${event.item.title}】\nこのタグを削除してもよろしいですか？`,
+        message: `【${event.item.title}】\nこのカテゴリーを削除してもよろしいですか？`,
         mode: CrudType.CONFIRM,
         action: ACTION_TYPE.DELETE,
         id: event.id,
@@ -194,7 +194,7 @@ export class CategoryComponent implements OnInit {
   delete(id: any) {
     this.adminService.deleteCategory(id).subscribe(res => {
       this.componentActions.showPopup({
-        message: '削除しました',
+        message: 'カテゴリーを削除しました',
         mode: CrudType.CLOSE,
         class: 'btn-blue',
         reget: true,

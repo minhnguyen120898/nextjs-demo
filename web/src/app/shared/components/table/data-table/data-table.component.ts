@@ -56,8 +56,11 @@ export class DataTableComponent implements OnInit {
   }
 
   choosepage(page: number) {
-    if (page > this.pager.endIndex || page < this.pager.startIndex) {
-      return;
+    if(page < 1){
+      page = 1;
+    }
+    if(page > this.pager.totalPages){
+      page = this.pager.totalPages;
     }
     this.setPage(page);
     if (this.currentPage != page) {

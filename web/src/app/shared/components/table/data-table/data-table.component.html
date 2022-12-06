@@ -1,7 +1,7 @@
 <div>
     <div class="pagesize" *ngIf="showOptionSize">
         <div class="dropdown">
-           <a  id="drop-pagesize-title" (click)="showDropPageSize()"> 件 : {{pageSize}}</a>
+           <a  id="drop-pagesize-title" (click)="showDropPageSize()">{{pageSize}}件</a>
            <ul id="drop-pagesize">
                 <li (click)="changePageSize(10)">
                     10
@@ -40,8 +40,8 @@
                                 {{content.title | translate}}
                             </ng-template>
                             <ng-template [ngIf]="content.img">
-                                <p class="img" [ngClass]="content.class">
-                                    <img src="{{content.img}}" alt="" >
+                                <p class="img" >
+                                    <img src="{{content.img}}" alt=""  [ngStyle]="content.style" >
                                 </p>
                             </ng-template>
                         </td>

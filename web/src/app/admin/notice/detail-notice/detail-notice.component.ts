@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ComponentActions } from 'src/app/shared/components/alert/component-actions';
 import { CrudType } from 'src/app/shared/enums/crud-type.enum';
-import { Utils } from 'src/app/shared/enums/utils';
+import { ACTION_TYPE, Utils } from 'src/app/shared/enums/utils';
 import { TimeService } from 'src/app/shared/services/helpers/time.service';
 import { UploadFileService } from 'src/app/shared/services/helpers/upload-file.service';
 import { ValidationService } from 'src/app/shared/services/helpers/validation.service';
@@ -98,8 +98,11 @@ export class DetailNoticeComponent implements OnInit {
       this.getData();
     }
     this.subject_save = this.componentActions.subject_save.subscribe((res: any) => {
-      if (res.create) {
+      if (res.action == ACTION_TYPE.CREATE) {
         this.create();
+      }
+      if (res.action == ACTION_TYPE.DELETE) {
+        this.delete(res.id);
       }
     });
 
@@ -132,7 +135,7 @@ export class DetailNoticeComponent implements OnInit {
       this.componentActions.showLoading();
       this.adminService.updateNotice(body, this.id).subscribe(res => {
         this.componentActions.showPopup({
-          message: 'お知らせを投稿しました',
+          message: 'お知らせの更新をしました',
           mode: CrudType.CLOSE,
           class: 'btn-blue',
           back: true
@@ -185,10 +188,39 @@ export class DetailNoticeComponent implements OnInit {
         message: `【${this.formNotice.value.title}】\n
         このプランで保存しますか？`,
         mode: CrudType.CONFIRM,
-        create: true,
+        action: ACTION_TYPE.CREATE,
         text: 'はい'
       });
     }
+  }
+
+  handleDelete(){
+    this.componentActions.showPopup({
+      message: `【${1}】\n削除しますか？`,
+      mode: CrudType.CONFIRM,
+      action: ACTION_TYPE.DELETE,
+      id: this.id,
+      text: 'はい'
+    });
+  }
+
+  delete(id: any) {
+    this.adminService.deleteNotice(id).subscribe(res => {
+      this.componentActions.showPopup({
+        message: 'タグを削除しました',
+        mode: CrudType.CLOSE,
+        class: 'btn-blue',
+        reget: true,
+        text: 'OK'
+      });
+      this.componentActions.hideLoading();
+    }, err => {
+      this.componentActions.showPopup({
+        message: err.errors.message,
+        mode: CrudType.CLOSE
+      });
+      this.componentActions.hideLoading();
+    });
   }
 
   handleSetEmloyment(event: any) {

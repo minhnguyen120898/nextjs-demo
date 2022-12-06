@@ -1,13 +1,15 @@
 <div id="list">
     <div id="head">
-        <app-header-page  [data]="pageInfo"></app-header-page>
+        <app-header-page [data]="pageInfo"></app-header-page>
     </div>
     <a class="back" (click)="back()">
         タグ　＞　新規登録</a>
-    <div class="search-tab">
+    <div class="tab-delete">
+        <span class="delete2" (click)="handleDelete()" *ngIf="id">
+            <img src="assets/images/icon-delete.png" alt="">削除
+        </span>
     </div>
     <div id="create-content">
-
         <div id="right" [formGroup]="formTag">
             <div class="form-group-box form-group-box-flex">
                 <div class="form-group">

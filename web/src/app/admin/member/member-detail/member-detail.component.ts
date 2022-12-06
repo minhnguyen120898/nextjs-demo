@@ -17,7 +17,7 @@ import { AdminService } from '../../admin.service';
 export class MemberDetailComponent implements OnInit {
 
   pageInfo: any = {
-    img: 'assets/images/icon-plan.svg',
+    img: 'assets/images/icon-member.svg',
     title: 'プランを検索する',
     is_seacrh: false,
     is_new: false,

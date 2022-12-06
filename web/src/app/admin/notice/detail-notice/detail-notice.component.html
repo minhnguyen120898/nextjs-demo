@@ -4,7 +4,10 @@
     </div>
     <a class="back" (click)="back()">
         担当設定　＞　新規登録</a>
-    <div class="search-tab">
+    <div class="tab-delete">
+        <span class="delete2" (click)="handleDelete()" *ngIf="id">
+            <img src="assets/images/icon-delete.png" alt="">削除
+        </span>
     </div>
     <div id="create-content">
 
@@ -39,17 +42,16 @@
             <div class="form-group-box form-group-box-flex">
                 <div class="form-group">
                     <label>アイキャッチ</label>
-                        <div id="loadimage">
-                            <img (click)="handleUpdateImage()" src="" onerror="this.src='assets/images/noimage.png'"
-                                alt="">
-                            <input id="input-file-main" type="file" (change)="onChangeImageMain($event)"
-                                accept="image/png,image/gif,image/jpeg,image/jpg">
-                                <p class="errors" class="errors" *ngIf="formErrors.image">
-                                    {{
-                                    formErrors.image
-                                    }}
-                                </p>
-                            </div>
+                    <div id="loadimage">
+                        <img (click)="handleUpdateImage()" src="" onerror="this.src='assets/images/noimage.png'" alt="">
+                        <input id="input-file-main" type="file" (change)="onChangeImageMain($event)"
+                            accept="image/png,image/gif,image/jpeg,image/jpg">
+                        <p class="errors" class="errors" *ngIf="formErrors.image">
+                            {{
+                            formErrors.image
+                            }}
+                        </p>
+                    </div>
                 </div>
             </div>
             <div class="form-group-box form-group-box-flex">

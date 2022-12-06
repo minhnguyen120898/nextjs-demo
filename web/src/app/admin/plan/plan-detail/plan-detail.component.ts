@@ -3,7 +3,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ComponentActions } from 'src/app/shared/components/alert/component-actions';
 import { CrudType } from 'src/app/shared/enums/crud-type.enum';
-import { TypeHeaderPage, Utils } from 'src/app/shared/enums/utils';
+import { ACTION_TYPE, TypeHeaderPage, Utils } from 'src/app/shared/enums/utils';
 import { TimeService } from 'src/app/shared/services/helpers/time.service';
 import { ValidationService } from 'src/app/shared/services/helpers/validation.service';
 import { environment as config } from 'src/environments/environment';
@@ -18,7 +18,7 @@ export class PlanDetailComponent implements OnInit {
 
   pageInfo: any = {
     img: 'assets/images/icon-plan.svg',
-    title: 'プランを検索する',
+    title: 'プラン設計',
     is_seacrh: false,
     is_new: false,
     holder_search: '検索する',
@@ -94,8 +94,11 @@ export class PlanDetailComponent implements OnInit {
       this.getData();
     }
     this.subject_save = this.componentActions.subject_save.subscribe((res: any) => {
-      if (res.create) {
+      if (res.action == ACTION_TYPE.CREATE) {
         this.create();
+      }
+      if (res.action == ACTION_TYPE.DELETE) {
+        this.delete(res.id);
       }
     });
 
@@ -142,7 +145,7 @@ export class PlanDetailComponent implements OnInit {
       this.componentActions.showLoading();
       this.adminService.createPlan(body).subscribe(res => {
         this.componentActions.showPopup({
-          message: '保存しました',
+          message: 'プランの更新をしました',
           mode: CrudType.CLOSE,
           class: 'btn-blue',
           back: true
@@ -153,6 +156,35 @@ export class PlanDetailComponent implements OnInit {
         this.componentActions.showPopup({ title: Utils.TITLE_ERROR, message: err.errors.message, mode: CrudType.CLOSE });
       });
     }
+  }
+
+  handleDelete(){
+    this.componentActions.showPopup({
+      message: `【${1}】\n削除しますか？`,
+      mode: CrudType.CONFIRM,
+      action: ACTION_TYPE.DELETE,
+      id: this.id,
+      text: 'はい'
+    });
+  }
+
+  delete(id: any) {
+    this.adminService.deletePlan(id).subscribe(res => {
+      this.componentActions.showPopup({
+        message: '削除しました',
+        mode: CrudType.CLOSE,
+        class: 'btn-blue',
+        reget: true,
+        text: 'OK'
+      });
+      this.componentActions.hideLoading();
+    }, err => {
+      this.componentActions.showPopup({
+        message: err.errors.message,
+        mode: CrudType.CLOSE
+      });
+      this.componentActions.hideLoading();
+    });
   }
 
 
@@ -183,7 +215,7 @@ export class PlanDetailComponent implements OnInit {
         message: `【${this.formPlan.value.title}】\n
         このプランで保存しますか？`,
         mode: CrudType.CONFIRM,
-        create: true,
+        action: ACTION_TYPE.CREATE,
         text: 'はい'
       });
     }
