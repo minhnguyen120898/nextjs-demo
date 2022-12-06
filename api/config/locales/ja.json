@@ -1,0 +1,161 @@
+{
+	"USER": {
+		"LOGIN": {
+			"USER_DOES_NOT_EXIST": "ユーザーは存在しません",
+			"INVALID_USER_ID": "無効なユーザーID",
+			"ACCOUNT_BLOCKED": "アカウントがブロックされました",
+			"ACCOUNT_NOT_ACTIVED": "アカウントはアクティブ化されていません",
+			"PASSWORD_IS_NOT_VALID": "パスワードが無効です",
+			"FAIL": "ログイン失敗"
+		},
+		"REGISTER": {
+			"EMAIL_IS_EXIST": "メールはすでに存在します",
+			"PHONE_IS_EXIST": "電話番号はすでに存在します",
+			"CREATE_ACCOUNT_SUCCESS": "アカウントが正常に作成されました",
+			"INVALID_ROLE": "ユーザーロールが無効です",
+			"PHONE_INVALID": "無効な電話番号"
+		},
+		"VERIFY": {
+			"ACTIVED": "アカウントはすでにアクティブ化されています",
+			"ACCOUNT_NOT_UPDATE": "アカウントは更新されていません情報",
+			"CODE_HAS_EXPIRED": "確認コードの有効期限が切れています",
+			"ACCOUNT_UPDATED": "アカウントが更新されました",
+			"VERIFY_CODE_INCORRECT": "確認コードが正しくありません",
+			"CODE_SENT": "確認コードが正常に送信されました",
+			"INVALID_PHONE": "無効な電話番号",
+			"INVALID_EMAIL": "無効な電子メールアドレス",
+			"INVALID_RESEND_CODE": "無効な再送コード",
+			"RESEND_CODE_SUCCESS": "コードの再送信に成功しました",
+			"SEND_CODE_FAILD": "送信されたアクティブなコードが失敗しました",
+			"UNABLE_UPLOAD_IMAGE": "画像をアップロードできません",
+			"VERIFIED": "成功を確認"
+		},
+		"GET": {
+			"NEWS_ID_NOT_FOUND": "ニュースIDが見つかりません",
+			"QA_ID_NOT_FOUND": "QA ID が見つかりません",
+			"CATEGORY_ID_NOT_FOUND": "カテゴリIDが見つかりません",
+			"COUNTRY_NOT_FOUND": "国が見つかりません",
+			"INVALID_STATUS": "無効なステータス",
+			"CONVERSATION_ID_NOT_FOUND": "会話IDが見つかりません",
+			"TAG_ID_NOT_FOUND": "タグIDが見つかりません",
+			"NICK_NAME_ALREADY_EXIST": "ニックネームはすでに存在します"
+		},
+		"CREATE": {
+			"SUCCESS": "データが正常に作成されました",
+			"INVALID_LOGO": "無効なロゴ",
+			"INVALID_BACKGROUND": "無効な背景",
+			"INVALID_TAGS": "無効なタグ",
+			"INVALID_TYPE": "無効なタイプ",
+			"INVALID_IMAGES": "無効な画像",
+			"INVALID_DATA": "無効なデータ"
+		},
+		"UPDATE": {
+			"PASSWORD_IN_USE": "このパスワードは使用中です",
+			"INFO_NOT_ENOUGH": "更新された情報が不完全です",
+			"UPDATED": "このアカウントは更新されました",
+			"INFO_SUCCESS": "情報が正常に更新されました",
+			"INVALID_DATA": "無効なデータ",
+			"MISS_DATA": "欠測データ",
+			"FORMAT_IMAGE_INVALID": "base64でエンコードされた写真をアップロードしてください",
+			"INVALID_STATUS": "無効なステータス",
+			"SUCCESS": "データは正常に更新されました",
+			"INVALID_NEW_PASSWORD": "Invalid new password"
+		},
+		"REMOVE": {
+			"SUCCESS": "データは正常に削除されました"
+		},
+		"RESET_PASSWORD": {
+			"RESET_PASSWORD_IS_SUCCESSFULLY": "パスワードのリセットに成功しました",
+			"CONFIRM_PASSWORD": "現在のパスワードを確認してください"
+		},
+		"AUTH": {
+			"INVALID_ACCESS_TOKEN": "無効なアクセストークン",
+			"INVALID_REFRESH_TOKEN": "無効な更新トークン",
+			"ACCESS_TOKEN_NOT_FOUND": "アクセストークンが見つかりません"
+		},
+		"LOGOUT": {
+			"LOG_OUT_SUCCESSFULLY": "正常にログアウトします"
+		},
+		"CONTACT": {
+			"EMAIL_DOES_NOT_EXIST": "このメールアドレスは存在しません",
+			"CONTACT_DOES_NOT_EXIST": "連絡先が存在しません",
+			"SEND_SUCCESS": "この連絡先は正常に送信されました",
+			"CATEGORY_NOT_FOUND": "連絡先カテゴリが見つかりません"
+		},
+		"SEND_EMAIL": {
+			"SENT_EMAIL_SUCCESSFULLY": "メールは正常に送信されました"
+		}
+	},
+	"MAIL": {
+		"TITLE": {
+			"REGISTER": "事前登録完了のお知らせ",
+			"RESET_PASSWORD": "パスワードをリセットしてください",
+			"REPLY_CONTACT": "連絡先に返信"
+		},
+		"CONTENT": {
+			"REGISTER_1": "この度はSupperDeliveryに事前登録いただき誠にありがとうございます。",
+			"REGISTER_2": "事前登録が完了いたしました。アプリリリース後はご登録いただいた電話番号とパスワードでログインが可能です。",
+			"REGISTER_3": "アプリリリースまで楽しみにお待ちください。よろしくお願い申し上げます。",
+			"FORGOT_PASSWORD_1": "30分以内にパスワードをリセットするには、このリンクをたどってください：",
+			"SIGNATURE_1": "SupperDelivery運営事務局"
+		}
+	},
+	"MIDD": {
+		"INVALID_FIRST_NAME": "first_nameフィールドのデータが無効です",
+		"INVALID_LAST_NAME": "last_nameフィールドのデータが無効です",
+		"INVALID_FIRST_NAME_KATAKANA": "first_name_katakanaフィールドのデータが無効です",
+		"INVALID_LAST_NAME_KATAKANA": "last_name_katakanaフィールドのデータが無効です",
+		"INVALID_EMAIL": "emailフィールドのデータが無効です",
+		"INVALID_BANK_NUMBER": "bank_authフィールドのデータが無効です",
+		"INVALID_CATEGORY": "categoryフィールドのデータが無効です",
+		"INVALID_CONTENT": "contentフィールドのデータが無効です"
+	},
+	"CONTACT": {
+		"CREATE_SUCCESS": "正常に処理されました",
+		"NOT_FOUND": "候補履歴IDが見つかりません",
+		"UPDATE_SUCCESS": "正常に処理されました",
+		"REMOVE_SUCCESS": "正常に処理されました",
+		"NOT_YET_UPDATE_KYC": "まだkycを更新していません"
+	},
+	"QA": {
+		"CREATE_SUCCESS": "正常に処理されました",
+		"NOT_FOUND": "候補履歴IDが見つかりません",
+		"UPDATE_SUCCESS": "正常に処理されました",
+		"REMOVE_SUCCESS": "正常に処理されました",
+		"NOT_YET_UPDATE_KYC": "まだkycを更新していません"
+	},
+	"NOTIFICATION": {
+		"CREATE_SUCCESS": "正常に処理されました",
+		"NOT_FOUND": "候補履歴IDが見つかりません",
+		"UPDATE_SUCCESS": "正常に処理されました",
+		"REMOVE_SUCCESS": "正常に処理されました",
+		"NOT_YET_UPDATE_KYC": "まだkycを更新していません",
+		"TITLE_MESSAGE": "#USER#からのメッセージがあります",
+		"TITLE_EVENT": "イベント",
+		"TITLE_KYC": "KYC",
+		"TITLE_CONTACT":"Contact",
+		"CONTENT_JOIN": "#USER#があなたのイベントに参加します",
+		"NEW_EVENT": "#USER#が新しいイベントを作成しました",
+		"USER_CANCEL_EVENT": "#USER#はあなたのイベントをキャンセルしました",
+		"OWNER_CANCEL_EVENT": "オーナーがイベントをキャンセルしました",
+		"OWNER_REJECT_USER": "所有者はあなたを拒否しました",
+		"OWNER_APPROVE_USER": "所有者はあなたを受け入れました",
+		"APPROVE_KYC":"管理者がKYCを承認",
+		"REJECT_KYC":"管理者はKYCを拒否しました",
+		"FIRST_REGISTER":"最初の登録"
+	},
+	"NEWS": {
+		"CREATE_SUCCESS": "正常に処理されました",
+		"NOT_FOUND": "候補履歴IDが見つかりません",
+		"UPDATE_SUCCESS": "正常に処理されました",
+		"REMOVE_SUCCESS": "正常に処理されました",
+		"NOT_YET_UPDATE_KYC": "まだkycを更新していません"
+	},
+	"COMMON": {
+		"CREATE_SUCCESS": "正常に処理されました",
+		"NOT_FOUND": "候補履歴IDが見つかりません",
+		"UPDATE_SUCCESS": "正常に処理されました",
+		"REMOVE_SUCCESS": "正常に処理されました",
+		"NOT_YET_UPDATE_KYC": "まだkycを更新していません"
+	}
+}
