@@ -1,14 +1,14 @@
 <div id="list">
     <div id="head">
-        <app-header-page  [data]="pageInfo"></app-header-page>
+        <app-header-page [data]="pageInfo"></app-header-page>
     </div>
     <a class="back" (click)="back()">
         タグ　＞　新規登録</a>
-        <div class="tab-delete">
-            <span class="delete2" (click)="handleDelete()" *ngIf="id">
-                <img src="assets/images/icon-delete.png" alt="">削除
-            </span>
-        </div>
+    <div class="tab-delete">
+        <span class="delete2" (click)="handleDelete()" *ngIf="id">
+            <img src="assets/images/icon-delete.png" alt="">削除
+        </span>
+    </div>
     <div id="create-content">
 
         <div id="right" [formGroup]="formCategory">
@@ -16,10 +16,10 @@
                 <div class="form-group">
                     <label>カテゴリー</label>
                     <div>
-                        <input formControlName="name" type="text">
-                        <p class="errors" class="errors" *ngIf="formErrors.name">
+                        <input formControlName="title" type="text">
+                        <p class="errors" class="errors" *ngIf="formErrors.title">
                             {{
-                            formErrors.name
+                            formErrors.title
                             }}
                         </p>
                     </div>
@@ -29,16 +29,32 @@
                 <div class="form-group">
                     <label>親カテゴリー</label>
                     <div>
-                        <app-select-dropdown (selectedOption)="handleSetEmloyment($event)"
-                            [nameSelect]="users.name_select" [options]="users.list"></app-select-dropdown>
-                        <p class="errors" class="errors" *ngIf="formErrors.user">
+                        <app-select-dropdown (selectedOption)="handleParentCategory($event)"
+                            [nameSelect]="categorys_parent.name_select" [options]="categorys_parent.list">
+                        </app-select-dropdown>
+                        <p class="errors" class="errors" *ngIf="formErrors.parent">
                             {{
-                            formErrors.user
+                            formErrors.parent
                             }}
                         </p>
                     </div>
                 </div>
-
+            </div>
+            <div class="form-group-box form-group-box-flex">
+                <div class="form-group">
+                    <label>アイキャッチ</label>
+                    <div id="loadimage">
+                        <img (click)="handleUpdateImage()" src="{{formCategory.value.image}}"
+                            onerror="this.src='assets/images/noimage.png'" alt="">
+                        <input id="input-file-main" type="file" (change)="onChangeImageMain($event)"
+                            accept="image/png,image/gif,image/jpeg,image/jpg">
+                        <p class="errors" class="errors" *ngIf="formErrors.image">
+                            {{
+                            formErrors.image
+                            }}
+                        </p>
+                    </div>
+                </div>
             </div>
             <div class="form-button">
                 <button (click)="handleReset()" class="btn-default">キャンセル</button>

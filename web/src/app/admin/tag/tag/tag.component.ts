@@ -36,7 +36,7 @@ export class TagComponent implements OnInit {
     text: ''
   }
   subject_save: any = null;
-  subject_close: any = null;
+  subject_success: any = null;
   data: any = [];
   constructor(private componentActions: ComponentActions,
     private activatedRoute: ActivatedRoute,
@@ -51,14 +51,12 @@ export class TagComponent implements OnInit {
     });
 
     this.subject_save = this.componentActions.subject_save.subscribe((res: any) => {
-      if (res && res.join && res.data) {
-        if (res.action == ACTION_TYPE.DELETE) {
-          this.delete(res.id);
-        }
+      if (res.action == ACTION_TYPE.DELETE) {
+        this.delete(res.id);
       }
     });
 
-    this.subject_close = this.componentActions.subject_close.subscribe((res: any) => {
+    this.subject_success = this.componentActions.subject_success.subscribe((res: any) => {
       if (res.back) {
         let params = {
           page: this.activatedRoute.snapshot.queryParamMap.get('page'),
@@ -75,17 +73,16 @@ export class TagComponent implements OnInit {
     this.panigation.currentPage = qparam && qparam.page ? Number(qparam.page) : 1;
     this.panigation.pageSize = qparam && qparam.pagesize ? Number(qparam.pagesize) : 10;
     this.panigation.text = qparam && qparam.text ? qparam.text : '';
-    
     this.adminService.getListTag(
       this.panigation.currentPage,
       this.panigation.pageSize,
-    this.panigation.text
+      this.panigation.text
     ).subscribe(res => {
       this.componentActions.hideLoading();
       this.panigation.totalPage = res.total;
-      this.data = this.conventData([1, 2, 3, 4, 5, 1, 2, 3, 4, 5]);
+      console.log(res);
+      this.data = this.conventData(res.docs);
     }, err => {
-      this.data = this.conventData([1, 2, 3, 4, 5, 1, 2, 3, 4, 5]);
       this.componentActions.hideLoading();
     })
   }
@@ -93,10 +90,8 @@ export class TagComponent implements OnInit {
     let temp: any = [];
     datas.forEach((e: any, key: number) => {
       let obj: any = {
-        id: 1,
-        item: {
-          title: 'text'
-        },
+        id: e._id,
+        item: e,
         content: [
 
         ],
@@ -108,9 +103,9 @@ export class TagComponent implements OnInit {
           title: key + 1 + '.'
         },
         {
-          title: '2022/10/25',
+          title: this.timeService.formatDateFromTimeUnix(e.created_at / 1000, this.timeService.DATE_TIME_FORMAT_JAPAN),
         },
-        { title: 'グルメ' },
+        { title: e.title },
         {
           title: '削除', action: ACTION_TYPE.DELETE,
           style: {
@@ -132,8 +127,6 @@ export class TagComponent implements OnInit {
   }
 
   handleAction(event: any) {
-    console.log(event);
-
     if (event.action == 'pagesize') {
       this.router.navigate([`/${config.routerLoginAdmin}/tag`],
         {
@@ -189,10 +182,11 @@ export class TagComponent implements OnInit {
   }
 
   delete(id: any) {
+    this.componentActions.showLoading();
     this.adminService.deleteTag(id).subscribe(res => {
       this.componentActions.showPopup({
         message: 'タグを削除しました',
-        mode: CrudType.CLOSE,
+        mode: CrudType.SUCCESS,
         class: 'btn-blue',
         reget: true,
         text: 'OK'
@@ -212,8 +206,8 @@ export class TagComponent implements OnInit {
     if (this.subject_save) {
       this.subject_save.unsubscribe();
     }
-    if (this.subject_close) {
-      this.subject_close.unsubscribe();
+    if (this.subject_success) {
+      this.subject_success.unsubscribe();
     }
   }
 }

@@ -85,7 +85,15 @@
 
                 .form-group {
                     display: flex;
+                    #loadimage {
+                        img {
+                            max-width: 25.5rem;
+                        }
 
+                        input {
+                            display: none;
+                        }
+                    }
                     label {
                         display: block;
                         font-size: 1.4rem;
