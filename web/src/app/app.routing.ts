@@ -13,7 +13,7 @@ export const APP_ROUTES: Routes = [
         path: `${environment.routerLoginAdmin}`,
         component: PrimaryLayoutComponent,
         loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
-        // canActivate: [AdminGuard]
+        canActivate: [AdminGuard]
     },
     {
         path: '',

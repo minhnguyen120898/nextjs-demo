@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ComponentActions } from 'src/app/shared/components/alert/component-actions';
 import { CrudType } from 'src/app/shared/enums/crud-type.enum';
 import { ACTION_TYPE, Utils } from 'src/app/shared/enums/utils';
+import { UploadFileService } from 'src/app/shared/services/helpers/upload-file.service';
 import { ValidationService } from 'src/app/shared/services/helpers/validation.service';
 import { environment as config } from 'src/environments/environment';
 import { AdminService } from '../../admin.service';
@@ -15,7 +16,7 @@ import { AdminService } from '../../admin.service';
 })
 export class CategoryDetailComponent implements OnInit {
 
-  
+
   pageInfo: any = {
     img: 'assets/images/icon-list.svg',
     title: 'カテゴリー',
@@ -25,39 +26,31 @@ export class CategoryDetailComponent implements OnInit {
     text_new: '新規登録'
   }
   subject_save: any = null;
-  subject_close: any = null;
+  subject_success: any = null;
+
   formErrors = {
-    name: '',
-    user: ''
+    title: '',
+    parent: '',
+    image: ''
   };
   validationMessages = {
-    name: {
-      required: '作成者を選択してください',
-      whitespace: '作成者を選択してください',
+    title: {
+      required: 'タイトルが必要です',
+      whitespace: 'タイトルが必要です',
     },
-    user: {
-      required: '作成者を選択してください',
-      whitespace: '作成者を選択してください',
+    parent: {
+      required: '',
+      whitespace: '',
+    },
+    image: {
+      required: '画像が必要です'
     }
   };
   formCategory: FormGroup = new FormGroup({});
   id: any = null;
 
-  users = {
-    list: [
-      {
-        itemName: '山田　太郎',
-        type: '正社員'
-      },
-      {
-        itemName: '田中　かずき',
-        type: '派遣社員'
-      },
-      {
-        itemName: '山下　花子',
-        type: 'アルバイト'
-      }
-    ],
+  categorys_parent: any = {
+    list: [],
     name_select: '- 選択してください'
   }
   constructor(private componentActions: ComponentActions,
@@ -65,15 +58,37 @@ export class CategoryDetailComponent implements OnInit {
     private adminService: AdminService,
     private router: Router,
     private formBuilder: FormBuilder,
-    private validatorService: ValidationService
+    private validatorService: ValidationService,
+    private uploadService: UploadFileService
   ) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.initForm();
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
+
+    await new Promise((resolve: any, reject: any) => {
+      this.adminService.getListCategory(1, 100, '').subscribe(res => {
+        res.docs = res.docs.map((e: any) => {
+          return {
+            itemName: e.title,
+            id: e._id,
+            parent: e.parent
+          }
+        }).filter((e: any) => {
+          return e.parent.length == 0;
+        });
+        resolve(res.docs);
+      }, err => {
+        resolve([]);
+      });
+    }).then(docs => {
+      this.categorys_parent.list = docs;
+    });
+
     if (this.id) {
       this.getData();
     }
+
     this.subject_save = this.componentActions.subject_save.subscribe((res: any) => {
       if (res.action == ACTION_TYPE.CREATE) {
         this.create();
@@ -83,7 +98,7 @@ export class CategoryDetailComponent implements OnInit {
       }
     });
 
-    this.subject_close = this.componentActions.subject_close.subscribe((res: any) => {
+    this.subject_success = this.componentActions.subject_success.subscribe((res: any) => {
       if (res.back) {
         this.back()
       }
@@ -91,25 +106,61 @@ export class CategoryDetailComponent implements OnInit {
   }
 
   getData() {
+    this.componentActions.showLoading();
+    this.adminService.getDetailCategory(this.id).subscribe(res => {
+      this.formCategory.patchValue({
+        title: res.title,
+        image: res.image,
+        parent: res.parent
+      });
 
+      if(res.parent&&res.parent[0]){
+        this.categorys_parent.name_select =  this.categorys_parent.list.find((e: any)=>{
+          return e.id == res.parent[0];
+        })?.itemName
+      }
+      this.componentActions.hideLoading();
+    }, err => {
+      this.componentActions.hideLoading();
+    })
   }
 
   back() {
     this.router.navigateByUrl(`/${config.routerLoginAdmin}/category`)
   }
 
+  handleUpdateImage() {
+    document.getElementById('input-file-main')?.click();
+  }
+
+
+  async onChangeImageMain(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      const check = this.uploadService.validate_file(file, this.uploadService.extension.image);
+      if (!check.status) {
+        check.error;
+      } else {
+        const image: any = await this.uploadService.getBase64Default(file);
+        this.formCategory.get('image')?.setValue(image.base64_default)
+      }
+    }
+  }
+
   create() {
     const body = {
       ...this.formCategory.value
     }
+
     if (this.id) {
       this.componentActions.showLoading();
       this.adminService.updateCategory(body, this.id).subscribe(res => {
         this.componentActions.showPopup({
           message: 'カテゴリーの更新をしました',
-          mode: CrudType.CLOSE,
+          mode: CrudType.SUCCESS,
           class: 'btn-blue',
-          back: true
+          back: true,
+          text: 'OK'
         });
         this.componentActions.hideLoading();
       }, err => {
@@ -121,9 +172,10 @@ export class CategoryDetailComponent implements OnInit {
       this.adminService.createCategory(body).subscribe(res => {
         this.componentActions.showPopup({
           message: 'カテゴリーの新規登録をしました',
-          mode: CrudType.CLOSE,
+          mode: CrudType.SUCCESS,
           class: 'btn-blue',
-          back: true
+          back: true,
+          text: 'OK'
         });
         this.componentActions.hideLoading();
       }, err => {
@@ -136,8 +188,9 @@ export class CategoryDetailComponent implements OnInit {
 
   initForm() {
     this.formCategory = this.formBuilder.group({
-      user: ['', [Validators.required, this.validatorService.noWhitespaceValidator]],
-      name: ['', [Validators.required, this.validatorService.noWhitespaceValidator]],
+      parent: [[], []],
+      title: ['', [Validators.required, this.validatorService.noWhitespaceValidator]],
+      image: ['', [Validators.required]],
     });
     this.formCategory.valueChanges.subscribe((data: object) => this.onValueChanged(data));
   }
@@ -159,10 +212,9 @@ export class CategoryDetailComponent implements OnInit {
     }
   }
 
-  
-  handleDelete(){
+  handleDelete() {
     this.componentActions.showPopup({
-      message: `【${1}】\nこのカテゴリーを削除してもよろしいですか？`,
+      message: `【${this.formCategory.value.title}】\nこのカテゴリーを削除してもよろしいですか？`,
       mode: CrudType.CONFIRM,
       action: ACTION_TYPE.DELETE,
       id: this.id,
@@ -171,12 +223,13 @@ export class CategoryDetailComponent implements OnInit {
   }
 
   delete(id: any) {
+    this.componentActions.showLoading();
     this.adminService.deleteCategory(id).subscribe(res => {
       this.componentActions.showPopup({
         message: 'カテゴリーを削除しました',
-        mode: CrudType.CLOSE,
+        mode: CrudType.SUCCESS,
         class: 'btn-blue',
-        reget: true,
+        back: true,
         text: 'OK'
       });
       this.componentActions.hideLoading();
@@ -189,13 +242,22 @@ export class CategoryDetailComponent implements OnInit {
     });
   }
 
-
   handleReset() {
-
+    this.formErrors = {
+      title: '',
+      parent: '',
+      image: ''
+    };
+    this.formCategory.reset();
+    if (this.id) {
+      this.getData();
+    }
   }
 
-  handleSetEmloyment(event: any) {
-    this.formCategory.get('user')?.setValue(event.value.type);
+  handleParentCategory(event: any) {
+    this.formCategory.get('parent')?.setValue([
+      event.value.id
+    ]);
   }
 
 
@@ -203,8 +265,8 @@ export class CategoryDetailComponent implements OnInit {
     if (this.subject_save) {
       this.subject_save.unsubscribe();
     }
-    if (this.subject_close) {
-      this.subject_close.unsubscribe();
+    if (this.subject_success) {
+      this.subject_success.unsubscribe();
     }
   }
 }

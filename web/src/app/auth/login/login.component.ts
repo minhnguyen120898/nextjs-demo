@@ -6,13 +6,18 @@ import { UserService } from 'src/app/shared/services/user/user.service';
 import { AuthService } from '../auth.service';
 import { EncodeDecodeService } from 'src/app/shared/services/helpers/encode-decode.service';
 import { Utils } from 'src/app/shared/enums/utils';
+import { environment as config } from 'src/environments/environment';
 import { CrudType } from 'src/app/shared/enums/crud-type.enum';
+import { UserRole } from 'src/app/shared/enums/user-role';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  typeAdmin: boolean = false;
+
   formLogin: FormGroup | any;
   formErrors = {
     email: '',
@@ -36,9 +41,12 @@ export class LoginComponent implements OnInit {
     private componentAction: ComponentActions,
     private userService: UserService,
     private authService: AuthService,
-    private encodeService: EncodeDecodeService
+    private encodeService: EncodeDecodeService,
+    private router: Router
 
-  ) { }
+  ) { 
+    this.typeAdmin = location.pathname.indexOf(config.routerLoginAdmin) > -1 ? true : false;
+  }
 
   ngOnInit() {
     this.initForm();
@@ -72,19 +80,27 @@ export class LoginComponent implements OnInit {
     this.formErrors = this.validationService.checkErorrNotDiry(this.formLogin, this.formErrors, this.validationMessages);
     }
     if (this.formLogin.valid) {
-      this.componentAction.showLoading();
-      this.authService.login(
-        this.encodeService.encode(`${this.formLogin.value.email}:${this.formLogin.value.password}`)).subscribe(
-          res => {
-            this.userService.setToken(res.token);
-            this.userService.login(true);
-            this.componentAction.hideLoading();
-          },
-          err => {
-            this.componentAction.showPopup({ title: Utils.TITLE_ERROR, message: err.errors.message, mode: CrudType.CLOSE });
-            this.componentAction.hideLoading();
+      const auth =
+      this.encodeService.encode(`${this.formLogin.value.email}:${this.formLogin.value.password}:${this.typeAdmin ? UserRole.ADMIN: UserRole.NORMAL}`);
+    this.componentAction.showLoading();
+    this.authService.login(auth).subscribe(
+      res => {
+        console.log(res);
+        
+        this.componentAction.hideLoading();
+          this.userService.setToken(res.token);
+          this.userService.login(true);
+          if(this.typeAdmin){
+            this.router.navigateByUrl(`/${config.routerLoginAdmin}`);
           }
-        );
+      },
+      err => {
+        console.log(err);
+        
+        this.componentAction.showPopup({ title: Utils.TITLE_ERROR, message: err.errors.message, mode: CrudType.CLOSE });
+        this.componentAction.hideLoading();
+      }
+    );
     }
   }
 

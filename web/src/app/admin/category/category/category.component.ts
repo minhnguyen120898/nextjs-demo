@@ -14,7 +14,7 @@ import { AdminService } from '../../admin.service';
 })
 export class CategoryComponent implements OnInit {
 
- 
+
   pageInfo: any = {
     img: 'assets/images/icon-list.svg',
     title: 'カテゴリー',
@@ -28,17 +28,18 @@ export class CategoryComponent implements OnInit {
     '作成日',
     'カテゴリー',
     '親カテゴリー',
+    'アイキャッチ',
     '',
     ''
   ];
   panigation = {
     pageSize: 10,
-    totalPage: 100,
+    totalPage: 0,
     currentPage: 1,
     text: ''
   }
   subject_save: any = null;
-  subject_close: any = null;
+  subject_success: any = null;
   data: any = [];
   constructor(private componentActions: ComponentActions,
     private activatedRoute: ActivatedRoute,
@@ -53,15 +54,13 @@ export class CategoryComponent implements OnInit {
     });
 
     this.subject_save = this.componentActions.subject_save.subscribe((res: any) => {
-      if (res && res.join && res.data) {
-        if (res.action == ACTION_TYPE.DELETE) {
-          this.delete(res.id);
-        }
+      if (res.action == ACTION_TYPE.DELETE) {
+        this.delete(res.id);
       }
     });
 
-    this.subject_close = this.componentActions.subject_close.subscribe((res: any) => {
-      if (res.back) {
+    this.subject_success = this.componentActions.subject_success.subscribe((res: any) => {
+      if (res.reget) {
         let params = {
           page: this.activatedRoute.snapshot.queryParamMap.get('page'),
           pagesize: this.activatedRoute.snapshot.queryParamMap.get('pagesize'),
@@ -77,17 +76,15 @@ export class CategoryComponent implements OnInit {
     this.panigation.currentPage = qparam && qparam.page ? Number(qparam.page) : 1;
     this.panigation.pageSize = qparam && qparam.pagesize ? Number(qparam.pagesize) : 10;
     this.panigation.text = qparam && qparam.text ? qparam.text : '';
-    
     this.adminService.getListCategory(
       this.panigation.currentPage,
       this.panigation.pageSize,
-    this.panigation.text
+      this.panigation.text
     ).subscribe(res => {
       this.componentActions.hideLoading();
       this.panigation.totalPage = res.total;
-      this.data = this.conventData([1, 2, 3, 4, 5, 1, 2, 3, 4, 5]);
+      this.data = this.conventData(res.docs);
     }, err => {
-      this.data = this.conventData([1, 2, 3, 4, 5, 1, 2, 3, 4, 5]);
       this.componentActions.hideLoading();
     })
   }
@@ -95,10 +92,8 @@ export class CategoryComponent implements OnInit {
     let temp: any = [];
     datas.forEach((e: any, key: number) => {
       let obj: any = {
-        id: 1,
-        item: {
-          title: 'text'
-        },
+        id: e._id,
+        item: e,
         content: [
 
         ],
@@ -110,10 +105,19 @@ export class CategoryComponent implements OnInit {
           title: key + 1 + '.'
         },
         {
-          title: '2022/10/25',
+          title: this.timeService.formatDateFromTimeUnix(e.created_at / 1000, this.timeService.DATE_TIME_FORMAT_JAPAN),
         },
-        { title: 'グルメ' },
-        { title: 'グルメ' },
+        { title: e.title },
+        { title: e.parent && e.parent[0] ? e.parent[0].title : '' },
+        {
+          img: e.image,
+          style: {
+            width: '3.5rem',
+            height: '3.5rem',
+            'border-radius': '5px',
+            'object-fit': 'cover'
+          }
+        },
         {
           title: '削除', action: ACTION_TYPE.DELETE,
           style: {
@@ -136,7 +140,6 @@ export class CategoryComponent implements OnInit {
 
   handleAction(event: any) {
     console.log(event);
-
     if (event.action == 'pagesize') {
       this.router.navigate([`/${config.routerLoginAdmin}/category`],
         {
@@ -192,10 +195,11 @@ export class CategoryComponent implements OnInit {
   }
 
   delete(id: any) {
+    this.componentActions.showLoading();
     this.adminService.deleteCategory(id).subscribe(res => {
       this.componentActions.showPopup({
         message: 'カテゴリーを削除しました',
-        mode: CrudType.CLOSE,
+        mode: CrudType.SUCCESS,
         class: 'btn-blue',
         reget: true,
         text: 'OK'
@@ -215,8 +219,8 @@ export class CategoryComponent implements OnInit {
     if (this.subject_save) {
       this.subject_save.unsubscribe();
     }
-    if (this.subject_close) {
-      this.subject_close.unsubscribe();
+    if (this.subject_success) {
+      this.subject_success.unsubscribe();
     }
   }
 }

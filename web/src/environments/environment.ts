@@ -6,10 +6,10 @@
 export const environment = {
   production: false,
   encodeDecode: {
-    clientKey: 'Sa5Juy4Gag14OTAIgG9RYTN21g1swQA0VVYY2o3nHtdZIQ4FKePZMufE5WEVVlO3YKyJxBe0TRywoAt8IjfNquqgaVYGzMlfYHpTwbyy2z2XeYfJ4s1560516420025CCHp6Wj0zBVqrndEimuk4XoN5wCRAyQeDG9v3S8fJZPc7F2TIhLstagYUx1OKlMbE'
+    clientKey: 'SChN56MvzoPDHZzjYR3hx8Fka4Q0uQnQv02DJhZHTJBOLFOC0biiLGOpBavxC5Z7YwRQ7mKD8Mxa2O0l7q638x0wf6hC5WctUp3wSVdq5Wre1560622142246CCJW3z2M4lshADE1GVTfQkBuHnt8YvyULSX76qF9r0OoxcgjCiPIZpaRbN5eKmwdE'
   },
   routerLoginAdmin: "admin",
-  host: "http://127.0.0.1:8017",
+  host: "http://server_test.rion-lab.com:9098",
 };
 
 

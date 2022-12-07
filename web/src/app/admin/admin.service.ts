@@ -57,35 +57,43 @@ export class AdminService extends BaseService {
     }
 
     getListTag(page: number, limit: number, text: string) {
-        return this.getData(`user/admin/list?page=${page}&limit=${limit}&text=${text}`);
+        return this.getData(`tag?page=${page}&limit=${limit}&search=${text}`);
+    }
+
+    getDetailTag(id: any){
+        return this.getData(`tag/${id}`);
     }
 
     createTag(body: any){
-        return this.postData(``, body);
+        return this.postData(`tag`, body);
     }
 
     updateTag(body: any, id: any){
-        return this.postData(``, body);
+        return this.putData(`tag/${id}`, body);
     }
 
     deleteTag(id: string){
-        return this.delete(`id`);
+        return this.delete(`tag/${id}`);
     }
 
     getListCategory(page: number, limit: number, text: string) {
-        return this.getData(`user/admin/list?page=${page}&limit=${limit}&text=${text}`);
+        return this.getData(`category?page=${page}&limit=${limit}&search=${text}`);
+    }
+
+    getDetailCategory(id: any){
+        return this.getData(`category/${id}`);
     }
 
     createCategory(body: any){
-        return this.postData(``, body);
+        return this.postData(`category`, body);
     }
 
     updateCategory(body: any, id: any){
-        return this.postData(``, body);
+        return this.putData(`category/${id}`, body);
     }
 
     deleteCategory(id: string){
-        return this.delete(`id`);
+        return this.delete(`category/${id}`);
     }
 
     getListAd() {

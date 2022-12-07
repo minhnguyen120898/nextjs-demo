@@ -68,3 +68,6 @@ html{
     box-sizing: border-box;
 
 }
+input:focus{
+   outline: unset;
+}

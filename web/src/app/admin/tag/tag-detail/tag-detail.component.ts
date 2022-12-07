@@ -25,12 +25,12 @@ export class TagDetailComponent implements OnInit {
     text_new: '新規登録'
   }
   subject_save: any = null;
-  subject_close: any = null;
+  subject_success: any = null;
   formErrors = {
-    name: ''
+    title: ''
   };
   validationMessages = {
-    name: {
+    title: {
       required: '作成者を選択してください',
       whitespace: '作成者を選択してください',
     }
@@ -60,7 +60,7 @@ export class TagDetailComponent implements OnInit {
       }
     });
 
-    this.subject_close = this.componentActions.subject_close.subscribe((res: any) => {
+    this.subject_success = this.componentActions.subject_success.subscribe((res: any) => {
       if (res.back) {
         this.back()
       }
@@ -68,11 +68,20 @@ export class TagDetailComponent implements OnInit {
   }
 
   getData() {
-
+    this.componentActions.showLoading();
+    this.adminService.getDetailTag(this.id).subscribe(res=>{
+      console.log(res);
+      this.formTag.patchValue({
+        title: res.title
+      });
+      this.componentActions.hideLoading();
+    },err=>{
+      this.componentActions.hideLoading();
+    })
   }
 
   back() {
-    this.router.navigateByUrl(`/${config.routerLoginAdmin}/Tag`)
+    this.router.navigateByUrl(`/${config.routerLoginAdmin}/tag`)
   }
 
   create() {
@@ -84,7 +93,7 @@ export class TagDetailComponent implements OnInit {
       this.adminService.updateTag(body, this.id).subscribe(res => {
         this.componentActions.showPopup({
           message: 'タグの更新をしました',
-          mode: CrudType.CLOSE,
+          mode: CrudType.SUCCESS,
           class: 'btn-blue',
           back: true
         });
@@ -98,7 +107,7 @@ export class TagDetailComponent implements OnInit {
       this.adminService.createTag(body).subscribe(res => {
         this.componentActions.showPopup({
           message: 'タグの新規登録をしました',
-          mode: CrudType.CLOSE,
+          mode: CrudType.SUCCESS,
           class: 'btn-blue',
           back: true
         });
@@ -114,7 +123,7 @@ export class TagDetailComponent implements OnInit {
 
   initForm() {
     this.formTag = this.formBuilder.group({
-      name: ['', [Validators.required, this.validatorService.noWhitespaceValidator]],
+      title: ['', [Validators.required, this.validatorService.noWhitespaceValidator]],
     });
     this.formTag.valueChanges.subscribe((data: object) => this.onValueChanged(data));
   }
@@ -139,7 +148,7 @@ export class TagDetailComponent implements OnInit {
   
   handleDelete(){
     this.componentActions.showPopup({
-      message: `【${1}】\nこのタグを削除してもよろしいですか？`,
+      message: `【${this.formTag.value.title}】\nこのタグを削除してもよろしいですか？`,
       mode: CrudType.CONFIRM,
       action: ACTION_TYPE.DELETE,
       id: this.id,
@@ -148,10 +157,11 @@ export class TagDetailComponent implements OnInit {
   }
 
   delete(id: any) {
+    this.componentActions.showLoading();
     this.adminService.deleteTag(id).subscribe(res => {
       this.componentActions.showPopup({
         message: 'タグを削除しました',
-        mode: CrudType.CLOSE,
+        mode: CrudType.SUCCESS,
         class: 'btn-blue',
         reget: true,
         text: 'OK'
@@ -167,15 +177,21 @@ export class TagDetailComponent implements OnInit {
   }
 
   handleReset() {
-
+    this.formErrors = {
+      title: '',
+    };
+    this.formTag.reset();
+    if(this.id){
+      this.getData();
+    }
   }
 
   ngOnDestroy() {
     if (this.subject_save) {
       this.subject_save.unsubscribe();
     }
-    if (this.subject_close) {
-      this.subject_close.unsubscribe();
+    if (this.subject_success) {
+      this.subject_success.unsubscribe();
     }
   }
 }
