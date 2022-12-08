@@ -32,7 +32,7 @@ const schema = new Schema({
     lat:Number,
     lng:Number,
     category1:String,
-    image:String,
+    image:[{type:String}],
     is_featured:{type:Boolean,default:true},
     time_start:Number,
     time_end:Number,
