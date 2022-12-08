@@ -103,6 +103,7 @@ const updateById = async (locals, id, body) => {
  
     }
 
+    console.log(body)
     await workModel.update(id, body)
     return {
         message: localeUtils.commonMessage(locals.lang).UPDATE_SUCCESS
