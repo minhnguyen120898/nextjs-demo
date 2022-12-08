@@ -182,6 +182,7 @@ const getByPagination = async (query, pagination) => {
                     time_end:1,
                     created_at: 1,
                     category:1,
+                    category_1:1,
                     tag: 1
                 }
             },
