@@ -133,7 +133,7 @@ const getByPagination = async (query, pagination) => {
                                 {
                                     $and:
                                         [
-                                            { $in: ["$_id1", "$$category_id"] }
+                                            { $in: ["$_id1", "$$tag_id"] }
                                         ]
                                 }
                             }
