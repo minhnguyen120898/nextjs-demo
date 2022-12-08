@@ -4,7 +4,8 @@ export class UploadFileService {
     extension = {
         image: ['jpg', 'jpeg', 'png'],
         pdf: ['pdf'],
-        excel: ['csv', 'xlsx', 'xls']
+        excel: ['csv', 'xlsx', 'xls'],
+        video: ['mp4'],
     }
     constructor(
     ) { }
@@ -30,7 +31,7 @@ export class UploadFileService {
     }
 
 
-    validate_file(file: any, extensions: string[]) {
+    validate_file(file: any, extensions: string[], maxSize : number = 2) {
         let result = {
             status: false,
             error: '',
@@ -44,7 +45,7 @@ export class UploadFileService {
         const name = file.name.toLowerCase();
         const extension = name.substring(name.lastIndexOf('.') + 1);
         const allowedExtensions = extensions;
-        const maxSizeMegabyte = 2;
+        const maxSizeMegabyte = maxSize;
         const maxSizeByte = maxSizeMegabyte * 1048576;
 
         if (allowedExtensions.indexOf(extension) === -1) {

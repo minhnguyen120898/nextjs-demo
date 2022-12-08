@@ -48,11 +48,11 @@ export class PrimaryLayoutComponent implements OnInit {
       img: `<svg class="hovesvg"  style="margin-right: 2rem"  xmlns="http://www.w3.org/2000/svg" width="21.875" height="25" viewBox="0 0 21.875 25">
       <path id="Icon_awesome-building" data-name="Icon awesome-building" d="M21.289,23.438h-.977V1.172A1.172,1.172,0,0,0,19.141,0H2.734A1.172,1.172,0,0,0,1.563,1.172V23.438H.586A.586.586,0,0,0,0,24.023V25H21.875v-.977A.586.586,0,0,0,21.289,23.438ZM6.25,3.711a.586.586,0,0,1,.586-.586H8.789a.586.586,0,0,1,.586.586V5.664a.586.586,0,0,1-.586.586H6.836a.586.586,0,0,1-.586-.586Zm0,4.688a.586.586,0,0,1,.586-.586H8.789a.586.586,0,0,1,.586.586v1.953a.586.586,0,0,1-.586.586H6.836a.586.586,0,0,1-.586-.586Zm2.539,7.227H6.836a.586.586,0,0,1-.586-.586V13.086a.586.586,0,0,1,.586-.586H8.789a.586.586,0,0,1,.586.586v1.953A.586.586,0,0,1,8.789,15.625ZM12.5,23.438H9.375v-4.1a.586.586,0,0,1,.586-.586h1.953a.586.586,0,0,1,.586.586Zm3.125-8.4a.586.586,0,0,1-.586.586H13.086a.586.586,0,0,1-.586-.586V13.086a.586.586,0,0,1,.586-.586h1.953a.586.586,0,0,1,.586.586Zm0-4.687a.586.586,0,0,1-.586.586H13.086a.586.586,0,0,1-.586-.586V8.4a.586.586,0,0,1,.586-.586h1.953a.586.586,0,0,1,.586.586Zm0-4.687a.586.586,0,0,1-.586.586H13.086a.586.586,0,0,1-.586-.586V3.711a.586.586,0,0,1,.586-.586h1.953a.586.586,0,0,1,.586.586Z" fill="#707070"/>
     </svg>`,
-      link: `/${config.routerLoginAdmin}/building`,
+      link: `/${config.routerLoginAdmin}/work`,
       sub_nav: [
         {
           sub_name: '施設をする',
-          url_sub: `/${config.routerLoginAdmin}/building/create`,
+          url_sub: `/${config.routerLoginAdmin}/work/create`,
           style: true
         }
       ]
@@ -107,7 +107,7 @@ export class PrimaryLayoutComponent implements OnInit {
     {
       id: 5,
       name: '担当設定',
-      link: `/${config.routerLoginAdmin}/work`,
+      link: `/${config.routerLoginAdmin}/work2`,
       img: `
       <svg class="hovesvg" style="margin-right: 2rem"  xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
   <path id="Icon_material-account-circle" data-name="Icon material-account-circle" d="M15.5,3A12.5,12.5,0,1,0,28,15.5,12.5,12.5,0,0,0,15.5,3Zm0,3.75a3.75,3.75,0,1,1-3.75,3.75A3.745,3.745,0,0,1,15.5,6.75Zm0,17.75A9,9,0,0,1,8,20.475c.037-2.488,5-3.85,7.5-3.85s7.463,1.363,7.5,3.85A9,9,0,0,1,15.5,24.5Z" transform="translate(-3 -3)" fill="#707070"/>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UUID } from 'angular2-uuid';
 import { ComponentActions } from 'src/app/shared/components/alert/component-actions';
 import { CrudType } from 'src/app/shared/enums/crud-type.enum';
 import { ACTION_TYPE, Utils } from 'src/app/shared/enums/utils';
@@ -53,6 +54,8 @@ export class CategoryDetailComponent implements OnInit {
     list: [],
     name_select: '- 選択してください'
   }
+
+
   constructor(private componentActions: ComponentActions,
     private activatedRoute: ActivatedRoute,
     private adminService: AdminService,
@@ -259,6 +262,7 @@ export class CategoryDetailComponent implements OnInit {
       event.value.id
     ]);
   }
+
 
 
   ngOnDestroy() {

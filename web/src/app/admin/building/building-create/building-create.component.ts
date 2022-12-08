@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UUID } from 'angular2-uuid';
 import { ComponentActions } from 'src/app/shared/components/alert/component-actions';
 import { CrudType } from 'src/app/shared/enums/crud-type.enum';
-import { ACTION_TYPE, Utils } from 'src/app/shared/enums/utils';
+import { ACTION_TYPE, Utils, WORK_STATUS } from 'src/app/shared/enums/utils';
 import { TimeService } from 'src/app/shared/services/helpers/time.service';
 import { UploadFileService } from 'src/app/shared/services/helpers/upload-file.service';
 import { ValidationService } from 'src/app/shared/services/helpers/validation.service';
@@ -19,12 +20,12 @@ export class BuildingCreateComponent implements OnInit {
   placeholder = {
     start_at: `${new Date().getFullYear()}/${new Date().getMonth() + 1}/${new Date().getDate()}`,
     end_at: `${new Date().getFullYear()}/${new Date().getMonth() + 1}/${new Date().getDate()}`,
-    time_start_at: `${new Date().getHours()}: ${new Date().getMinutes()}`,
-    time_end_at: `${new Date().getHours()}: ${new Date().getMinutes()}`,
   };
+
+  name_file_upload = '';
   date = {
-    start_at: new Date(''),
-    end_at: new Date(''),
+    time_start: new Date(''),
+    time_end: new Date(''),
   }
   pageInfo: any = {
     img: 'assets/images/icon-building.svg',
@@ -35,107 +36,97 @@ export class BuildingCreateComponent implements OnInit {
     text_new: '新規登録'
   }
   subject_save: any = null;
-  subject_close: any = null;
+  subject_success: any = null;
+
   status = {
     list: [
       {
-        itemName: '山田　太郎',
-        type: '正社員'
+        itemName: '公衆',
+        type: WORK_STATUS.PUBLIC
       },
       {
-        itemName: '田中　かずき',
-        type: '派遣社員'
-      },
-      {
-        itemName: '山下　花子',
-        type: 'アルバイト'
+        itemName: 'プライベート',
+        type: WORK_STATUS.PRIVATE
       }
     ],
     name_select: '- 選択してください'
   }
 
-  category = {
-    list: [
-      {
-        itemName: '山田　太郎',
-        type: '正社員'
-      },
-      {
-        itemName: '田中　かずき',
-        type: '派遣社員'
-      },
-      {
-        itemName: '山下　花子',
-        type: 'アルバイト'
-      }
-    ],
+  category: any = {
+    list: [],
+    name_select: '- 選択してください'
+  }
+
+  tag: any = {
+    list: [],
     name_select: '- 選択してください'
   }
 
   formErrors = {
     status: '',
     title: '',
-    image: '',
-    text: '',
+    eye_catching: '',
+    description: '',
     category: '',
     tag: '',
     video_link: '',
     video_up: '',
-    seo_title: '',
-    meta_decription: '',
+    meta_title: '',
+    meta_description: '',
     content_id: '',
     spot_name: '',
     explanatory_text: '',
     url: '',
+    zip_code: '',
     address: '',
-    street_and_apartement: '',
-    phone_number: '',
+    phone: '',
     utilization_time: '',
     holiday: '',
-    usage_fee: '',
+    fee: '',
     parking: '',
-    remake: '',
+    remark: '',
     stay_time: '',
-    longitude: '',
-    latitude: '',
-    category_2: '',
-    image_2: '',
-    start_at: '',
-    end_at: ''
+    lng: '',
+    lat: '',
+    category1: '',
+    image: '',
+    time_start: '',
+    time_end: '',
+    is_featured: ''
   };
   validationMessages = {
     status: {
-      required: 'タイトルを入力してください',
-      whitespace: '作成者を選択してください',
+      required: 'ステータスの選択をしてください',
+      whitespace: 'ステータスの選択をしてください',
     },
     title: {
       required: 'タイトルを入力してください',
       whitespace: 'タイトルを入力してください',
     },
-    image: {
-      required: '画像が必要です',
+    eye_catching: {
+      required: '画像をアップデートしてください',
     },
-    text: {
+    description: {
       required: '本文を入力してください',
       whitespace: '本文を入力してください',
     },
     category: {
-      required: '本文を入力してください',
+      required: 'カテゴリーを選択してください',
     },
     tag: {
-      required: '本文を入力してください',
+      required: 'タグを選択してください',
     },
     video_link: {
-      required: '本文を入力してください',
+      required: '動画リンクを入力してください',
     },
     video_up: {
-      required: '本文を入力してください',
+      required: '動画の容量は2GB以下の必要があります',
     },
-    seo_title: {
+    meta_title: {
       required: 'タイトル必須',
       whitespace: 'タイトル必須',
     },
-    meta_decription: {
+    meta_description: {
       required: '修理が必要',
       whitespace: '修理が必要',
     },
@@ -151,14 +142,14 @@ export class BuildingCreateComponent implements OnInit {
     url: {
       required: '修理が必要',
     },
+    zip_code: {
+      required: '修理が必要',
+    },
     address: {
       required: '修理が必要',
     },
-    street_and_apartement: {
-      required: '修理が必要',
-    },
-    phone_number: {
-      required: '修理が必要',
+    phone: {
+      pattern: '電話無効',
     },
     utilization_time: {
       required: '修理が必要',
@@ -166,40 +157,41 @@ export class BuildingCreateComponent implements OnInit {
     holiday: {
       required: '修理が必要',
     },
-    usage_fee: {
+    fee: {
       required: '修理が必要',
     },
     parking: {
       required: '修理が必要',
     },
-    remake: {
+    remark: {
       required: '修理が必要',
     },
     stay_time: {
       required: '修理が必要',
     },
-    longitude: {
+    lng: {
       required: '修理が必要',
     },
-    latitude: {
+    lat: {
       required: '修理が必要',
     },
-    category_2: {
+    category1: {
       required: '修理が必要',
     },
-    image_2: {
+    image: {
       required: '修理が必要',
     },
-    start_at: {
+    time_start: {
       required: '修理が必要',
     },
-    end_at: {
+    time_end: {
       required: '修理が必要',
     }
   };
-  formBuilding: FormGroup = new FormGroup({});
+  formWork: FormGroup = new FormGroup({});
   id: any = null;
-  images: any[] = [1];
+  imageList: any[] = [{ id: UUID.UUID(), image: null }];
+
   constructor(private componentActions: ComponentActions,
     private activatedRoute: ActivatedRoute,
     private adminService: AdminService,
@@ -210,9 +202,16 @@ export class BuildingCreateComponent implements OnInit {
     private uploadService: UploadFileService
   ) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.initForm();
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
+    await Promise.all([this.adminService.getDataPromise('category?page=1&limit=1000'),
+    this.adminService.getDataPromise('tag?page=1&limit=1000')
+    ]).then(res => {
+      this.category.list = res[0];
+      this.tag.list = res[1];
+    });
+
     if (this.id) {
       this.getData();
     }
@@ -225,7 +224,7 @@ export class BuildingCreateComponent implements OnInit {
       }
     });
 
-    this.subject_close = this.componentActions.subject_close.subscribe((res: any) => {
+    this.subject_success = this.componentActions.subject_success.subscribe((res: any) => {
       if (res.back) {
         this.back()
       }
@@ -233,29 +232,134 @@ export class BuildingCreateComponent implements OnInit {
   }
 
   getData() {
+    this.componentActions.showLoading();
+    this.adminService.getDetailWork(this.id).subscribe(res => {
+      this.formWork.patchValue({
+        status: res.status,
+        title: res.title,
+        eye_catching: res.eye_catching,
+        description: res.description,
+        category: res.category.map((e: any) => {
+          return e._id
+        }),
+        tag: res.tag.map((e: any) => {
+          return e._id
+        }),
+        video_link: res.video,
+        video_up: null,
+        meta_title: res.meta_title,
+        meta_description: res.meta_description,
+        content_id: res.content_id,
+        spot_name: res.spot_name,
+        explanatory_text: res.explanatory_text,
+        url: res.url,
+        zip_code: res.zip_code,
+        address: res.address,
+        phone: res.phone,
+        utilization_time: res.utilization_time,
+        holiday: res.holiday,
+        fee: res.fee,
+        parking: res.parking,
+        remark: res.remark,
+        stay_time: res.stay_time,
+        lng: res.lng,
+        lat: res.lat,
+        category1: res.category1,
+        image: res.image,
+        time_start: res.time_start,
+        time_end: res.time_end,
+        is_featured: res.is_featured
+      });
+      // CATEGORY 
+      this.category.name_select = res.category.map((e: any) => { return e.title }).join(' ,');
+      this.category.list.forEach((e: any) => {
+        if (this.category.name_select.indexOf(e.itemName) > -1) {
+          e.checked = true;
+        }
+      });
+      // TAG 
+      this.tag.name_select = res.tag.map((e: any) => { return e.title }).join(' ,');
+      this.tag.list.forEach((e: any) => {
+        if (this.tag.name_select.indexOf(e.itemName) > -1) {
+          e.checked = true;
+        }
+      });
+      // STATUS
+      this.status.name_select = this.status.list.find(e => { return e.type == res.status })?.itemName || '';
+      // IMAGE
+      this.imageList = res.image.map((e: any, key: number) => {
+        return {
+          id: UUID.UUID(),
+          image: e,
+          is_delete: key ? true : false
+        }
+      });
 
+      // TIME
+      if(res.time_start){
+        this.date.time_start = new Date(new Date(Number(res.time_start)).getFullYear(),
+        new Date(Number(res.time_start)).getMonth(),
+        new Date(Number(res.time_start)).getDate());
+      }
+      
+      if(res.time_end){
+        this.date.time_end = new Date(new Date(Number(res.time_end)).getFullYear(),
+        new Date(Number(res.time_end)).getMonth(),
+        new Date(Number(res.time_end)).getDate())
+      }
+     
+
+      this.componentActions.hideLoading();
+    }, err => {
+      this.componentActions.hideLoading();
+    })
   }
 
   back() {
-    this.router.navigateByUrl(`/${config.routerLoginAdmin}/building`)
+    this.router.navigateByUrl(`/${config.routerLoginAdmin}/work`)
   }
 
   create() {
     const body = {
-      ...this.formBuilding.value
-    }
-    if (body.image) {
-      if (!body.image.islink) {
-        body.avatar = body.image.base64_default;
-      }
-      delete body.image;
+      status: this.formWork.value.status,
+      title: this.formWork.value.title,
+      eye_catching: this.formWork.value.eye_catching,
+      description: this.formWork.value.description,
+      category: this.formWork.value.category,
+      tag: this.formWork.value.tag,
+      video: this.formWork.value.video_up ? this.formWork.value.video_up : this.formWork.value.video_link,
+      meta_title: this.formWork.value.meta_title,
+      meta_description: this.formWork.value.meta_description,
+      content_id: this.formWork.value.content_id,
+      spot_name: this.formWork.value.spot_name,
+      explanatory_text: this.formWork.value.explanatory_text,
+      url: this.formWork.value.url,
+      zip_code: this.formWork.value.zip_code,
+      address: this.formWork.value.address,
+      phone: this.formWork.value.phone,
+      utilization_time: this.formWork.value.utilization_time,
+      holiday: this.formWork.value.holiday,
+      fee: this.formWork.value.fee,
+      parking: this.formWork.value.parking,
+      remark: this.formWork.value.remark,
+      stay_time: this.formWork.value.stay_time,
+      lng: this.formWork.value.lng,
+      lat: this.formWork.value.lat,
+      category1: this.formWork.value.category1,
+      image: this.imageList.map(e => {
+        return e.image
+      }),
+      time_start: this.formWork.value.time_start,
+      time_end: this.formWork.value.time_end,
+      is_featured: this.formWork.value.is_featured
     };
+
     if (this.id) {
       this.componentActions.showLoading();
-      this.adminService.updateBuilding(body, this.id).subscribe(res => {
+      this.adminService.updateWork(body, this.id).subscribe(res => {
         this.componentActions.showPopup({
           message: '施設の更新をしました',
-          mode: CrudType.CLOSE,
+          mode: CrudType.SUCCESS,
           class: 'btn-blue',
           back: true
         });
@@ -266,10 +370,10 @@ export class BuildingCreateComponent implements OnInit {
       });
     } else {
       this.componentActions.showLoading();
-      this.adminService.createBuilding(body).subscribe(res => {
+      this.adminService.createWork(body).subscribe(res => {
         this.componentActions.showPopup({
           message: '施設の新規登録をしました',
-          mode: CrudType.CLOSE,
+          mode: CrudType.SUCCESS,
           class: 'btn-blue',
           back: true
         });
@@ -283,50 +387,51 @@ export class BuildingCreateComponent implements OnInit {
 
 
   initForm() {
-    this.formBuilding = this.formBuilder.group({
+    this.formWork = this.formBuilder.group({
       status: ['', [Validators.required]],
       title: ['', [Validators.required, this.validatorService.noWhitespaceValidator]],
-      image: ['', [Validators.required]],
-      text: ['', [Validators.required, this.validatorService.noWhitespaceValidator]],
+      eye_catching: ['', [Validators.required]],
+      description: ['', [Validators.required, this.validatorService.noWhitespaceValidator]],
       category: ['', [Validators.required]],
       tag: ['', [Validators.required]],
       video_link: [''],
       video_up: [''],
-      seo_title: ['', [Validators.required, this.validatorService.noWhitespaceValidator]],
-      meta_decription: ['', [Validators.required, this.validatorService.noWhitespaceValidator]],
+      meta_title: ['', []],
+      meta_description: ['', []],
       content_id: [''],
       spot_name: [''],
       explanatory_text: [''],
       url: [''],
+      zip_code: [''],
       address: [''],
-      street_and_apartement: [''],
-      phone_number: [''],
+      phone: ['', [Validators.pattern(this.validatorService.only_number)]],
       utilization_time: [''],
       holiday: [''],
-      usage_fee: [''],
+      fee: [''],
       parking: [''],
-      remake: [''],
+      remark: [''],
       stay_time: [''],
-      longitude: [''],
-      latitude: [''],
-      category_2: [''],
-      image_2: [''],
-      start_at: [''],
-      end_at: ['']
+      lng: [''],
+      lat: [''],
+      category1: [''],
+      image: [[], []],
+      time_start: [''],
+      time_end: [''],
+      is_featured: ['']
     });
-    this.formBuilding.valueChanges.subscribe((data: object) => this.onValueChanged(data));
+    this.formWork.valueChanges.subscribe((data: object) => this.onValueChanged(data));
   }
 
   onValueChanged(data?: any) {
-    this.validatorService.getValidate(this.formBuilding, this.formErrors, this.validationMessages);
+    this.validatorService.getValidate(this.formWork, this.formErrors, this.validationMessages);
   }
 
   handleCreate() {
-    if (this.formBuilding.invalid) {
-      this.formErrors = this.validatorService.checkErorrNotDiry(this.formBuilding, this.formErrors, this.validationMessages);
+    if (this.formWork.invalid) {
+      this.formErrors = this.validatorService.checkErorrNotDiry(this.formWork, this.formErrors, this.validationMessages);
     } else {
       this.componentActions.showPopup({
-        message: `【${this.formBuilding.value.title}】\n
+        message: `【${this.formWork.value.title}】\n
         このプランで保存しますか？`,
         mode: CrudType.CONFIRM,
         action: ACTION_TYPE.CREATE,
@@ -335,10 +440,10 @@ export class BuildingCreateComponent implements OnInit {
     }
   }
 
-  
-  handleDelete(){
+
+  handleDelete() {
     this.componentActions.showPopup({
-      message: `【${1}】\n削除しますか？`,
+      message: `【${this.formWork.value.title}】\n削除しますか？`,
       mode: CrudType.CONFIRM,
       action: ACTION_TYPE.DELETE,
       id: this.id,
@@ -347,12 +452,13 @@ export class BuildingCreateComponent implements OnInit {
   }
 
   delete(id: any) {
-    this.adminService.deleteBuilding(id).subscribe(res => {
+    this.componentActions.showLoading();
+    this.adminService.deleteWork(id).subscribe(res => {
       this.componentActions.showPopup({
         message: '削除しました',
-        mode: CrudType.CLOSE,
+        mode: CrudType.SUCCESS,
         class: 'btn-blue',
-        reget: true,
+        back: true,
         text: 'OK'
       });
       this.componentActions.hideLoading();
@@ -365,61 +471,72 @@ export class BuildingCreateComponent implements OnInit {
     });
   }
 
-
-  handleSetEmloyment(event: any) {
-    this.formBuilding.get('user')?.setValue(event.value.type);
+  handleSetCategory(event: any[]) {
+    let arr = event.map(e => { return JSON.parse(e) });
+    this.category.name_select = arr.map(e => { return e.itemName }).join(' ,');
+    let ids = arr.map(e => { return e.id });
+    this.formWork.get('category')?.setValue(ids);
   }
 
-  handleSetCategory(event: any) {
-    this.formBuilding.get('category')?.setValue(event.value.type);
+  handleSetTag(event: any[]) {
+    let arr = event.map(e => { return JSON.parse(e) });
+    this.tag.name_select = arr.map(e => { return e.itemName }).join(' ,');
+    let ids = arr.map(e => { return e.id });
+    this.formWork.get('tag')?.setValue(ids);
+  }
+
+  handleSetStatus(event: any) {
+    this.status.name_select = event.value.itemName;
+    this.formWork.get('status')?.setValue(Number(event.value.type));
   }
 
 
   handleReset() {
     this.formErrors = {
       status: '',
-    title: '',
-    image: '',
-    text: '',
-    category: '',
-    tag: '',
-    video_link: '',
-    video_up: '',
-    seo_title: '',
-    meta_decription: '',
-    content_id: '',
-    spot_name: '',
-    explanatory_text: '',
-    url: '',
-    address: '',
-    street_and_apartement: '',
-    phone_number: '',
-    utilization_time: '',
-    holiday: '',
-    usage_fee: '',
-    parking: '',
-    remake: '',
-    stay_time: '',
-    longitude: '',
-    latitude: '',
-    category_2: '',
-    image_2: '',
-    start_at: '',
-    end_at: ''
+      title: '',
+      eye_catching: '',
+      description: '',
+      category: '',
+      tag: '',
+      video_link: '',
+      video_up: '',
+      meta_title: '',
+      meta_description: '',
+      content_id: '',
+      spot_name: '',
+      explanatory_text: '',
+      url: '',
+      zip_code: '',
+      address: '',
+      phone: '',
+      utilization_time: '',
+      holiday: '',
+      fee: '',
+      parking: '',
+      remark: '',
+      stay_time: '',
+      lng: '',
+      lat: '',
+      category1: '',
+      image: '',
+      time_start: '',
+      time_end: '',
+      is_featured: ''
     };
-    this.formBuilding.reset();
+    this.formWork.reset();
+    this.imageList = [{ id: UUID.UUID(), image: null, is_delete: false }];
   }
 
   handleSetDelivery(event: any, index: number) {
-    (this.formBuilding.get('spaces') as FormArray).at(index).patchValue({
+    (this.formWork.get('spaces') as FormArray).at(index).patchValue({
       delivery: event.value.type
     });
   }
 
   handleUpdateImage() {
-    document.getElementById('input-file-main')?.click();
+    document.getElementById('input-file-image-main')?.click();
   }
-
 
   async onChangeImageMain(event: any) {
     const file = event.target.files[0];
@@ -428,44 +545,63 @@ export class BuildingCreateComponent implements OnInit {
       if (!check.status) {
         check.error;
       } else {
-        const image = await this.uploadService.getBase64Default(file);
-        // this.formStaff.get('image')?.setValue(image)
+        const image: any = await this.uploadService.getBase64Default(file);
+        this.formWork.get('eye_catching')?.setValue(image.base64_default)
       }
     }
   }
 
-  handleUpdateImage2() {
-    document.getElementById('input-file-main')?.click();
+  handleUpdateVideo() {
+    document.getElementById('input-file-main-video')?.click();
   }
 
 
-  async onChangeImageMain2(event: any) {
+  async onChangeVideo(event: any) {
     const file = event.target.files[0];
     if (file) {
-      const check = this.uploadService.validate_file(file, this.uploadService.extension.image);
+      const check = this.uploadService.validate_file(file, this.uploadService.extension.video, 2048);
+      this.name_file_upload = check.fileName;
       if (!check.status) {
         check.error;
       } else {
-        const image = await this.uploadService.getBase64Default(file);
-        // this.formStaff.get('image')?.setValue(image)
+        const video: any = await this.uploadService.getBase64Default(file);
+        this.formWork.get('video_up')?.setValue(video.base64_default);
       }
     }
   }
 
   getTime(event: any, type: string) {
-
+    this.formWork.get(type)?.setValue(new Date(event).getTime());
   }
 
   addImage() {
-    this.images.push(1);
+    this.imageList.push({ id: UUID.UUID(), image: null, is_delete: true });
+  }
+
+
+  onDeleteSubImg(item: any, index: number) {
+    this.imageList.splice(index, 1)
+  }
+
+  async onChangeImageSecond(event: any, i: number) {
+    const file = event.target.files[0];
+    if (file) {
+      const check = this.uploadService.validate_file(file, this.uploadService.extension.image);
+      if (!check.status) {
+        this.formErrors.image = check.error;
+      } else {
+        const image: any = await this.uploadService.getBase64Default(file);
+        this.imageList[i].image = image.base64_default;
+      }
+    }
   }
 
   ngOnDestroy() {
     if (this.subject_save) {
       this.subject_save.unsubscribe();
     }
-    if (this.subject_close) {
-      this.subject_close.unsubscribe();
+    if (this.subject_success) {
+      this.subject_success.unsubscribe();
     }
   }
 }
