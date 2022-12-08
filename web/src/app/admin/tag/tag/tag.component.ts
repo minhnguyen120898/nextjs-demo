@@ -80,7 +80,7 @@ export class TagComponent implements OnInit {
     ).subscribe(res => {
       this.componentActions.hideLoading();
       this.panigation.totalPage = res.total;
-      console.log(res);
+      (res);
       this.data = this.conventData(res.docs);
     }, err => {
       this.componentActions.hideLoading();

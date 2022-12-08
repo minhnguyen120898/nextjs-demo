@@ -4,19 +4,19 @@
     </div>
     <a class="back" (click)="back()">
         施設一覧　＞　新規登録</a>
-        <div class="tab-delete">
-            <span class="delete2" (click)="handleDelete()" *ngIf="id">
-                <img src="assets/images/icon-delete.png" alt="">削除
-            </span>
-        </div>
+    <div class="tab-delete">
+        <span class="delete2" (click)="handleDelete()" *ngIf="id">
+            <img src="assets/images/icon-delete.png" alt="">削除
+        </span>
+    </div>
     <div id="create-content">
 
-        <div id="right" [formGroup]="formBuilding">
+        <div id="right" [formGroup]="formWork">
             <div class="form-group-box">
                 <div class="form-group">
                     <label>ステータス</label>
                     <div class="content-field">
-                        <app-select-dropdown (selectedOption)="handleSetEmloyment($event)"
+                        <app-select-dropdown (selectedOption)="handleSetStatus($event)"
                             [nameSelect]="status.name_select" [options]="status.list"></app-select-dropdown>
                         <p class="errors" class="errors" *ngIf="formErrors.status">
                             {{
@@ -43,12 +43,13 @@
                 <div class="form-group">
                     <label>アイキャッチ</label>
                     <div id="loadimage">
-                        <img (click)="handleUpdateImage()" src="" onerror="this.src='assets/images/noimage.png'" alt="">
-                        <input id="input-file-main" type="file" (change)="onChangeImageMain($event)"
+                        <img (click)="handleUpdateImage()" src="{{formWork.value.eye_catching}}"
+                            onerror="this.src='assets/images/noimage.png'" alt="">
+                        <input id="input-file-image-main" type="file" (change)="onChangeImageMain($event)"
                             accept="image/png,image/gif,image/jpeg,image/jpg">
-                        <p class="errors" class="errors" *ngIf="formErrors.image">
+                        <p class="errors" class="errors" *ngIf="formErrors.eye_catching">
                             {{
-                            formErrors.image
+                            formErrors.eye_catching
                             }}
                         </p>
                     </div>
@@ -58,12 +59,12 @@
                 <div class="form-group">
                     <label>本文</label>
                     <div class="content-field">
-                        <textarea formControlName="text" name="" id="" cols="30" rows="10">
+                        <textarea formControlName="description" name="" id="" cols="30" rows="10">
 
                         </textarea>
-                        <p class="errors" class="errors" *ngIf="formErrors.text">
+                        <p class="errors" class="errors" *ngIf="formErrors.description">
                             {{
-                            formErrors.text
+                            formErrors.description
                             }}
                         </p>
                     </div>
@@ -73,7 +74,7 @@
                 <div class="form-group">
                     <label>カテゴリー</label>
                     <div class="content-field">
-                        <app-select-dropdown (selectedOption)="handleSetCategory($event)"
+                        <app-select-dropdown [multi]="true" (selectedOption)="handleSetCategory($event)"
                             [nameSelect]="category.name_select" [options]="category.list"></app-select-dropdown>
                         <p class="errors" class="errors" *ngIf="formErrors.category">
                             {{
@@ -87,7 +88,8 @@
                 <div class="form-group">
                     <label>タグ</label>
                     <div class="content-field">
-                        <input formControlName="tag" type="text">
+                        <app-select-dropdown [multi]="true" (selectedOption)="handleSetTag($event)"
+                            [nameSelect]="tag.name_select" [options]="tag.list"></app-select-dropdown>
                         <p class="errors" class="errors" *ngIf="formErrors.tag">
                             {{
                             formErrors.tag
@@ -113,10 +115,12 @@
                 <div class="form-group">
                     <label>動画UP</label>
                     <div id="loadimage">
-                        <img (click)="handleUpdateImage2()" src="" onerror="this.src='assets/images/upload-image.png'"
-                            alt="">
-                        <input id="input-file-main" type="file" (change)="onChangeImageMain2($event)"
-                            accept="image/png,image/gif,image/jpeg,image/jpg">
+                        <div>
+                            <img (click)="handleUpdateVideo()" src="assets/images/upload-image.png" alt="">
+                            <p>{{name_file_upload}}</p>
+                        </div>
+                        <input id="input-file-main-video" type="file" (change)="onChangeVideo($event)"
+                            accept="video/mp4,video/x-m4v,video/*">
                         <p class="errors" class="errors" *ngIf="formErrors.video_up">
                             {{
                             formErrors.video_up
@@ -130,10 +134,10 @@
                     <label>SEOタイトル<br>
                         (title) </label>
                     <div class="content-field">
-                        <input formControlName="seo_title" type="text">
-                        <p class="errors" class="errors" *ngIf="formErrors.seo_title">
+                        <input formControlName="meta_title" type="text">
+                        <p class="errors" class="errors" *ngIf="formErrors.meta_title">
                             {{
-                            formErrors.seo_title
+                            formErrors.meta_title
                             }}
                         </p>
                     </div>
@@ -145,10 +149,10 @@
                         リプション<br>
                         (meta description)</label>
                     <div class="content-field">
-                        <input formControlName="meta_decription" type="text">
-                        <p class="errors" class="errors" *ngIf="formErrors.meta_decription">
+                        <input formControlName="meta_description" type="text">
+                        <p class="errors" class="errors" *ngIf="formErrors.meta_description">
                             {{
-                            formErrors.meta_decription
+                            formErrors.meta_description
                             }}
                         </p>
                     </div>
@@ -185,7 +189,7 @@
                 <div class="form-group">
                     <label>説明文</label>
                     <div class="content-field">
-                        <textarea  formControlName="explanatory_text" name="" id="" cols="30" rows="10"></textarea>
+                        <textarea formControlName="explanatory_text" name="" id="" cols="30" rows="10"></textarea>
                         <p class="errors" class="errors" *ngIf="formErrors.explanatory_text">
                             {{
                             formErrors.explanatory_text
@@ -212,11 +216,11 @@
                     <label>住所</label>
                     <div class="content-field">
                         <div class="dflex">
-                            <input formControlName="address" type="text">
+                            <input formControlName="zip_code" type="text">
                             <button class="btn-blue">郵便番号から検索</button>
                         </div>
                         <div>
-                            <input formControlName="street_and_apartement" type="text">
+                            <input formControlName="address" type="text">
                         </div>
                         <p class="errors" class="errors" *ngIf="formErrors.address">
                             {{
@@ -230,16 +234,16 @@
                 <div class="form-group">
                     <label>利用時間</label>
                     <div class="content-field">
-                        <input formControlName="phone_number" type="text">
-                        <p class="errors" class="errors" *ngIf="formErrors.phone_number">
+                        <input formControlName="phone" type="text">
+                        <p class="errors" class="errors" *ngIf="formErrors.phone">
                             {{
-                            formErrors.phone_number
+                            formErrors.phone
                             }}
                         </p>
                     </div>
                 </div>
             </div>
-           
+
             <div class="form-group-box">
                 <div class="form-group">
                     <label>休日</label>
@@ -270,10 +274,10 @@
                 <div class="form-group">
                     <label>利用料金</label>
                     <div class="content-field">
-                        <input formControlName="usage_fee" type="text">
-                        <p class="errors" class="errors" *ngIf="formErrors.usage_fee">
+                        <input formControlName="fee" type="text">
+                        <p class="errors" class="errors" *ngIf="formErrors.fee">
                             {{
-                            formErrors.usage_fee
+                            formErrors.fee
                             }}
                         </p>
                     </div>
@@ -297,10 +301,10 @@
                     <label>備考<br>
                         (決済情報など)</label>
                     <div class="content-field">
-                        <textarea formControlName="remake" name="" id="" cols="30" rows="10"></textarea>
-                        <p class="errors" class="errors" *ngIf="formErrors.remake">
+                        <textarea formControlName="remark" name="" id="" cols="30" rows="10"></textarea>
+                        <p class="errors" class="errors" *ngIf="formErrors.remark">
                             {{
-                            formErrors.remake
+                            formErrors.remark
                             }}
                         </p>
                     </div>
@@ -323,10 +327,10 @@
                 <div class="form-group">
                     <label>軽度</label>
                     <div class="content-field">
-                        <input formControlName="longitude" type="text">
-                        <p class="errors" class="errors" *ngIf="formErrors.longitude">
+                        <input formControlName="lng" type="text">
+                        <p class="errors" class="errors" *ngIf="formErrors.lng">
                             {{
-                            formErrors.longitude
+                            formErrors.lng
                             }}
                         </p>
                     </div>
@@ -336,10 +340,10 @@
                 <div class="form-group">
                     <label>緯度</label>
                     <div class="content-field">
-                        <input formControlName="latitude" type="text">
-                        <p class="errors" class="errors" *ngIf="formErrors.latitude">
+                        <input formControlName="lat" type="text">
+                        <p class="errors" class="errors" *ngIf="formErrors.lat">
                             {{
-                            formErrors.latitude
+                            formErrors.lat
                             }}
                         </p>
                     </div>
@@ -349,10 +353,10 @@
                 <div class="form-group">
                     <label>カテゴリー</label>
                     <div class="content-field">
-                        <input formControlName="category_2" type="text">
-                        <p class="errors" class="errors" *ngIf="formErrors.category_2">
+                        <input formControlName="category1" type="text">
+                        <p class="errors" class="errors" *ngIf="formErrors.category1">
                             {{
-                            formErrors.category_2
+                            formErrors.category1
                             }}
                         </p>
                     </div>
@@ -364,19 +368,26 @@
                     <div class="content-field">
                         <div>
                             <div class="collection-image">
-                                <div *ngFor="let item of images">
-                                    <img class="ima" src="assets/images/noimage.png" alt="">
+                                <div *ngFor="let item of imageList, let i = index">
+                                    <div class="area">
+                                        <img (click)="handleUpdateImage()" class="image" src="{{item.image}}"
+                                            onerror="this.src='assets/images/noimage.png'" alt="">
+                                        <input id="input-file-second-{{i}}" (change)="onChangeImageSecond($event, i)"
+                                            accept="image/png,image/gif,image/jpeg,image/jpg" type="file">
+                                    </div>
+                                    <span *ngIf="item.is_delete" (click)="onDeleteSubImg(item, i)"
+                                        class="delete">削除する</span>
                                 </div>
-                                <img (click)="addImage()" src="assets/images/icon-plus.png">
+                                <img class="addimage" (click)="addImage()" src="assets/images/icon-plus.png">
                             </div>
                         </div>
-                        <p class="errors" class="errors" *ngIf="formErrors.image_2">
+                        <p class="errors" class="errors" *ngIf="formErrors.image">
                             {{
-                            formErrors.image_2
+                            formErrors.image
                             }}
                         </p>
                         <div class="checkbox">
-                            <input type="checkbox">おすすめに掲載する
+                            <input type="checkbox" formControlName="is_featured">おすすめに掲載する
                         </div>
                     </div>
                 </div>
@@ -388,25 +399,25 @@
                         <div class="form-flex-inner">
                             <div class="flex-item">
                                 <label></label>
-                                <app-date-picker (actionTime)="getTime($event, 'start_at')" [date]="date.start_at"
+                                <app-date-picker (actionTime)="getTime($event, 'time_start')" [date]="date.time_start"
                                     [pickerType]="'calendar'" [placeholder]="placeholder.start_at">
                                 </app-date-picker>
                             </div>～
                             <div class="flex-item">
                                 <label></label>
-                                <app-date-picker (actionTime)="getTime($event, 'end_at')" [date]="date.end_at"
+                                <app-date-picker (actionTime)="getTime($event, 'time_end')" [date]="date.time_end"
                                     [pickerType]="'calendar'" [placeholder]="placeholder.end_at">
                                 </app-date-picker>
                             </div>
                         </div>
-                        <p class="errors" class="errors" *ngIf="formErrors.start_at">
+                        <p class="errors" class="errors" *ngIf="formErrors.time_start">
                             {{
-                            formErrors.start_at
+                            formErrors.time_start
                             }}
                         </p>
-                        <p class="errors" class="errors" *ngIf="formErrors.end_at">
+                        <p class="errors" class="errors" *ngIf="formErrors.time_end">
                             {{
-                            formErrors.end_at
+                            formErrors.time_end
                             }}
                         </p>
                     </div>

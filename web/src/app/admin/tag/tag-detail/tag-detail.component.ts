@@ -70,7 +70,6 @@ export class TagDetailComponent implements OnInit {
   getData() {
     this.componentActions.showLoading();
     this.adminService.getDetailTag(this.id).subscribe(res=>{
-      console.log(res);
       this.formTag.patchValue({
         title: res.title
       });

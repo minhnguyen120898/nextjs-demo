@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { DateTimeAdapter } from 'ng-pick-datetime';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { DateTimeAdapter, OwlDateTimeComponent } from 'ng-pick-datetime';
 import { PickerType, SelectMode } from 'ng-pick-datetime/date-time/date-time.class';
 
 @Component({
@@ -14,7 +14,6 @@ export class DatePickerComponent implements OnInit {
   @Input() placeholder = '日付選択';
   @Input() startView: any = 'month';
   @Output() actionTime = new EventEmitter();
-
   constructor(dateTimeAdapter: DateTimeAdapter<any>) {
     dateTimeAdapter.setLocale('ja-JP'); // change locale to Japanese
   }
@@ -24,6 +23,7 @@ export class DatePickerComponent implements OnInit {
   }
 
   getTime() {
+  
     this.actionTime.emit(this.date);
   }
 }

@@ -17,7 +17,7 @@ export const routes: Routes = [
         path: 'notice', loadChildren: () => import('./notice/notice.module').then(m => m.NoticeModule)
     },
     {
-        path: 'building', loadChildren: () => import('./building/building.module').then(m => m.BuildingModule)
+        path: 'work', loadChildren: () => import('./building/building.module').then(m => m.BuildingModule)
     },
     {
         path: 'category', loadChildren: () => import('./category/category.module').then(m => m.CategoryModule)

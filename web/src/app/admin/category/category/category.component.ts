@@ -139,7 +139,6 @@ export class CategoryComponent implements OnInit {
   }
 
   handleAction(event: any) {
-    console.log(event);
     if (event.action == 'pagesize') {
       this.router.navigate([`/${config.routerLoginAdmin}/category`],
         {

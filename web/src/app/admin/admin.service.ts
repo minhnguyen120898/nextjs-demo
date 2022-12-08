@@ -8,35 +8,39 @@ export class AdminService extends BaseService {
         super(httpc)
     }
 
-    getListBuilding(page: number, limit: number, text: string) {
-        return this.getData(`user/admin/list?page=${page}&limit=${limit}&text=${text}`);
+    getListWork(page: number, limit: number, text: string) {
+        return this.getData(`work/admin?page=${page}&limit=${limit}&search=${text}`);
     }
 
-    createBuilding(body: any){
-        return this.postData(``, body);
+    createWork(body: any) {
+        return this.postData(`work`, body);
     }
 
-    updateBuilding(body: any, id: any){
-        return this.postData(``, body);
+    updateWork(body: any, id: any) {
+        return this.putData(`work/${id}`, body);
     }
 
-    deleteBuilding(id: string){
-        return this.delete(`id`);
+    getDetailWork(id: any) {
+        return this.getData(`work/${id}`);
+    }
+
+    deleteWork(id: string) {
+        return this.delete(`work/${id}`);
     }
 
     getListPlan(page: number, limit: number, text: string) {
         return this.getData(`user/admin/list?page=${page}&limit=${limit}&text=${text}`);
     }
 
-    createPlan(body: any){
+    createPlan(body: any) {
         return this.postData(``, body);
     }
 
-    updatePlan(body: any, id: any){
+    updatePlan(body: any, id: any) {
         return this.postData(``, body);
     }
 
-    deletePlan(id: string){
+    deletePlan(id: string) {
         return this.delete(`id`);
     }
 
@@ -44,15 +48,15 @@ export class AdminService extends BaseService {
         return this.getData(`user/admin/list?page=${page}&limit=${limit}&text=${text}`);
     }
 
-    createUser(body: any){
+    createUser(body: any) {
         return this.postData(``, body);
     }
 
-    updateUser(body: any, id: any){
+    updateUser(body: any, id: any) {
         return this.postData(``, body);
     }
 
-    deleteUser(id: string){
+    deleteUser(id: string) {
         return this.delete(`id`);
     }
 
@@ -60,19 +64,19 @@ export class AdminService extends BaseService {
         return this.getData(`tag?page=${page}&limit=${limit}&search=${text}`);
     }
 
-    getDetailTag(id: any){
+    getDetailTag(id: any) {
         return this.getData(`tag/${id}`);
     }
 
-    createTag(body: any){
+    createTag(body: any) {
         return this.postData(`tag`, body);
     }
 
-    updateTag(body: any, id: any){
+    updateTag(body: any, id: any) {
         return this.putData(`tag/${id}`, body);
     }
 
-    deleteTag(id: string){
+    deleteTag(id: string) {
         return this.delete(`tag/${id}`);
     }
 
@@ -80,35 +84,57 @@ export class AdminService extends BaseService {
         return this.getData(`category?page=${page}&limit=${limit}&search=${text}`);
     }
 
-    getDetailCategory(id: any){
+    getDetailCategory(id: any) {
         return this.getData(`category/${id}`);
     }
 
-    createCategory(body: any){
+    createCategory(body: any) {
         return this.postData(`category`, body);
     }
 
-    updateCategory(body: any, id: any){
+    updateCategory(body: any, id: any) {
         return this.putData(`category/${id}`, body);
     }
 
-    deleteCategory(id: string){
+    deleteCategory(id: string) {
         return this.delete(`category/${id}`);
+    }
+
+    getDataPromise(path: string) {
+        return new Promise((resolve: any, reject: any) => {
+            this.getData(path).subscribe(res => {
+                res.docs = res.docs.map((e: any) => {
+                    return {
+                        itemName: e.title,
+                        id: e._id,
+                        item: JSON.stringify(
+                            {
+                                itemName: e.title,
+                                id: e._id
+                            }
+                        )
+                    }
+                });
+                resolve(res.docs);
+            }, err => {
+                resolve([]);
+            });
+        })
     }
 
     getListAd() {
         return this.getData('/');
     }
 
-    createAd(body: any){
+    createAd(body: any) {
         return this.postData(``, body);
     }
 
-    updateAd(body: any, id: any){
+    updateAd(body: any, id: any) {
         return this.postData(``, body);
     }
 
-    deleteAd(id: string){
+    deleteAd(id: string) {
         return this.delete(`id`);
     }
 
@@ -116,15 +142,15 @@ export class AdminService extends BaseService {
         return this.getData(`user/admin/list?page=${page}&limit=${limit}&text=${text}`);
     }
 
-    createNotice(body: any){
+    createNotice(body: any) {
         return this.postData(``, body);
     }
 
-    updateNotice(body: any, id: any){
+    updateNotice(body: any, id: any) {
         return this.postData(``, body);
     }
 
-    deleteNotice(id: string){
+    deleteNotice(id: string) {
         return this.delete(`id`);
     }
 }

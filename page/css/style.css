@@ -306,27 +306,30 @@ header #right ul li .btn-pink {
 /* FIELD TOP  */
 
 
-.field-top{
+.field-top {
     background-color: #10161B;
     padding: 0 1rem;
 }
+
 .field-top .inner-field {
     max-width: 102.3rem;
     margin-left: auto;
     margin-right: auto;
     padding-top: 4rem;
 }
-.field-top .collection-video{
+
+.field-top .collection-video {
     padding-top: 3rem;
     padding-bottom: 10rem;
 }
-.field-top .collection-video video{
-        width: 100%;
-        height: 37rem;
-        max-width: 53.2rem;
-        margin-left: auto;
-        margin-right: auto;
-        display: block;
+
+.field-top .collection-video video {
+    width: 100%;
+    height: 37rem;
+    max-width: 53.2rem;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
 }
 
 .field-top h3 {
@@ -344,33 +347,34 @@ header #right ul li .btn-pink {
 }
 
 .field-top h3 small {
-   display: block;
-   font-size: 1.6rem;
-   color: white;
+    display: block;
+    font-size: 1.6rem;
+    color: white;
 }
 
-.field-top .social{
+.field-top .social {
     display: flex;
     justify-content: space-between;
 }
+
 .field-top .social .left {
     display: flex;
-   flex-wrap: wrap;
-  align-items: center;
+    flex-wrap: wrap;
+    align-items: center;
 
 }
+
 .field-top .social .left span {
-  font-size: 1.4rem;
-  text-align: center;
-  padding: 0 1rem;
-  color: white;
-  border-radius: 2rem;
-  background-color: #667CF2;
-  margin-right: 1rem;
+    font-size: 1.4rem;
+    text-align: center;
+    padding: 0 1rem;
+    color: white;
+    border-radius: 2rem;
+    background-color: #667CF2;
+    margin-right: 1rem;
 }
-.field-top .social .right{
-   
-}
+
+.field-top .social .right {}
 
 .field-top .social .right ul {
     display: flex;
@@ -381,52 +385,39 @@ header #right ul li .btn-pink {
     list-style: none;
 }
 
-.field-top .social  .right ul li {
+.field-top .social .right ul li {
     padding: 0 1rem;
 }
 
 @media (max-width: 768px) {
-    
-.field-top{
-}
-.field-top .inner-field {
-   
-}
-.field-top .collection-video{
- 
-}
-.field-top .collection-video video{
-       
-}
 
-.field-top h3 {
-  
-}
+    .field-top {}
 
-.field-top h3 span {
-    font-size: 2.8rem;
-}
+    .field-top .inner-field {}
 
-.field-top h3 small {
-  
-}
+    .field-top .collection-video {}
 
-.field-top .social{
-}
-.field-top .social .left {
+    .field-top .collection-video video {}
 
-}
-.field-top .social .left span {
-}
-.field-top .social .right{
-   
-}
+    .field-top h3 {}
 
-.field-top .social .right ul {
-}
+    .field-top h3 span {
+        font-size: 2.8rem;
+    }
 
-.field-top .social  .right ul li {
-}
+    .field-top h3 small {}
+
+    .field-top .social {}
+
+    .field-top .social .left {}
+
+    .field-top .social .left span {}
+
+    .field-top .social .right {}
+
+    .field-top .social .right ul {}
+
+    .field-top .social .right ul li {}
 }
 
 /* FIELD  */
@@ -521,59 +512,50 @@ header #right ul li .btn-pink {
 }
 
 @media (max-width: 768px) {
-    
-.field {
-    background-color: #10161B;
-    padding: 0 1rem;
-}
 
-.field .inner-field {
-   
-}
+    .field {
+        background-color: #10161B;
+        padding: 0 1rem;
+    }
 
-.field h3 {
-}
+    .field .inner-field {}
 
-.field h3 span {
-    padding-right: 4rem;
-    font-size: 2.8rem;
-}
+    .field h3 {}
 
-.field .collection-image {
-    padding-bottom: 3rem;
-}
+    .field h3 span {
+        padding-right: 4rem;
+        font-size: 2.8rem;
+    }
 
-.field .collection-image div {
-    width: calc(100% / 2);
-    height: auto;
-}
+    .field .collection-image {
+        padding-bottom: 3rem;
+    }
 
-.field .collection-image img {
-}
+    .field .collection-image div {
+        width: calc(100% / 2);
+        height: auto;
+    }
 
-.field p {
-    padding-right: 0;
-    padding-left: 0;
-    padding-bottom: 3rem;
-}
+    .field .collection-image img {}
 
-.field table {
-    margin-right:0;
-    margin-left: 0;
-}
+    .field p {
+        padding-right: 0;
+        padding-left: 0;
+        padding-bottom: 3rem;
+    }
 
-.field table tr {}
+    .field table {
+        margin-right: 0;
+        margin-left: 0;
+    }
 
-.field table tr td {
-}
+    .field table tr {}
 
-.field table tr td span {
-  
-}
+    .field table tr td {}
 
-.field table tr td label {
-    
-}
+    .field table tr td span {}
+
+    .field table tr td label {}
 }
 
 /* FOOTER  */

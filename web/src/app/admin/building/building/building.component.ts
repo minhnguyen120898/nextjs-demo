@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ComponentActions } from 'src/app/shared/components/alert/component-actions';
 import { CrudType } from 'src/app/shared/enums/crud-type.enum';
-import { ACTION_TYPE, TypeHeaderPage } from 'src/app/shared/enums/utils';
+import { ACTION_TYPE, TypeHeaderPage, WORK_STATUS } from 'src/app/shared/enums/utils';
+import { HelperService } from 'src/app/shared/services/helpers/helper.service';
 import { TimeService } from 'src/app/shared/services/helpers/time.service';
 import { environment as config } from 'src/environments/environment';
 import { AdminService } from '../../admin.service';
@@ -33,18 +34,19 @@ export class BuildingComponent implements OnInit {
   ];
   panigation = {
     pageSize: 10,
-    totalPage: 100,
+    totalPage: 0,
     currentPage: 1,
     text: ''
   }
   subject_save: any = null;
-  subject_close: any = null;
+  subject_succes: any = null;
   data: any = [];
   constructor(private componentActions: ComponentActions,
     private activatedRoute: ActivatedRoute,
     private adminService: AdminService,
     private timeService: TimeService,
-    private router: Router
+    private router: Router,
+    private helperService: HelperService
   ) { }
 
   ngOnInit(): void {
@@ -53,15 +55,13 @@ export class BuildingComponent implements OnInit {
     });
 
     this.subject_save = this.componentActions.subject_save.subscribe((res: any) => {
-      if (res && res.join && res.data) {
-        if (res.action == ACTION_TYPE.DELETE) {
-          this.delete(res.id);
-        }
+      if (res.action == ACTION_TYPE.DELETE) {
+        this.delete(res.id);
       }
     });
 
-    this.subject_close = this.componentActions.subject_close.subscribe((res: any) => {
-      if (res.back) {
+    this.subject_succes = this.componentActions.subject_success.subscribe((res: any) => {
+      if (res.reget) {
         let params = {
           page: this.activatedRoute.snapshot.queryParamMap.get('page'),
           pagesize: this.activatedRoute.snapshot.queryParamMap.get('pagesize'),
@@ -77,16 +77,15 @@ export class BuildingComponent implements OnInit {
     this.panigation.currentPage = qparam && qparam.page ? Number(qparam.page) : 1;
     this.panigation.pageSize = qparam && qparam.pagesize ? Number(qparam.pagesize) : 10;
     this.panigation.text = qparam && qparam.text ? qparam.text : '';
-    this.adminService.getListBuilding(
+    this.adminService.getListWork(
       this.panigation.currentPage,
       this.panigation.pageSize,
       this.panigation.text
     ).subscribe(res => {
       this.componentActions.hideLoading();
       this.panigation.totalPage = res.total;
-      this.data = this.conventData([1, 2, 3, 4, 5, 1, 2, 3, 4, 5]);
+      this.data = this.conventData(res.docs);
     }, err => {
-      this.data = this.conventData([1, 2, 3, 4, 5, 1, 2, 3, 4, 5]);
       this.componentActions.hideLoading();
     })
   }
@@ -94,10 +93,8 @@ export class BuildingComponent implements OnInit {
     let temp: any = [];
     datas.forEach((e: any, key: number) => {
       let obj: any = {
-        id: 1,
-        item: {
-          title: 'text'
-        },
+        id: e._id,
+        item: e,
         content: [
 
         ],
@@ -109,14 +106,14 @@ export class BuildingComponent implements OnInit {
           title: key + 1 + '.'
         },
         {
-          title: '2022/10/25',
+          title: this.timeService.formatDateFromTimeUnix(e.created_at / 1000, this.timeService.DATE_TIME_FORMAT_JAPAN),
         },
-        { title: '三重ホテルA' },
+        { title: e.title },
         {
-          title: '三重県志摩市阿児町神明...'
+          title: this.helperService.trundertext(e.description, 20)
         },
         {
-          img: 'assets/images/icon-check.svg',
+          img: e.status == WORK_STATUS.PUBLIC ? 'assets/images/icon-check.svg' : '',
           style: {
             'margin-left': '3rem',
           }
@@ -142,10 +139,8 @@ export class BuildingComponent implements OnInit {
   }
 
   handleAction(event: any) {
-    console.log(event);
-
     if (event.action == 'pagesize') {
-      this.router.navigate([`/${config.routerLoginAdmin}/building`],
+      this.router.navigate([`/${config.routerLoginAdmin}/work`],
         {
           queryParams: {
             page: this.panigation.currentPage,
@@ -156,7 +151,7 @@ export class BuildingComponent implements OnInit {
       )
     }
     if (event.action == ACTION_TYPE.DETAIL) {
-      this.router.navigateByUrl(`/${config.routerLoginAdmin}/building/update/${event.id}`)
+      this.router.navigateByUrl(`/${config.routerLoginAdmin}/work/update/${event.id}`)
     }
     if (event.action == ACTION_TYPE.DELETE) {
       this.componentActions.showPopup({
@@ -171,7 +166,7 @@ export class BuildingComponent implements OnInit {
 
 
   handlePage(page: any) {
-    this.router.navigate([`/${config.routerLoginAdmin}/building`],
+    this.router.navigate([`/${config.routerLoginAdmin}/work`],
       {
         queryParams: {
           page: page
@@ -183,7 +178,7 @@ export class BuildingComponent implements OnInit {
 
   handleSearch(event: any) {
     if (event.typeHeaderPage == TypeHeaderPage.SEARCH) {
-      this.router.navigate([`/${config.routerLoginAdmin}/building`],
+      this.router.navigate([`/${config.routerLoginAdmin}/work`],
         {
           queryParams: {
             page: 1,
@@ -194,15 +189,16 @@ export class BuildingComponent implements OnInit {
       )
     }
     if (event.typeHeaderPage == TypeHeaderPage.LINK) {
-      this.router.navigate([`/${config.routerLoginAdmin}/building/create`])
+      this.router.navigate([`/${config.routerLoginAdmin}/work/create`])
     }
   }
 
   delete(id: any) {
-    this.adminService.deleteBuilding(id).subscribe(res => {
+    this.componentActions.showLoading();
+    this.adminService.deleteWork(id).subscribe(res => {
       this.componentActions.showPopup({
         message: '削除しました',
-        mode: CrudType.CLOSE,
+        mode: CrudType.SUCCESS,
         class: 'btn-blue',
         reget: true,
         text: 'OK'
@@ -222,8 +218,8 @@ export class BuildingComponent implements OnInit {
     if (this.subject_save) {
       this.subject_save.unsubscribe();
     }
-    if (this.subject_close) {
-      this.subject_close.unsubscribe();
+    if (this.subject_succes) {
+      this.subject_succes.unsubscribe();
     }
   }
 }

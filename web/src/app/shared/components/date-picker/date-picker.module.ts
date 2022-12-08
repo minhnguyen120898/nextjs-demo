@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DatePickerComponent } from './date-picker.component';
-import { OwlDateTimeModule, OwlNativeDateTimeModule, OWL_DATE_TIME_FORMATS } from 'ng-pick-datetime';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { FormsModule } from '@angular/forms';
 import { OWL_DATE_TIME_LOCALE } from 'ng-pick-datetime';
 import { CalendarViewComponent } from './calendar-view/calendar-view.component';
 @NgModule({
@@ -10,8 +10,9 @@ import { CalendarViewComponent } from './calendar-view/calendar-view.component';
         DatePickerComponent,
         CalendarViewComponent
     ],
-    imports: [ CommonModule , FormsModule,
-        OwlDateTimeModule, 
+    imports: [CommonModule,
+        FormsModule,
+        OwlDateTimeModule,
         OwlNativeDateTimeModule
     ],
     exports: [
@@ -19,7 +20,7 @@ import { CalendarViewComponent } from './calendar-view/calendar-view.component';
         CalendarViewComponent
     ],
     providers: [
-        {provide: OWL_DATE_TIME_LOCALE, useValue: 'ja-JP'},
+        { provide: OWL_DATE_TIME_LOCALE, useValue: 'ja-JP' },
     ],
 })
-export class DatePickerModule {}
+export class DatePickerModule { }

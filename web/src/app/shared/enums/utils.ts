@@ -17,3 +17,8 @@ export enum TypeHeaderPage {
     DETAIL = 2,
     CREATE = 3
   }
+
+  export enum WORK_STATUS {
+    PUBLIC = 0,
+    PRIVATE = 1
+  }

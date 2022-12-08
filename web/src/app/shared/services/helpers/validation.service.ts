@@ -96,7 +96,6 @@ export class ValidationService {
     // clear previous error message (if any)
     this.resetFormErrors(formErrors);
     for (const field in formErrors) {
-      console.log(field);
       
       const control = form.get(field) as any;
 
