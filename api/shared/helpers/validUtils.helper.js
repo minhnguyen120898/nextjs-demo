@@ -36,7 +36,7 @@ const hasKeysInObject = (obj, keys) => {
     return isHas
 }
 const isBase64 = (string) => {
-    return isBase64encode(string, {mimeRequired: true})
+    return string&&string.trim().indexOf("data:")>=0
 }
 const isValidFile = (extension) => {
     return Object.values(appConstant.FILE.EXTENSION).indexOf(extension.toLowerCase()) >= 0
