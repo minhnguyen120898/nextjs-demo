@@ -41,6 +41,8 @@ const create = async (locals, body) => {
  
     }
 
+    console.log(body)
+
     await workModel.create(body)
     return {
         message: localeUtils.commonMessage(locals.lang).CREATE_SUCCESS

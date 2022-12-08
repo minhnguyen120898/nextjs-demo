@@ -36,6 +36,7 @@ router.route('/').post(auth.verifiedTokenAdmin, async (req, res) => {
         const response = await workHandler.create(res.locals, req.body);
         resHelper.sendResponse(res, response);
     } catch (error) {
+        console.log(error)
         resHelper.sendError(res, error)
     }
 })
