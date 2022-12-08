@@ -36,6 +36,7 @@ router.route('/').post(auth.verifiedTokenAdmin, async (req, res) => {
         const response = await workHandler.create(res.locals, req.body);
         resHelper.sendResponse(res, response);
     } catch (error) {
+        console.log(error)
         resHelper.sendError(res, error)
     }
 })
@@ -57,6 +58,7 @@ router.route('/:id').put(auth.verifiedTokenAdmin, async (req, res) => {
         const response = await workHandler.updateById(res.locals, req.params.id, req.body);
         resHelper.sendResponse(res, response);
     } catch (error) {
+        console.log(error)
         resHelper.sendError(res, error)
     }
 })

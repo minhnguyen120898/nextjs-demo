@@ -48,7 +48,7 @@ const uploadToStorage = async (name, base64String, folder=configCommon.s3().fold
 
                 console.log("123456543212")
                 console.log(data)
-                resolve(`${configCommon.s3().host}${name}`)
+                resolve(`${configCommon.s3().host}${folder}/${name}`)
             }
         });
     })

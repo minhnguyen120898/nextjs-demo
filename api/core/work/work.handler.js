@@ -41,6 +41,8 @@ const create = async (locals, body) => {
  
     }
 
+    console.log(body)
+
     await workModel.create(body)
     return {
         message: localeUtils.commonMessage(locals.lang).CREATE_SUCCESS
@@ -101,6 +103,7 @@ const updateById = async (locals, id, body) => {
  
     }
 
+    console.log(body)
     await workModel.update(id, body)
     return {
         message: localeUtils.commonMessage(locals.lang).UPDATE_SUCCESS

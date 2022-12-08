@@ -74,7 +74,7 @@ const getAll = async (query) => {
 
 const getByPagination = async (query, pagination) => {
     console.log(query)
-    query = _.merge(query, { is_delete: 0 })
+    // query = _.merge(query, { is_delete: 0 })
     return new Promise((resolve, reject) => {
         model.aggregate([
             { $match: query },
@@ -133,7 +133,7 @@ const getByPagination = async (query, pagination) => {
                                 {
                                     $and:
                                         [
-                                            { $in: ["$_id1", "$$category_id"] }
+                                            { $in: ["$_id1", "$$tag_id"] }
                                         ]
                                 }
                             }
@@ -182,6 +182,7 @@ const getByPagination = async (query, pagination) => {
                     time_end:1,
                     created_at: 1,
                     category:1,
+                    category_1:1,
                     tag: 1
                 }
             },
