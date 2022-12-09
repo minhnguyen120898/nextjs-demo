@@ -12,6 +12,8 @@ const newsSchema = new Schema({
     to_user_id     : {type:String,default:appConstant.ID_NEW_DEFAULT,ref: appConstant.DATA_TABLE.USER },
     type            :Number,
     image:String,
+    meta_title:String,
+    meta_description:String,
     created_at  : Number,
     updated_at  : Number,
 })
