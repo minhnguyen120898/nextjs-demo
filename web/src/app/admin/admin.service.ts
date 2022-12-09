@@ -140,18 +140,23 @@ export class AdminService extends BaseService {
 
 
     getListNotice(page: number, limit: number, text: string) {
-        return this.getData(`user/admin/list?page=${page}&limit=${limit}&text=${text}`);
+        return this.getData(`new?page=${page}&limit=${limit}&text=${text}`);
     }
 
     createNotice(body: any) {
-        return this.postData(``, body);
+        return this.postData(`new`, body);
+    }
+
+    getDetailNotice(id: any) {
+        return this.getData(`new/${id}`);
     }
 
     updateNotice(body: any, id: any) {
-        return this.postData(``, body);
+        return this.putData(`new/${id}`, body);
     }
 
     deleteNotice(id: string) {
-        return this.delete(`id`);
+        return this.delete(`new/${id}`);
+
     }
 }

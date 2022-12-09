@@ -99,6 +99,7 @@
                             width: 100%;
                             max-width: 25.5rem;
                             height: 17.3rem;
+                            object-fit: cover;
                         }
 
                         input {
@@ -110,7 +111,8 @@
                         margin-left: 4rem;
                         width: calc(100% - 11rem);
                         position: relative;
-
+                        font-size: 1.4rem;
+                        color: #707070;
                         .box-input {
                             position: relative;
                             margin-left: 0;

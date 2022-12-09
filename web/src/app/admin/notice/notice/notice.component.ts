@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ComponentActions } from 'src/app/shared/components/alert/component-actions';
 import { CrudType } from 'src/app/shared/enums/crud-type.enum';
-import { ACTION_TYPE, TypeHeaderPage } from 'src/app/shared/enums/utils';
+import { ACTION_TYPE, NEW_STATUS, TypeHeaderPage } from 'src/app/shared/enums/utils';
+import { HelperService } from 'src/app/shared/services/helpers/helper.service';
 import { TimeService } from 'src/app/shared/services/helpers/time.service';
 import { environment as config } from 'src/environments/environment';
 import { AdminService } from '../../admin.service';
@@ -33,18 +34,19 @@ export class NoticeComponent implements OnInit {
   ];
   panigation = {
     pageSize: 10,
-    totalPage: 100,
+    totalPage: 0,
     currentPage: 1,
     text: ''
   }
   subject_save: any = null;
-  subject_close: any = null;
+  subject_success: any = null;
   data: any = [];
   constructor(private componentActions: ComponentActions,
     private activatedRoute: ActivatedRoute,
     private adminService: AdminService,
     private timeService: TimeService,
-    private router: Router
+    private router: Router,
+    private helperService: HelperService
   ) { }
 
   ngOnInit(): void {
@@ -53,15 +55,13 @@ export class NoticeComponent implements OnInit {
     });
 
     this.subject_save = this.componentActions.subject_save.subscribe((res: any) => {
-      if (res && res.join && res.data) {
         if (res.action == ACTION_TYPE.DELETE) {
           this.delete(res.id);
         }
-      }
     });
 
-    this.subject_close = this.componentActions.subject_close.subscribe((res: any) => {
-      if (res.back) {
+    this.subject_success = this.componentActions.subject_success.subscribe((res: any) => {
+      if (res.reget) {
         let params = {
           page: this.activatedRoute.snapshot.queryParamMap.get('page'),
           pagesize: this.activatedRoute.snapshot.queryParamMap.get('pagesize'),
@@ -82,11 +82,12 @@ export class NoticeComponent implements OnInit {
       this.panigation.pageSize,
       this.panigation.text
     ).subscribe(res => {
+      console.log(res);
+      
       this.componentActions.hideLoading();
       this.panigation.totalPage = res.total;
-      this.data = this.conventData([1, 2, 3, 4, 5, 1, 2, 3, 4, 5]);
+      this.data = this.conventData(res.docs);
     }, err => {
-      this.data = this.conventData([1, 2, 3, 4, 5, 1, 2, 3, 4, 5]);
       this.componentActions.hideLoading();
     })
   }
@@ -94,10 +95,8 @@ export class NoticeComponent implements OnInit {
     let temp: any = [];
     datas.forEach((e: any, key: number) => {
       let obj: any = {
-        id: 1,
-        item: {
-          title: 'text'
-        },
+        id: e._id,
+        item: e,
         content: [
 
         ],
@@ -109,14 +108,14 @@ export class NoticeComponent implements OnInit {
           title: key + 1 + '.'
         },
         {
-          title: '2022/10/25',
+          title: this.timeService.formatDateFromTimeUnix(e.created_at / 1000, this.timeService.DATE_TIME_FORMAT_JAPAN),
         },
-        { title: 'タイトルタイトル' },
+        { title: e.title },
         {
-          title: 'あいうえおかきくけこさしすせそ...'
+          title: this.helperService.trundertext(e.content, 20)
         },
         {
-          title: '公開'
+          title: e.status == NEW_STATUS.PUBLIC ? '公衆' : 'プライベート' 
         },
         {
           title: '削除', action: ACTION_TYPE.DELETE,
@@ -139,8 +138,6 @@ export class NoticeComponent implements OnInit {
   }
 
   handleAction(event: any) {
-    console.log(event);
-
     if (event.action == 'pagesize') {
       this.router.navigate([`/${config.routerLoginAdmin}/notice`],
         {
@@ -196,10 +193,11 @@ export class NoticeComponent implements OnInit {
   }
 
   delete(id: any) {
+    this.componentActions.showLoading();
     this.adminService.deleteNotice(id).subscribe(res => {
       this.componentActions.showPopup({
         message: '削除しました',
-        mode: CrudType.CLOSE,
+        mode: CrudType.SUCCESS,
         class: 'btn-blue',
         reget: true,
         text: 'OK'
@@ -219,8 +217,8 @@ export class NoticeComponent implements OnInit {
     if (this.subject_save) {
       this.subject_save.unsubscribe();
     }
-    if (this.subject_close) {
-      this.subject_close.unsubscribe();
+    if (this.subject_success) {
+      this.subject_success.unsubscribe();
     }
   }
 }

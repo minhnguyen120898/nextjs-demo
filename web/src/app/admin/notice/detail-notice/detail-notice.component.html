@@ -16,7 +16,7 @@
                 <div class="form-group">
                     <label>ステータス</label>
                     <div>
-                        <app-select-dropdown (selectedOption)="handleSetEmloyment($event)"
+                        <app-select-dropdown (selectedOption)="handleSetStatus($event)"
                             [nameSelect]="status.name_select" [options]="status.list"></app-select-dropdown>
                         <p class="errors" class="errors" *ngIf="formErrors.status">
                             {{
@@ -43,7 +43,7 @@
                 <div class="form-group">
                     <label>アイキャッチ</label>
                     <div id="loadimage">
-                        <img (click)="handleUpdateImage()" src="" onerror="this.src='assets/images/noimage.png'" alt="">
+                        <img (click)="handleUpdateImage()" src="{{formNotice.value.image}}" onerror="this.src='assets/images/noimage.png'" alt="">
                         <input id="input-file-main" type="file" (change)="onChangeImageMain($event)"
                             accept="image/png,image/gif,image/jpeg,image/jpg">
                         <p class="errors" class="errors" *ngIf="formErrors.image">
@@ -58,12 +58,12 @@
                 <div class="form-group">
                     <label>本文</label>
                     <div>
-                        <textarea name="" id="" cols="30" rows="10">
+                        <textarea formControlName="content" name="" id="" cols="30" rows="10">
 
                         </textarea>
-                        <p class="errors" class="errors" *ngIf="formErrors.title">
+                        <p class="errors" class="errors" *ngIf="formErrors.content">
                             {{
-                            formErrors.title
+                            formErrors.content
                             }}
                         </p>
                     </div>
@@ -73,10 +73,10 @@
                 <div class="form-group">
                     <label>SEOタイトル</label>
                     <div>
-                        <input formControlName="title" type="text">
-                        <p class="errors" class="errors" *ngIf="formErrors.title">
+                        <input formControlName="meta_title" type="text">
+                        <p class="errors" class="errors" *ngIf="formErrors.meta_title">
                             {{
-                            formErrors.title
+                            formErrors.meta_title
                             }}
                         </p>
                     </div>
@@ -87,10 +87,10 @@
                     <label>ディスク<br>
                         リプション</label>
                     <div>
-                        <input formControlName="title" type="text">
-                        <p class="errors" class="errors" *ngIf="formErrors.title">
+                        <input formControlName="meta_description" type="text">
+                        <p class="errors" class="errors" *ngIf="formErrors.meta_description">
                             {{
-                            formErrors.title
+                            formErrors.meta_description
                             }}
                         </p>
                     </div>
@@ -100,7 +100,7 @@
                 <div class="form-group">
                     <label></label>
                     <div>
-                        <input formControlName="term" type="checkbox">NEW
+                        <input formControlName="type" type="checkbox">NEW
                     </div>
                 </div>
             </div>
