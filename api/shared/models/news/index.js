@@ -70,12 +70,10 @@ const getByPagination = async (query, pagination) => {
                     .countDocuments(query)
                     .then(count => {
                         resolve({
-                            meta: {
-                                total: count,
-                                page: pagination.page,
-                                limit: pagination.limit
-                            },
-                            data: result
+                            total : count,
+                            limit : pagination.limit,
+                            page : pagination.page,
+                            docs: result
                         })
                     })
                     .catch(error => {
