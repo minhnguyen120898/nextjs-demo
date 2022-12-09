@@ -147,6 +147,7 @@ export class CategoryDetailComponent implements OnInit {
         const image: any = await this.uploadService.getBase64Default(file);
         this.formCategory.get('image')?.setValue(image.base64_default)
       }
+      (<HTMLInputElement>document.getElementById('input-file-main')).value = '';
     }
   }
 
@@ -207,7 +208,7 @@ export class CategoryDetailComponent implements OnInit {
       this.formErrors = this.validatorService.checkErorrNotDiry(this.formCategory, this.formErrors, this.validationMessages);
     } else {
       this.componentActions.showPopup({
-        message: `カテゴリーの新規登録をしました`,
+        message: `新しいカテゴリを作成しますか?`,
         mode: CrudType.CONFIRM,
         action: ACTION_TYPE.CREATE,
         text: 'はい'

@@ -122,21 +122,22 @@ export class AdminService extends BaseService {
         })
     }
 
-    getListAd() {
-        return this.getData('/');
+    getListBanner(page: number, limit: number, text: string) {
+        return this.getData(`banner?page=${page}&limit=${limit}&search=${text}`);
     }
 
-    createAd(body: any) {
-        return this.postData(``, body);
+    createBanner(body: any) {
+        return this.postData(`banner`, body);
     }
 
-    updateAd(body: any, id: any) {
-        return this.postData(``, body);
+    updateBanner(body: any, id: any) {
+        return this.putData(`banner/${id}`, body);
     }
 
-    deleteAd(id: string) {
-        return this.delete(`id`);
+    deleteBanner(id: string) {
+        return this.delete(`banner/${id}`);
     }
+
 
     getListNotice(page: number, limit: number, text: string) {
         return this.getData(`user/admin/list?page=${page}&limit=${limit}&text=${text}`);
