@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderPageModule } from 'src/app/shared/components/header-page/header-page.module';
 import { SelectDropdDownModule } from 'src/app/shared/components/select-dropdown/select-drop.module';
 import { TableModule } from 'src/app/shared/components/table/table.module';
+import { PanigationModule } from 'src/app/shared/components/panigation/panigation.module';
 
 
 const routes: Routes = [
@@ -27,7 +28,8 @@ const routes: Routes = [
     HeaderPageModule,
     FormsModule,
     ReactiveFormsModule,
-    SelectDropdDownModule
+    SelectDropdDownModule,
+    PanigationModule
   ]
 })
 export class BannerModule { }

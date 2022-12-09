@@ -548,6 +548,7 @@ export class BuildingCreateComponent implements OnInit {
         const image: any = await this.uploadService.getBase64Default(file);
         this.formWork.get('eye_catching')?.setValue(image.base64_default)
       }
+      (<HTMLInputElement>document.getElementById('input-file-image-main')).value = '';
     }
   }
 
@@ -567,6 +568,8 @@ export class BuildingCreateComponent implements OnInit {
         const video: any = await this.uploadService.getBase64Default(file);
         this.formWork.get('video_up')?.setValue(video.base64_default);
       }
+      (<HTMLInputElement>document.getElementById('input-file-main-video')).value = '';
+
     }
   }
 

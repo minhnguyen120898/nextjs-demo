@@ -1,26 +1,22 @@
-<div id="pag" *ngIf="totalPage&& totalPage > pageSize">
-    <ul *ngIf="pager  && pager['pages'] && pager['pages'].length "
-     class="pagination"
-     [ngClass]="class"
-     >
-        <li [ngClass]="{disabled:pager['currentPage'] === 1}">
-            <a (click)="choosepage(1)">
-                <img src="assets/image/ic-arrow-doubleleft.png" alt="">
-            </a>
-        </li>
-        <li [ngClass]="{disabled:pager['currentPage'] === 1}">
-            <a (click)="choosepage(pager.currentPage - 1)"> <img src="assets/image/ic-arrow-left.png" alt=""> </a>
-        </li>
-        <li *ngFor="let page of pager['pages']" class="page" [ngClass]="{'active':pager['currentPage'] === page}">
-            <a (click)="choosepage(page)">{{page}}</a>
-        </li>
-        <li [ngClass]="{disabled:pager['currentPage'] === pager['totalPages']}">
-            <a (click)="choosepage(pager['currentPage'] + 1)"> <img src="assets/image/ic-arrow-right.png" alt="">
-            </a>
-        </li>
-        <li [ngClass]="{disabled:pager['currentPage'] === pager['totalPages']}">
-            <a (click)="choosepage(pager['totalPages'])"> <img src="assets/image/ic-arrow-doubleright.png" alt="">
-            </a>
-        </li>
-    </ul>
-</div>
+<ul *ngIf="pager  && pager['pages'].length > 1 && pager['pages'].length" class="pagination"
+    [ngClass]="class">
+    <li [ngClass]="{disabled:pager['currentPage'] === 1}">
+        <a (click)="choosepage(1)">
+            <img src="assets/images/double-left.png" alt="">
+        </a>
+    </li>
+    <li [ngClass]="{disabled:pager['currentPage'] === 1}">
+        <a (click)="choosepage(pager.currentPage - 1)"> <img src="assets/images/left.png" alt=""> </a>
+    </li>
+    <li *ngFor="let page of pager['pages']" class="page" [ngClass]="{'active':pager['currentPage'] === page}">
+        <a (click)="choosepage(page)">{{page}}</a>
+    </li>
+    <li [ngClass]="{disabled:pager['currentPage'] === pager['totalPages']}">
+        <a (click)="choosepage(pager['currentPage'] + 1)"> <img src="assets/images/right.png" alt="">
+        </a>
+    </li>
+    <li [ngClass]="{disabled:pager['currentPage'] === pager['totalPages']}">
+        <a (click)="choosepage(pager['totalPages'])"> <img src="assets/images/double-right.png" alt="">
+        </a>
+    </li>
+</ul>
