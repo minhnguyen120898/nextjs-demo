@@ -17,6 +17,18 @@ router.route('/').get(auth.noCheckToken, async (req, res) => {
     }
 })
 
+/**
+ * get all qa history
+ */
+router.route('/admin').get(auth.verifiedTokenAdmin, async (req, res) => {
+    try {
+        let response = await bannerHandler.getList(res.locals,req.query);
+        resHelper.sendResponse(res, response)
+    } catch (error) {
+        resHelper.sendError(res, error);
+    }
+})
+
 // add qa
 router.route('/').post(auth.verifiedTokenAdmin, async (req, res) => {
     try {
