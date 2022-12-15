@@ -11,8 +11,32 @@ export class TopService extends BaseService {
     }
     // USER
 
-    getListPage(page: number, limit: number) {
-        return this.getData(`profile?status=1&page=${page}&limit=${limit}`);
+    getListWorkByCategory(id: any, page: number, limit: number) {
+        return this.getData(`work?category_id=${id}&page=${page}&limit=${limit}`);
+    }
+
+    getCategory() {
+        return new Promise((resolve, reject) => {
+            return this.getData('category').subscribe(res => {
+                let docs = res.docs.filter((e: any) => {
+                    return e.parent.length == 0;
+                });
+
+                for (let index = 0; index < docs.length; index++) {
+                    const element = docs[index];
+                    element.childs = res.docs.filter((e: any) => {
+                        let find = e.parent.find((c: any) => {
+                            return c._id == element._id;
+                        });
+                        return e.parent.length && find;
+                    });
+                }
+
+                resolve(docs);
+            }, err => {
+                resolve([]);
+            })
+        });
     }
 
 }

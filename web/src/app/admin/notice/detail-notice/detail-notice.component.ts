@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ComponentActions } from 'src/app/shared/components/alert/component-actions';
 import { CrudType } from 'src/app/shared/enums/crud-type.enum';
-import { ACTION_TYPE, Utils } from 'src/app/shared/enums/utils';
+import { ACTION_TYPE, NEW_STATUS, Utils } from 'src/app/shared/enums/utils';
 import { TimeService } from 'src/app/shared/services/helpers/time.service';
 import { UploadFileService } from 'src/app/shared/services/helpers/upload-file.service';
 import { ValidationService } from 'src/app/shared/services/helpers/validation.service';
@@ -27,54 +27,50 @@ export class DetailNoticeComponent implements OnInit {
     text_new: 'CSVダウンロード'
   }
   subject_save: any = null;
-  subject_close: any = null;
+  subject_success: any = null;
   status = {
     list: [
       {
-        itemName: '山田　太郎',
-        type: '正社員'
+        itemName: '公衆',
+        type: NEW_STATUS.PUBLIC
       },
       {
-        itemName: '田中　かずき',
-        type: '派遣社員'
-      },
-      {
-        itemName: '山下　花子',
-        type: 'アルバイト'
+        itemName: 'プライベート',
+        type: NEW_STATUS.PRIVATE
       }
     ],
     name_select: '- 選択してください'
   }
- 
+
   formErrors = {
     status: '',
     title: '',
     image: '',
-    text: '',
-    seo_title: '',
-    reption: ''
+    content: '',
+    meta_title: '',
+    meta_description: ''
   };
   validationMessages = {
     status: {
       required: 'タイトルを入力してください',
       whitespace: '作成者を選択してください',
     },
-    image:{
+    image: {
       required: '画像が必要です',
     },
     title: {
       required: 'タイトルを入力してください',
       whitespace: 'タイトルを入力してください',
     },
-    text: {
+    content: {
       required: '本文を入力してください',
       whitespace: '本文を入力してください',
     },
-    seo_title:{
+    meta_title: {
       required: 'タイトル必須',
       whitespace: 'タイトル必須',
     },
-    reption:{
+    meta_description: {
       required: '修理が必要',
       whitespace: '修理が必要',
     }
@@ -106,7 +102,7 @@ export class DetailNoticeComponent implements OnInit {
       }
     });
 
-    this.subject_close = this.componentActions.subject_close.subscribe((res: any) => {
+    this.subject_success = this.componentActions.subject_success.subscribe((res: any) => {
       if (res.back) {
         this.back()
       }
@@ -114,7 +110,23 @@ export class DetailNoticeComponent implements OnInit {
   }
 
   getData() {
-
+    this.componentActions.showLoading();
+    this.adminService.getDetailNotice(this.id).subscribe(res => {
+      this.formNotice.patchValue({
+        status: res.status,
+        title: res.title,
+        content: res.content,
+        image: res.image,
+        meta_title: res.meta_title,
+        meta_description: res.meta_description,
+        type: res.type
+      });
+      // STATUS
+      this.status.name_select = this.status.list.find(e => { return e.type == res.status })?.itemName || '';
+      this.componentActions.hideLoading();
+    }, err => {
+      this.componentActions.hideLoading();
+    })
   }
 
   back() {
@@ -125,18 +137,13 @@ export class DetailNoticeComponent implements OnInit {
     const body = {
       ...this.formNotice.value
     }
-    if (body.image) {
-      if (!body.image.islink) {
-        body.avatar = body.image.base64_default;
-      }
-      delete body.image;
-    };
+   
     if (this.id) {
       this.componentActions.showLoading();
       this.adminService.updateNotice(body, this.id).subscribe(res => {
         this.componentActions.showPopup({
           message: 'お知らせの更新をしました',
-          mode: CrudType.CLOSE,
+          mode: CrudType.SUCCESS,
           class: 'btn-blue',
           back: true
         });
@@ -150,7 +157,7 @@ export class DetailNoticeComponent implements OnInit {
       this.adminService.createNotice(body).subscribe(res => {
         this.componentActions.showPopup({
           message: 'お知らせを投稿しました',
-          mode: CrudType.CLOSE,
+          mode: CrudType.SUCCESS,
           class: 'btn-blue',
           back: true
         });
@@ -168,10 +175,10 @@ export class DetailNoticeComponent implements OnInit {
       status: ['', [Validators.required]],
       title: ['', [Validators.required, this.validatorService.noWhitespaceValidator]],
       image: ['', [Validators.required]],
-      term: ['', [Validators.required]],
-      text: ['', [Validators.required, this.validatorService.noWhitespaceValidator]],
-      seo_title: ['', [Validators.required, this.validatorService.noWhitespaceValidator]],
-      reption: ['', [Validators.required, this.validatorService.noWhitespaceValidator]]
+      type: ['', []],
+      content: ['', [Validators.required, this.validatorService.noWhitespaceValidator]],
+      meta_title: ['', [Validators.required, this.validatorService.noWhitespaceValidator]],
+      meta_description: ['', [Validators.required, this.validatorService.noWhitespaceValidator]]
     });
     this.formNotice.valueChanges.subscribe((data: object) => this.onValueChanged(data));
   }
@@ -194,9 +201,9 @@ export class DetailNoticeComponent implements OnInit {
     }
   }
 
-  handleDelete(){
+  handleDelete() {
     this.componentActions.showPopup({
-      message: `【${1}】\n削除しますか？`,
+      message: `【${this.formNotice.value.title}】\n削除しますか？`,
       mode: CrudType.CONFIRM,
       action: ACTION_TYPE.DELETE,
       id: this.id,
@@ -205,12 +212,13 @@ export class DetailNoticeComponent implements OnInit {
   }
 
   delete(id: any) {
+    this.componentActions.showLoading();
     this.adminService.deleteNotice(id).subscribe(res => {
       this.componentActions.showPopup({
         message: 'タグを削除しました',
-        mode: CrudType.CLOSE,
+        mode: CrudType.SUCCESS,
         class: 'btn-blue',
-        reget: true,
+        back: true,
         text: 'OK'
       });
       this.componentActions.hideLoading();
@@ -223,8 +231,9 @@ export class DetailNoticeComponent implements OnInit {
     });
   }
 
-  handleSetEmloyment(event: any) {
-    this.formNotice.get('user')?.setValue(event.value.type);
+  handleSetStatus(event: any) {
+    this.status.name_select = event.value.itemName;
+    this.formNotice.get('status')?.setValue(Number(event.value.type));
   }
 
   handleReset() {
@@ -232,9 +241,9 @@ export class DetailNoticeComponent implements OnInit {
       status: '',
       title: '',
       image: '',
-      text: '',
-      seo_title: '',
-      reption: ''
+      content: '',
+      meta_title: '',
+      meta_description: ''
     };
     this.formNotice.reset();
   }
@@ -257,9 +266,10 @@ export class DetailNoticeComponent implements OnInit {
       if (!check.status) {
         check.error;
       } else {
-        const image = await this.uploadService.getBase64Default(file);
-        // this.formStaff.get('image')?.setValue(image)
+        const image : any= await this.uploadService.getBase64Default(file);
+        this.formNotice.get('image')?.setValue(image.base64_default);
       }
+      (<HTMLInputElement>document.getElementById('input-file-main')).value = '';
     }
   }
 
@@ -267,8 +277,8 @@ export class DetailNoticeComponent implements OnInit {
     if (this.subject_save) {
       this.subject_save.unsubscribe();
     }
-    if (this.subject_close) {
-      this.subject_close.unsubscribe();
+    if (this.subject_success) {
+      this.subject_success.unsubscribe();
     }
   }
 }

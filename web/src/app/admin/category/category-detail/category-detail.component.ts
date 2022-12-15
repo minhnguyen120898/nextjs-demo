@@ -78,7 +78,7 @@ export class CategoryDetailComponent implements OnInit {
             parent: e.parent
           }
         }).filter((e: any) => {
-          return e.parent.length == 0;
+          return e.id != this.id;
         });
         resolve(res.docs);
       }, err => {
@@ -117,8 +117,8 @@ export class CategoryDetailComponent implements OnInit {
         parent: res.parent
       });
 
-      if(res.parent&&res.parent[0]){
-        this.categorys_parent.name_select =  this.categorys_parent.list.find((e: any)=>{
+      if (res.parent && res.parent[0]) {
+        this.categorys_parent.name_select = this.categorys_parent.list.find((e: any) => {
           return e.id == res.parent[0];
         })?.itemName
       }
