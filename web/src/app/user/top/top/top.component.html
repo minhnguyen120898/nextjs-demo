@@ -14,24 +14,20 @@
 </div>
 <div class="tab">
     <ul>
-        <li>
-            <a>おすすめ</a>
-        </li>
-        <li>
-            <a>グルメ</a>
-        </li>
-        <li>
-            <a>アクティビティ</a>
+        <li [ngClass]="{'active': item.active}" *ngFor="let item of listCategorys">
+            <a routerLink="/" [queryParams]="{category_id: item._id}" fragment="building"
+            routerLinkActive="router-link-active"><img  src="{{item.image}}">{{item.title}}</a>
         </li>
     </ul>
 </div>
-<div class="building" *ngFor="let item of listData">
+<a id="building"></a>
+<div class="building"  *ngFor="let item of listData">
     <h3>{{item.title}}<span>すべて見る</span></h3>
     <div class="content">
         <owl-carousel-o [options]="customOptions2">
             <ng-template *ngFor="let child of item.datas" carouselSlide>
-                <div class="element">
-                    <span>text</span>
+                <div class="element" [ngStyle]="{'background-image': child.background}">
+                    <span>{{child.title}}</span>
                 </div>
             </ng-template>
         </owl-carousel-o>

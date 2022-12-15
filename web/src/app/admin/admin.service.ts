@@ -100,22 +100,59 @@ export class AdminService extends BaseService {
         return this.delete(`category/${id}`);
     }
 
-    getDataPromise(path: string) {
+    getDataPromise(path: string, another: boolean = false) {
         return new Promise((resolve: any, reject: any) => {
             this.getData(path).subscribe(res => {
-                res.docs = res.docs.map((e: any) => {
-                    return {
-                        itemName: e.title,
-                        id: e._id,
-                        item: JSON.stringify(
-                            {
-                                itemName: e.title,
-                                id: e._id
-                            }
-                        )
+                let docs: any[] = [];
+                if (another) {
+                    // for (let index = 0; index < res.docs.length; index++) {
+                    //     const element = res.docs[index];
+                    //     let doc = element.parent.map((e: any) => {
+                    //         return {
+                    //             itemName: e.title,
+                    //             id: e._id,
+                    //             item: JSON.stringify(
+                    //                 {
+                    //                     itemName: e.title,
+                    //                     id: e._id
+                    //                 }
+                    //             )
+                    //         }
+                    //     });
+                    //     docs = docs.concat(doc);
+                    // }
+                    docs = res.docs.filter((e: any) => {
+                        return e.parent.length;
+                    }).map((e: any) => {
+                        return {
+                            itemName: e.title,
+                            id: e._id,
+                            item: JSON.stringify(
+                                {
+                                    itemName: e.title,
+                                    id: e._id
+                                }
+                            )
+                        }
                     }
-                });
-                resolve(res.docs);
+                    )
+                    resolve(docs);
+                } else {
+                    docs = res.docs.map((e: any) => {
+                        return {
+                            itemName: e.title,
+                            id: e._id,
+                            item: JSON.stringify(
+                                {
+                                    itemName: e.title,
+                                    id: e._id
+                                }
+                            )
+                        }
+                    });
+                }
+
+                resolve(docs);
             }, err => {
                 resolve([]);
             });

@@ -205,8 +205,8 @@ export class BuildingCreateComponent implements OnInit {
   async ngOnInit() {
     this.initForm();
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
-    await Promise.all([this.adminService.getDataPromise('category?page=1&limit=1000'),
-    this.adminService.getDataPromise('tag?page=1&limit=1000')
+    await Promise.all([this.adminService.getDataPromise('category?page=1&limit=1000', true),
+    this.adminService.getDataPromise('tag?page=1&limit=1000', false)
     ]).then(res => {
       this.category.list = res[0];
       this.tag.list = res[1];

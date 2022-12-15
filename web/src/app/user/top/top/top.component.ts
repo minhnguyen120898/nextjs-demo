@@ -66,21 +66,9 @@ export class TopComponent implements OnInit {
   listPage: any[] = [1, 2, 3, 4, 5, 6];
   list: any[] = [1, 2, 3, 4, 5, 6];
   listBanner: any[] = [1, 2, 3, 4, 5, 6];
+  listCategorys: any[] = [];
 
-  listData = [
-   {
-    title: 'ahihi',
-    datas : [1,2,3,5,6,7,8,8,9,9]
-   },
-   {
-    title: 'ahihi',
-    datas : [1,2,3,5,6,7,8,8,9,9]
-   },
-   {
-    title: 'ahihi',
-    datas : [1,2,3,5,6,7,8,8,9,9]
-   }
-  ]
+  listData: any[] = []
 
   dataFaq = [
     {
@@ -115,29 +103,59 @@ export class TopComponent implements OnInit {
     private router: Router
   ) { }
 
-  ngOnInit(): void {
-    this.activatedRoute.queryParams.subscribe(res => {
-      this.getData(res)
+  async ngOnInit() {
+    await this.topService.getCategory().then((res: any) => {
+      this.listCategorys = res;
+    }).catch(err => {
+      this.listCategorys = err;
+    });
+    this.activatedRoute.queryParams.subscribe((res: any) => {
+      this.listCategorys.forEach(e => {
+        e.active = false;
+      });
+      if (res.category_id) {
+        const element = this.listCategorys.find((e: any) => {
+          return e._id == res.category_id;
+        });
+        if (element) {
+          element.active = true;
+        }
+
+        this.getData(res, element);
+      } else {
+        this.listCategorys[0].active = true;
+        this.getData(res, this.listCategorys[0]);
+      }
     });
   }
 
-  getData(qparam: any) {
+  getData(qparam: any, category: any) {
+
     this.panigation.currentPage = qparam && qparam.page ? Number(qparam.page) : 1;
     this.panigation.pageSize = qparam && qparam.pagesize ? Number(qparam.pagesize) : 6;
-    this.topService.getListPage(this.panigation.currentPage,
-      this.panigation.pageSize).subscribe(res => {
-        this.listPage = res.docs.map((e: any) => {
-          return {
-            id: e._id,
-            banner: e.banner,
-            name: e.name,
-            store_name: e.store_name,
-            logo: e.logo_top
-          }
-        });
-        this.panigation.totalPage = res.total;
-      }, err => {
-      });
+    this.listData = [];
+    if (category) {
+      for (let index = 0; index < category.childs.length; index++) {
+        const element = category.childs[index];
+        let obj: any = {
+          title: element.title,
+          datas: []
+        }
+        this.topService.getListWorkByCategory(element._id, this.panigation.currentPage,
+          this.panigation.pageSize).subscribe(res => {
+            let datas = res.docs.map((e: any) => {
+              return {
+                id: e._id,
+                background: `url(${e.eye_catching})`,
+                title: e.title
+              }
+            });
+            obj.datas = datas;
+            this.listData.push(obj);
+          }, err => {
+          });
+      }
+    }
   }
 
   handleAction(event: any) {
