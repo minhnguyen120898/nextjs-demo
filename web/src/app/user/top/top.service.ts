@@ -15,6 +15,10 @@ export class TopService extends BaseService {
         return this.getData(`work?category_id=${id}&page=${page}&limit=${limit}`);
     }
 
+    getListBanner(page: number, limit: number) {
+        return this.getData(`banner?page=${page}&limit=${limit}`);
+    }
+
     getCategory() {
         return new Promise((resolve, reject) => {
             return this.getData('category').subscribe(res => {

@@ -6,8 +6,8 @@
 <div id="sub-banner">
     <owl-carousel-o [options]="customOptions">
         <ng-template *ngFor="let item of listBanner" carouselSlide>
-            <div class="element">
-                <span>text</span>
+            <div class="element" (click)="navigateBanner(item)" [ngStyle]="{'background-image': item.background}">
+                <!-- <span>text</span> -->
             </div>
         </ng-template>
     </owl-carousel-o>
