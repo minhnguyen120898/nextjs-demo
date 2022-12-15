@@ -17,7 +17,10 @@
         align-items: center;
         background-color: #686868;
         max-width: 504px;
-
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        cursor: pointer;
         span {
             font-size: 3.5rem;
             color: white;
@@ -147,6 +150,7 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            cursor: pointer;
             span {
                 font-size: 3.5rem;
                 color: white;

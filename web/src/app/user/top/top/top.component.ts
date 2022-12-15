@@ -63,11 +63,8 @@ export class TopComponent implements OnInit {
       }
     }
   };
-  listPage: any[] = [1, 2, 3, 4, 5, 6];
-  list: any[] = [1, 2, 3, 4, 5, 6];
   listBanner: any[] = [1, 2, 3, 4, 5, 6];
   listCategorys: any[] = [];
-
   listData: any[] = []
 
   dataFaq = [
@@ -104,6 +101,21 @@ export class TopComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
+
+    this.topService.getListBanner(1, 50).subscribe(res => {
+      console.log(res);
+      let datas = res.docs.map((e: any) => {
+        return {
+          id: e._id,
+          background: `url(${e.image})`,
+          title: '',
+          url: e.url
+        }
+      });
+      this.listBanner = datas;
+    }, err => {
+    });
+
     await this.topService.getCategory().then((res: any) => {
       this.listCategorys = res;
     }).catch(err => {
@@ -127,6 +139,10 @@ export class TopComponent implements OnInit {
         this.getData(res, this.listCategorys[0]);
       }
     });
+  }
+
+  navigateBanner(item: any){
+    window.open(item.url, 'target=_black');
   }
 
   getData(qparam: any, category: any) {
