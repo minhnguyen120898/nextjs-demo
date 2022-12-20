@@ -8,15 +8,39 @@
 
 #sub-banner {
     background-color: #10161B;
-    padding: 9rem 5rem 5rem;
-
+    padding: 9rem 0rem 5rem;
+    ::ng-deep {
+        owl-carousel-o {
+            .owl-carousel {
+                .owl-nav {
+                }
+                .owl-dots {
+                    margin-top: 3rem;
+                    .owl-dot{
+                        span{
+                            width: 1.5rem;
+                            height: 1.5rem;
+                            background-color: #AEAEAE;
+                            margin: 0 1.5rem;
+                        }
+                    }
+                    .owl-dot.active {
+                        span {
+                            width: 2.1rem!important;
+                            height: 2.1rem!important;
+                            background-color: #E8E8E8!important;
+                        }
+                    }
+                }
+            }
+        }
+    }
     .element {
-        height: 35rem;
+        height: 28.3rem;
         display: flex;
         justify-content: center;
         align-items: center;
         background-color: #686868;
-        max-width: 504px;
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -25,6 +49,84 @@
             font-size: 3.5rem;
             color: white;
             font-family: 'Notosan';
+        }
+        
+    }
+}
+
+.el {
+    background-color: #10161B;
+    padding-bottom: 7rem;
+    padding-top: 7rem;
+    h3 {
+      text-align: center;
+      margin-top: 0;
+      margin-bottom: 3rem;
+        span{
+            font-size: 3.2rem;
+            text-align: center;
+            display: inline-block;
+            position: relative;
+            font-weight: bold;
+            color: white;
+            position: relative;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        span::after {
+            content: '';
+            width: 8.1rem;
+            height: 2px;
+            background-color: white;
+            left: - 8.2rem;
+            top: 2rem;
+            position: absolute;
+        }
+    
+        span::before {
+            content: '';
+            width: 8.1rem;
+            height: 2px;
+            background-color: white;
+            right: - 8.2rem;
+            top: 2rem;
+            position: absolute;
+    
+        }
+    }
+
+    
+
+    ul {
+        padding: 0;
+        margin: 0 auto;
+        display: flex;
+        max-width: 99.2rem;
+        li {
+            width: calc(100% / 3);
+
+            div{
+                min-height: 24.5rem;
+                img {
+                    max-width: 100%;
+                    margin: 0 auto 1rem;
+                    display: block;
+                }
+            }
+
+            span {
+                display: block;
+                text-align: center;
+                font-size: 2.4rem;
+                color: white;
+            }
+
+            p {
+                font-size: 1.6rem;
+                color: white;
+                text-align: center;
+                margin: 1rem 0;
+            }
         }
     }
 }
@@ -36,6 +138,7 @@
     padding-bottom: 1rem;
     padding-right: 5rem;
     padding-left: 5rem;
+
     ul {
         margin: 0;
         padding: 0;
@@ -44,6 +147,7 @@
         li {
             margin-right: 2rem;
             position: relative;
+
             a {
                 font-family: 'Noto Serif JP';
                 font-size: 2.4rem;
@@ -51,27 +155,18 @@
                 cursor: pointer;
                 display: flex;
                 align-items: center;
-                img{
+
+                img {
                     width: 3.4rem;
                     height: 3.4rem;
                     object-fit: cover;
                     margin-right: 1rem;
                 }
             }
-           
+
         }
-        li:hover ::after{
-          content: '';
-          display: block;
-          width: 100%;
-          height: 2px;
-          background-color: white;
-          position: absolute;
-          bottom: -1rem;
-          left: 0;
-          right: 0;
-        }
-        li.active ::after{
+
+        li:hover ::after {
             content: '';
             display: block;
             width: 100%;
@@ -81,7 +176,19 @@
             bottom: -1rem;
             left: 0;
             right: 0;
-          }
+        }
+
+        li.active ::after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: white;
+            position: absolute;
+            bottom: -1rem;
+            left: 0;
+            right: 0;
+        }
 
     }
 }
@@ -96,6 +203,14 @@
         font-family: 'Noto Serif JP';
         margin-top: 0;
         margin-bottom: 2rem;
+
+        img {
+            width: 3.4rem;
+            height: 3.4rem;
+            object-fit: cover;
+            margin-right: 1rem;
+        }
+
         span {
             border-radius: 2.4rem;
             color: #fff;
@@ -103,8 +218,9 @@
             line-height: 2;
             font-size: 2.4rem;
             display: inline-block;
-            margin-left: 10rem;
+            margin-left: auto;
             padding: 0 3rem;
+            float: right;
         }
     }
 
@@ -136,6 +252,7 @@
                             right: 0;
                         }
                     }
+                   
                 }
             }
         }
@@ -146,48 +263,123 @@
             justify-content: center;
             align-items: center;
             background-color: #686868;
-            max-width: 504px;
+            max-width: 250px;
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             cursor: pointer;
-            span {
-                font-size: 3.5rem;
-                color: white;
-                font-family: 'Notosan';
+            position: relative;
+            .content-element{
+                position: absolute;
+                right: 0;
+                left: 0;
+                bottom: 0;
+                padding-left: 1rem;
+                padding-right: 1rem;
+                span {
+                    font-size: 2.4rem;
+                    color: white;
+                    font-family: 'Notosan';
+                }
+                div{
+                    label{
+                        font-size: 1.5rem;
+                        color: white;
+                        font-family: 'Notosan';
+                        padding: 0 1.7rem;
+                        border-radius: 2rem;
+                        background-color: #667CF2;
+                    }
+                }
             }
+            
         }
     }
 }
 
-@media(max-width: 768px){
+@media(max-width: 768px) {
+    #banner{
+        #inner-banner{
+            img{
+                width: 100%;
+                height: 52.7rem;
+                object-fit: cover;
+            }
+        }
+    }
     #sub-banner {
         padding: 9rem 1.5rem 5rem;
-    
-        
+
+
     }
+    .el {
+      
+        h3 {
+         font-size: 1.8rem;
+        }
     
+        ul {
+            flex-direction: column;
+            li {
+                width: 100%;
+    
+                div{
+                    min-height: 24.5rem;
+                    img {
+                    }
+                }
+    
+                span {
+                    font-size: 1.8rem;
+                }
+    
+                p {
+                    font-size: 1.3rem;
+                }
+            }
+        }
+    }
     .tab {
         padding-right: 1.5rem;
         padding-left: 1.5rem;
-    }
+        ul {
+           
     
+            li {
+               
+    
+                a {
+                    font-size:1.4rem;
+                   
+    
+                    img {
+                        width: 2rem;
+                        height: 2rem;
+                    }
+                }
+    
+            }
+        }
+    }
+
     .building {
         padding: 5rem 1.5rem;
-    
+
         h3 {
+            font-size: 1.8rem;
             span {
                 color: #fff;
                 margin-left: 3rem;
+                font-size: 1.1rem;
             }
         }
-    
+
         .content {
             ::ng-deep {
                 owl-carousel-o {
                     .owl-carousel {
                         .owl-nav {
-    
+
                             .owl-prev,
                             .owl-next {
                                 font-size: 5rem;
@@ -201,11 +393,11 @@
                                 cursor: pointer;
                                 line-height: 0.9;
                             }
-    
+
                             .owl-prev {
                                 left: 0;
                             }
-    
+
                             .owl-next {
                                 right: 0;
                             }
@@ -213,22 +405,28 @@
                     }
                 }
             }
-    
+
             .element {
-                height: 35rem;
+                height: 13.8rem;
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 background-color: #686868;
-                max-width: 504px;
-    
-                span {
-                    font-size: 3.5rem;
-                    color: white;
-                    font-family: 'Notosan';
+                max-width: 15.6rem;
+
+                .content-element{
+                    span {
+                        font-size: 1.3rem;
+                    }
+                    div{
+                        label{
+                            font-size: 1.1rem;
+                        }
+                    }
                 }
+                
             }
         }
     }
-    
+
 }

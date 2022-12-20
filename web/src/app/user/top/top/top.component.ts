@@ -13,11 +13,11 @@ export class TopComponent implements OnInit {
     loop: true,
     nav: false,
     dots: true,
-    mouseDrag: true,
+    mouseDrag: true,  
     touchDrag: true,
     pullDrag: true,
     // lazyLoad: true,
-    center: window.innerWidth < 768 ? true : false,
+    center: true,
     margin: 10,
     autoplayHoverPause: true,
     navSpeed: 700,
@@ -30,7 +30,7 @@ export class TopComponent implements OnInit {
         items: 1
       },
       768: {
-        items: 3
+        items: 2
       }
     }
   };
@@ -141,7 +141,7 @@ export class TopComponent implements OnInit {
     });
   }
 
-  navigateBanner(item: any){
+  navigateBanner(item: any) {
     window.open(item.url, 'target=_black');
   }
 
@@ -153,17 +153,23 @@ export class TopComponent implements OnInit {
     if (category) {
       for (let index = 0; index < category.childs.length; index++) {
         const element = category.childs[index];
+        console.log(element);
+        
         let obj: any = {
           title: element.title,
+          image: element.image,
           datas: []
         }
         this.topService.getListWorkByCategory(element._id, this.panigation.currentPage,
           this.panigation.pageSize).subscribe(res => {
+            console.log(res);
+            
             let datas = res.docs.map((e: any) => {
               return {
                 id: e._id,
                 background: `url(${e.eye_catching})`,
-                title: e.title
+                title: e.title,
+                tag: e.tag
               }
             });
             obj.datas = datas;
