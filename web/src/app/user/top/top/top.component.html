@@ -12,22 +12,66 @@
         </ng-template>
     </owl-carousel-o>
 </div>
+
+<div class="el">
+    <h3>
+        <span>
+            特徴
+        </span>
+    </h3>
+    <ul>
+        <li>
+            <div>
+                <img src="assets/images/e2.png" alt="">
+            </div>
+            <span>モデルコース</span>
+            <p>あなたの好みに合わせた<br>
+                モデルコースが作れる</p>
+        </li>
+        <li>
+            <div>
+                <img src="assets/images/e1.png" alt="">
+            </div>
+            <span>AIコンシェルジュ</span>
+            <p>AIコンシェルジュが<br>
+                最適なルートを提案</p>
+        </li>
+        <li>
+            <div>
+                <img src="assets/images/e3.png" alt="">
+            </div>
+            <span>動画</span>
+            <p>施設の特徴を<br>
+                動画で閲覧可能</p>
+        </li>
+    </ul>
+</div>
+
 <div class="tab">
     <ul>
         <li [ngClass]="{'active': item.active}" *ngFor="let item of listCategorys">
             <a routerLink="/" [queryParams]="{category_id: item._id}" fragment="building"
-            routerLinkActive="router-link-active"><img  src="{{item.image}}">{{item.title}}</a>
+                routerLinkActive="router-link-active"><img src="{{item.image}}">{{item.title}}</a>
         </li>
     </ul>
 </div>
 <a id="building"></a>
-<div class="building"  *ngFor="let item of listData">
-    <h3>{{item.title}}<span>すべて見る</span></h3>
+<div class="building" *ngFor="let item of listData">
+    <h3><img src="{{item.image}}">{{item.title}}<span>すべて見る</span></h3>
     <div class="content">
         <owl-carousel-o [options]="customOptions2">
             <ng-template *ngFor="let child of item.datas" carouselSlide>
                 <div class="element" [ngStyle]="{'background-image': child.background}">
-                    <span>{{child.title}}</span>
+                    
+
+                    <div class="content-element">
+                        <div>
+                            <label  *ngFor="let tag of child.tag">
+                                #{{child.title}}
+                            </label>
+                        </div>
+                        <span>{{child.title}}</span>
+                    </div>
                 </div>
             </ng-template>
         </owl-carousel-o>
