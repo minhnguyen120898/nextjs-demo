@@ -82,7 +82,7 @@ const remove = async (id) => {
 
 const getAll = async (query) => {
     return new Promise((resolve, reject) => {
-        model
+        Model
             .find(query)
             .lean()
             .then(result => {
