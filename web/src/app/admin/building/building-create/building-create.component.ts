@@ -272,15 +272,17 @@ export class BuildingCreateComponent implements OnInit {
       });
       // CATEGORY 
       this.category.name_select = res.category.map((e: any) => { return e.title }).join(' ,');
+      const categoryName = res.category.map((e: any) => { return e.title }) as any[];
       this.category.list.forEach((e: any) => {
-        if (this.category.name_select.indexOf(e.itemName) > -1) {
+        if (categoryName.includes(e.itemName)) {
           e.checked = true;
         }
       });
       // TAG 
       this.tag.name_select = res.tag.map((e: any) => { return e.title }).join(' ,');
+      const tagName = res.category.map((e: any) => { return e.title }) as any[];
       this.tag.list.forEach((e: any) => {
-        if (this.tag.name_select.indexOf(e.itemName) > -1) {
+        if (tagName.includes(e.itemName)) {
           e.checked = true;
         }
       });
