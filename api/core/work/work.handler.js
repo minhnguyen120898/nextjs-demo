@@ -4,7 +4,7 @@ const localeUtils = require('../../shared/helpers/localesUtils.helper')
 const validUtils = require('../../shared/helpers/validUtils.helper')
 const fileHandle = require('../../shared/helpers/fileHandle.helper')
 const moment = require("moment");
-
+const categoryModel= require('../../shared/models/category')
 /**
  * @method POST
  * @path /work
