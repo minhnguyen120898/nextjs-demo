@@ -1,0 +1,363 @@
+#banner {
+    #inner-banner {
+        img {
+            width: 100%;
+        }
+    }
+}
+
+#sub-banner {
+    background-color: #10161B;
+    padding: 9rem 0rem 5rem;
+
+    ::ng-deep {
+        owl-carousel-o {
+            .owl-carousel {
+                .owl-nav {}
+
+                .owl-dots {
+                    margin-top: 3rem;
+
+                    .owl-dot {
+                        span {
+                            width: 1.5rem;
+                            height: 1.5rem;
+                            background-color: #AEAEAE;
+                            margin: 0 1.5rem;
+                        }
+                    }
+
+                    .owl-dot.active {
+                        span {
+                            width: 2.1rem !important;
+                            height: 2.1rem !important;
+                            background-color: #E8E8E8 !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .element {
+        height: 28.3rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #686868;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        cursor: pointer;
+
+        span {
+            font-size: 3.5rem;
+            color: white;
+            font-family: 'Notosan';
+        }
+
+    }
+}
+
+#data {
+    background-color: #10161B;
+    padding-top: 16rem;
+    padding-left: 1rem;
+    padding-right: 1rem ;
+    #inner-data {
+        max-width: 105.5rem;
+        margin-left: auto;
+        margin-right: auto;
+        padding-bottom: 4rem;
+
+        h3 {
+            font-size: 4.2rem;
+            color: white;
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 10rem;
+        }
+
+        div#content {
+            min-height: 75rem;
+            display: flex;
+            flex-wrap: wrap;
+            .element-data {
+                height: 35rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #686868;
+                max-width: 250px;
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                cursor: pointer;
+                position: relative;
+                margin: 2.5rem 7px;
+                width: calc(25% - 14px);
+                .content-element {
+                    position: absolute;
+                    right: 0;
+                    left: 0;
+                    bottom: 0;
+                    padding-left: 1rem;
+                    padding-right: 1rem;
+
+                    span {
+                        font-size: 2.4rem;
+                        color: white;
+                        font-family: 'Notosan';
+                    }
+
+                    div {
+                        label {
+                            font-size: 1.5rem;
+                            color: white;
+                            font-family: 'Notosan';
+                            padding: 0 1.7rem;
+                            border-radius: 2rem;
+                            background-color: #667CF2;
+                        }
+                    }
+                }
+
+            }
+        }
+
+        .page {
+            margin-top: 8rem;
+        }
+    }
+
+}
+
+
+.building {
+    background-color: #10161B;
+    padding: 5rem;
+
+    h3 {
+        font-size: 3.5rem;
+        color: white;
+        font-family: 'Noto Serif JP';
+        margin-top: 0;
+        margin-bottom: 2rem;
+
+        img {
+            width: 3.4rem;
+            height: 3.4rem;
+            object-fit: cover;
+            margin-right: 1rem;
+        }
+
+        span {
+            border-radius: 2.4rem;
+            color: #fff;
+            background-color: #c82c2c;
+            line-height: 2;
+            font-size: 2.4rem;
+            display: inline-block;
+            margin-left: auto;
+            padding: 0 3rem;
+            float: right;
+        }
+    }
+
+    .content {
+        ::ng-deep {
+            owl-carousel-o {
+                .owl-carousel {
+                    .owl-nav {
+
+                        .owl-prev,
+                        .owl-next {
+                            font-size: 5rem;
+                            width: 3.3rem;
+                            height: 5.6rem;
+                            position: absolute;
+                            background-color: transparent;
+                            color: white;
+                            text-align: center;
+                            top: 40%;
+                            cursor: pointer;
+                            line-height: 0.9;
+                        }
+
+                        .owl-prev {
+                            left: 0;
+                        }
+
+                        .owl-next {
+                            right: 0;
+                        }
+                    }
+
+                }
+            }
+        }
+
+        .element {
+            height: 35rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #686868;
+            max-width: 250px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            cursor: pointer;
+            position: relative;
+
+            .content-element {
+                position: absolute;
+                right: 0;
+                left: 0;
+                bottom: 0;
+                padding-left: 1rem;
+                padding-right: 1rem;
+
+                span {
+                    font-size: 2.4rem;
+                    color: white;
+                    font-family: 'Notosan';
+                }
+
+                div {
+                    label {
+                        font-size: 1.5rem;
+                        color: white;
+                        font-family: 'Notosan';
+                        padding: 0 1.7rem;
+                        border-radius: 2rem;
+                        background-color: #667CF2;
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+@media(max-width: 768px) {
+   
+
+    #sub-banner {
+        padding: 9rem 1.5rem 5rem;
+    }
+
+    .building {
+        padding: 5rem 1.5rem;
+
+        h3 {
+            font-size: 1.8rem;
+
+            span {
+                color: #fff;
+                margin-left: 3rem;
+                font-size: 1.1rem;
+            }
+        }
+
+        .content {
+            ::ng-deep {
+                owl-carousel-o {
+                    .owl-carousel {
+                        .owl-nav {
+
+                            .owl-prev,
+                            .owl-next {
+                                font-size: 5rem;
+                                width: 3.3rem;
+                                height: 5.6rem;
+                                position: absolute;
+                                background-color: transparent;
+                                color: white;
+                                text-align: center;
+                                top: 40%;
+                                cursor: pointer;
+                                line-height: 0.9;
+                            }
+
+                            .owl-prev {
+                                left: 0;
+                            }
+
+                            .owl-next {
+                                right: 0;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .element {
+                height: 13.8rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #686868;
+                max-width: 15.6rem;
+
+                .content-element {
+                    span {
+                        font-size: 1.3rem;
+                    }
+
+                    div {
+                        label {
+                            font-size: 1.1rem;
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+
+    #data {
+      padding-top: 9rem;
+        #inner-data {
+          
+    
+            h3 {
+                font-size: 2.4rem;
+                margin-bottom: 4.5rem;
+            }
+    
+            div#content {
+                min-height: 75rem;
+                display: flex;
+                flex-wrap: wrap;
+                .element-data {
+                    height: 14.5rem;
+                    margin: 5px;
+                    width: calc(33.3333% - 10px);
+                    .content-element {
+    
+                        span {
+                            font-size: 1.3rem;
+                        }
+    
+                        div {
+                            label {
+                                font-size: 6px;
+                                padding: 0 1.7rem;
+                            }
+                        }
+                    }
+    
+                }
+            }
+    
+            .page {
+                margin-top: 8rem;
+            }
+        }
+        .page{
+            margin-top: 3rem;
+        }
+    
+    }
+}

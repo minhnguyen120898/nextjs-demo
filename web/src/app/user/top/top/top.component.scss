@@ -211,7 +211,7 @@
             margin-right: 1rem;
         }
 
-        span {
+        a {
             border-radius: 2.4rem;
             color: #fff;
             background-color: #c82c2c;
@@ -221,6 +221,7 @@
             margin-left: auto;
             padding: 0 3rem;
             float: right;
+            text-decoration: unset;
         }
     }
 
@@ -367,7 +368,7 @@
 
         h3 {
             font-size: 1.8rem;
-            span {
+            a {
                 color: #fff;
                 margin-left: 3rem;
                 font-size: 1.1rem;

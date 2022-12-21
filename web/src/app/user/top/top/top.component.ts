@@ -91,7 +91,7 @@ export class TopComponent implements OnInit {
   ]
 
   panigation = {
-    pageSize: 6,
+    pageSize: 12,
     totalPage: 0,
     currentPage: 1
   };
@@ -103,7 +103,6 @@ export class TopComponent implements OnInit {
   async ngOnInit() {
 
     this.topService.getListBanner(1, 50).subscribe(res => {
-      console.log(res);
       let datas = res.docs.map((e: any) => {
         return {
           id: e._id,
@@ -153,13 +152,13 @@ export class TopComponent implements OnInit {
     if (category) {
       for (let index = 0; index < category.childs.length; index++) {
         const element = category.childs[index];
-        console.log(element);
-        
         let obj: any = {
           title: element.title,
+          id: element._id,
           image: element.image,
           datas: []
         }
+
         this.topService.getListWorkByCategory(element._id, this.panigation.currentPage,
           this.panigation.pageSize).subscribe(res => {
             console.log(res);
