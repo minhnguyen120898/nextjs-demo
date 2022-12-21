@@ -143,7 +143,7 @@ const getList = async (locals, query) => {
         for (const category of categories) {
             cq.push(category._id.toString())
         }
-        q.category_id = { $in: cq }
+        q.category = { $in: cq }
     }
 
     const work = await workModel.getByPagination(q, pagination)
