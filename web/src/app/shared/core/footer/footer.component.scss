@@ -1,17 +1,13 @@
 footer {
-    padding-left: 4rem;
-    padding-right: 4rem;
-    padding-top: 2.5rem;
-    padding-bottom: 2.5rem;
     background-color: #262626;
-
+    padding: 7rem 4rem;
     #copired {
         text-align: center;
         font-size: 1.6rem;
-        font-family: 'Notosan';
         color: white;
         text-decoration: unset;
-        margin: 5rem 0;
+        margin: 4rem 0 0;
+        font-family: 'SourceHanSerif-Medium';
     }
 
     #inner-footer {
@@ -30,7 +26,7 @@ footer {
 
                 a {
                     font-size: 1.6rem;
-                    font-size: 'Notosan';
+                    font-family: 'SourceHanSerif-Medium';
                     color: white;
                     text-decoration: unset;
                 }
