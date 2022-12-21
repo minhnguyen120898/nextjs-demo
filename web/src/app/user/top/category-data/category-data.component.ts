@@ -118,7 +118,7 @@ export class CategoryDataComponent implements OnInit {
             tag: e.tag
           }
         });
-        this.listData = datas.concat(datas).concat(datas).concat(datas).concat(datas).concat(datas).concat(datas).concat(datas).concat(datas).concat(datas).concat(datas).concat(datas).concat(datas);
+        this.listData = datas;
         this.panigation.totalPage = 100;
       }, err => {
       });
