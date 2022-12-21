@@ -139,7 +139,7 @@ const getList = async (locals, query) => {
     const q={$in:[0]}
     if (query.category_id) {
         const cq = query.category_id.split(",");
-        const categories = await categoryModel.getAll({ parent: { $in: query.category.split(",") } })
+        const categories = await categoryModel.getAll({ parent: { $in: query.category_id.split(",") } })
         for (const category of categories) {
             cq.push(category._id.toString())
         }
