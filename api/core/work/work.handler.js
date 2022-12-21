@@ -136,7 +136,7 @@ const removeById = async (locals, id) => {
  */
 const getList = async (locals, query) => {
     const pagination = validUtils.paginationValidator(query)
-    const q={$in:[0]}
+    const q={status:{$in:[0]}}
     if (query.category_id) {
         const cq = query.category_id.split(",");
         const categories = await categoryModel.getAll({ parent: { $in: query.category_id.split(",") } })
