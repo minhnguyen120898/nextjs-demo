@@ -53,6 +53,26 @@
     }
 }
 
+.circle{
+    li.page{
+        a{
+            width: 3.8rem;
+            height: 4rem;
+            border-radius: 50%;
+            font-size: 1.9rem;
+            border: 1px solid white;
+            color: white;
+        }
+    }
+    li.active {
+        a {
+            background-color: $blue;
+            color: white;
+            border: 1px solid transparent;
+        }
+    }
+}
+
 .pink {
     li.active {
         a {
@@ -71,4 +91,23 @@
             border: 0;
         }
     }
+}
+
+@media(max-width: 768px){
+    
+.circle{
+    li.page{
+        margin: 0 .2rem;
+        a{
+            width: 2.9rem;
+            height: 3rem;
+            font-size: 1.5rem;
+        }
+    }
+    li.active {
+        a {
+        }
+    }
+}
+
 }

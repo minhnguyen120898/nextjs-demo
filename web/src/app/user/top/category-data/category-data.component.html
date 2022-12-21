@@ -1,0 +1,55 @@
+<div id="data">
+    <div id="inner-data">
+        <h3>体験</h3>
+        <div id="content">
+            <div *ngFor="let child of listData" class="element-data" [ngStyle]="{'background-image': child.background}">
+                <div class="content-element">
+                    <div>
+                        <label *ngFor="let tag of child.tag">
+                            #{{child.title}}
+                        </label>
+                    </div>
+                    <span>{{child.title}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="page">
+            <app-panigation (outputPage)="handlePage($event)"
+             [pageSize]="panigation.pageSize"
+             [class]="'circle'"
+                [totalPage]="panigation.totalPage" 
+                [currentPage]="panigation.currentPage"></app-panigation>
+        </div>
+    </div>
+</div>
+
+<div id="sub-banner">
+    <owl-carousel-o [options]="customOptions">
+        <ng-template *ngFor="let item of listBanner" carouselSlide>
+            <div class="element" (click)="navigateBanner(item)" [ngStyle]="{'background-image': item.background}">
+                <!-- <span>text</span> -->
+            </div>
+        </ng-template>
+    </owl-carousel-o>
+</div>
+
+<a id="building"></a>
+<div class="building">
+    <h3>text</h3>
+    <div class="content">
+        <owl-carousel-o [options]="customOptions2">
+            <ng-template *ngFor="let child of listData" carouselSlide>
+                <div class="element" [ngStyle]="{'background-image': child.background}">
+                    <div class="content-element">
+                        <div>
+                            <label *ngFor="let tag of child.tag">
+                                #{{child.title}}
+                            </label>
+                        </div>
+                        <span>{{child.title}}</span>
+                    </div>
+                </div>
+            </ng-template>
+        </owl-carousel-o>
+    </div>
+</div>
