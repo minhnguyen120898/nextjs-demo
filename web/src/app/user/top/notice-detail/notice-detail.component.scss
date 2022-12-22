@@ -1,0 +1,111 @@
+#data {
+    background-color: #10161B;
+    padding-top: 16rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+    #inner-data {
+        max-width: 120rem;
+        margin-left: auto;
+        margin-right: auto;
+        padding-bottom: 4rem;
+
+        h3 {
+            font-size: 3.2rem;
+            color: white;
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 10rem;
+            font-family: 'SourceHanSerif-Medium';
+
+        }
+
+        div#content {
+            min-height: 75rem;
+
+            .element-data {
+               
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                border-bottom: 1px dotted #919191;
+                cursor: pointer;
+                position: relative;
+                margin-bottom: 2.5rem;
+                width: 100%;
+                padding: 1.8rem 0;
+
+                // .left {
+                //     img {
+                //         width: 27.6rem;
+                //         height: 17.6rem;
+                //         object-fit: cover;
+                //     }
+
+                // }
+
+                .right {
+                    // width: calc(100% - 27.6rem);
+                    width: 100%;
+                    padding-top: 1.5rem;
+
+                    p {
+                        font-size: 2rem;
+                        color: white;
+                        font-family: 'SourceHanSerif-Bold';
+                        margin: 0;
+
+                        span {
+                            display: block;
+                            font-size: 1.6rem;
+                            font-family: 'SourceHanSerif-Medium';
+                            margin-bottom: 1rem;
+                        }
+                    }
+                }
+                ul {
+                    display: flex;
+                    justify-content: flex-end;
+                    padding-left: 0;
+                    padding-right: 0;
+                    margin-top: 0;
+    
+                    li {
+                        padding: 0 1rem;
+                    }
+                }
+            }
+        }
+
+        .page {
+            margin-top: 8rem;
+        }
+    }
+
+}
+
+@media(max-width: 768px) {
+    #data {
+        padding-top: 9rem;
+
+        #inner-data {
+
+
+            h3 {
+                font-size: 2.4rem;
+                margin-bottom: 4.5rem;
+            }
+
+            div#content {}
+
+            .page {
+                margin-top: 8rem;
+            }
+        }
+
+        .page {
+            margin-top: 3rem;
+        }
+
+    }
+}
