@@ -34,7 +34,6 @@ export class NoticeDetailComponent implements OnInit {
   getData(qparam: any) {
     this.topService.getNoticeDetail(this.notice_id).subscribe(res => {
       res.time = this.timeService.formatDateFromTimeUnix(res.created_at / 1000, 'YYYY.MM.DD')
-      console.log(res);
       this.data = res;
     }, err => {
     });
