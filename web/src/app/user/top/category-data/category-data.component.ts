@@ -119,7 +119,7 @@ export class CategoryDataComponent implements OnInit {
           }
         });
         this.listData = datas;
-        this.panigation.totalPage = 100;
+        this.panigation.totalPage = res.total;
       }, err => {
       });
   }
