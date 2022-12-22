@@ -48,5 +48,8 @@ export class TopService extends BaseService {
         return this.getData(`new?page=${page}&limit=${limit}`);
     }
 
+    getNoticeDetail(id: any) {
+        return this.getData(`new/${id}`);
+    }
 
 }

@@ -7,6 +7,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { CategoryDataComponent } from './category-data/category-data.component';
 import { PanigationModule } from 'src/app/shared/components/panigation/panigation.module';
 import { NoticeComponent } from './notice/notice.component';
+import { NoticeDetailComponent } from './notice-detail/notice-detail.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,9 @@ const routes: Routes = [
   },
   {
     path: 'notice', component: NoticeComponent
+  },
+  {
+    path: 'notice/:noticeid', component: NoticeDetailComponent
   }
 ];
 
@@ -24,7 +28,8 @@ const routes: Routes = [
   declarations: [
     TopComponent,
     CategoryDataComponent,
-    NoticeComponent
+    NoticeComponent,
+    NoticeDetailComponent
   ],
   imports: [
     RouterModule.forChild(routes),

@@ -2,7 +2,7 @@
     <div id="inner-data">
         <h3>お知らせ</h3>
         <div id="content">
-            <div *ngFor="let child of listData" class="element-data">
+            <div (click)="handleAction(child)" *ngFor="let child of listData" class="element-data">
                 <div class="left">
                     <img src="{{child.image}}" alt="">
                 </div>

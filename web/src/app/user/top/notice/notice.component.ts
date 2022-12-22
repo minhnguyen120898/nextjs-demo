@@ -54,13 +54,7 @@ export class NoticeComponent implements OnInit {
   }
 
   handleAction(event: any) {
-    this.router.navigate(['/'],
-      {
-        queryParams: {
-          page: event
-        }
-      }
-    )
+    this.router.navigateByUrl(`/notice/${event._id}`)
   }
 
   handlePage(page: any) {
