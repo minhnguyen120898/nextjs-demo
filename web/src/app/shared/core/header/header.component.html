@@ -1,5 +1,5 @@
-<header>
-  <div id="header-content" [@openClose]="toogle ? 'open' : 'closed'">
+<header [ngClass]="{'bg-white': isWhiteBackground }">
+  <div id="header-content">
     <div id="left">
       <a id="logo" routerLink="/">
         <img src="assets/images/logo.png" alt="">
@@ -7,18 +7,25 @@
     </div>
     <div id="right">
       <ul>
-        <li >
-          <a routerLink="/auth/login">
-            <img src="assets/images/icon-login.png">
-          </a>
+        <li class="search-box" [ngClass]="{'active': isShowSearchText}">
+          <input 
+            id="search-text-header"
+            type="text" 
+            [(ngModel)]="valueSearch" 
+            class="search-text" 
+            placeholder="Type to search..."
+          >
+          <button class="icon search-btn" (click)="showSearch()">
+            <img src="assets/images/icons/ic_search-w.svg" alt="search">
+          </button>
         </li>
-        <li >
-          <a routerLink="/auth/login">
-            <img src="assets/images/icon-search.png">
+        <!-- <li>
+          <a routerLink="/auth/login" class="icon">
+            <img src="assets/images/icons/ic_logout-w.svg" alt="search">
           </a>
-        </li>
-        <li class="mr-0 ml-6">
-          <div id="toogle">
+        </li> -->
+        <li>
+          <div class="toggle">
             <div class="toggle-button" [ngClass]="{'on': toogle}" (click)="toogleMenu()">
               <span></span>
             </div>
@@ -26,5 +33,35 @@
         </li>
       </ul>
     </div>
+  </div>
+  <div class="side-nav" [ngClass]="{'open': toogle}">
+    <div class="close-side-nav" (click)="toogleMenu()">
+      <img
+      src="assets/images/icons/ic_close.svg"
+      alt="close-side-nav"
+    />
+    </div>
+    <h2 class="side-nav__title">Menu</h2>
+    <p class="side-nav__desc">メニュー</p>
+    <ul class="side-nav__list">
+      <li class="item">
+        <a href="">item</a>
+      </li>
+      <li class="item">
+        <a href="">item</a>
+      </li>
+      <li class="item">
+        <a href="">item</a>
+      </li>
+      <li class="item">
+        <a href="">item</a>
+      </li>
+      <li class="item">
+        <a href="">item</a>
+      </li>
+      <li class="item">
+        <a href="">item</a>
+      </li>
+    </ul>
   </div>
 </header>

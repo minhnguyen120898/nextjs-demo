@@ -19,7 +19,7 @@ export const APP_ROUTES: Routes = [
         path: '',
         component: MainLayoutComponent,
         loadChildren: () => import('./user/user.module').then(m => m.UserModule),
-        canActivate: [LoginGuard]
+        // canActivate: [LoginGuard]
     },
     {
         path: 'auth',
