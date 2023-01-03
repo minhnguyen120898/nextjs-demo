@@ -9,6 +9,7 @@ import { HeaderComponent } from '../core/header/header.component';
 import { SideNavComponent } from '../core/side-nav/side-nav.component';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { PipeCustomModule } from '../pipe/pipe.module';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { PipeCustomModule } from '../pipe/pipe.module';
         CommonModule,
         RouterModule,
         TranslateModule.forChild(),
-        PipeCustomModule
+        PipeCustomModule,
+        FormsModule
     ],
     declarations: [
         PrimaryLayoutComponent,
