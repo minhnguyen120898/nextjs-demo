@@ -1,8 +1,10 @@
 #banner {
     #inner-banner {
-        img {
-            width: 100%;
-        }
+        background-image: url(/assets/images/fv.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        min-height: 52.7rem;
     }
 }
 
