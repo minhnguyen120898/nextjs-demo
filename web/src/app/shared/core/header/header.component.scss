@@ -65,12 +65,13 @@ header {
 
                 &.search-box {
                     position: relative;
-                    height: 4rem;
+                    height: 4.4rem;
                     border-radius: 4rem;
                     padding: 0;
                     display: flex;
                     align-items: center;
                     padding: 0;
+                    transition: all 0.4s;
 
                     .search-text {
                         border: none;
@@ -78,14 +79,16 @@ header {
                         outline: none;
                         padding: 0;
                         font-size: 1.6rem;
-                        line-height: 4rem;
-                        transition: 0.4s;
+                        line-height: 4.4rem;
+                        transition: all 0.4s;
                         width: 0;
                         color: white;
                     }
 
                     &.active {
+                        background-color: #10161b;
                         border: 0.1rem solid white;
+                        box-shadow: 0.2rem 0.2rem 2rem 0 #fff;
 
                         .search-text {
                             width: 24rem;
@@ -94,6 +97,11 @@ header {
 
                         .search-btn {
                             border-color: transparent;
+
+                            img {
+                                width: 2rem;
+                                height: 2rem;
+                            }
                         }
                     }
                 }
@@ -220,15 +228,10 @@ header {
     }
 
     &__list .item {
-        padding: 1.6rem 0;
-        border-bottom: 0.1rem solid rgba(229, 229, 229, 0.5);
-        background: url(/assets/images/icons/ic_chevron-right.svg) right center no-repeat;
-
-        &:first-child {
-            border-top: 0.1rem solid rgba(229, 229, 229, 0.5);
-        }
+        padding: 0;
 
         a {
+            padding: 1.6rem;
             color: #fff;
             font-weight: 700;
             font-size: 1.2rem;
@@ -236,6 +239,43 @@ header {
             display: block;
             height: 100%;
             text-align: center;
+            position: relative;
+            border-bottom: 0.1rem solid rgba(229, 229, 229, 0.5);
+            background: url(/assets/images/icons/ic_chevron-right.svg) right center no-repeat;
+
+            &::before {
+                content: attr(data-text);
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                color: #10161b;
+                font-weight: 700;
+                font-size: 1.2rem;
+                line-height: 6.9rem;
+                display: block;
+                background: url(/assets/images/icons/ic_chevron-right-b.svg) right center no-repeat, #fff;
+                box-shadow: 0 0.2rem 2rem 0 rgba($color: #fff, $alpha: 0.8);
+                transform: scaleX(0);
+                transform-origin: left;
+                transition: transform 0.3s ease-in-out;
+                transition-delay: 0s;
+            }
+            
+            &:hover {
+                
+                &::before{
+                    transform: scaleX(1);
+                    transform-origin: right;
+                    transition: transform 0.3s ease-in-out;
+                    transition-delay: 0.3s;
+                }
+            }
+        }
+
+        &:first-child a {
+            border-top: 0.1rem solid rgba(229, 229, 229, 0.5);
         }
     }
 }
@@ -275,6 +315,16 @@ header {
                         &.active {
                             .search-text {
                                 width: 10rem;
+                                &::placeholder {
+                                    font-size: 1.2rem;
+                                }
+                            }
+
+                            .search-btn {
+                                img {
+                                    width: 1.4rem;
+                                    height: 1.4rem;
+                                }
                             }
                         }
                     }
