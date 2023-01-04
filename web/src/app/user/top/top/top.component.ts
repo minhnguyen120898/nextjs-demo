@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TopService } from '../top.service';
-import { CarouselComponent, OwlOptions } from 'ngx-owl-carousel-o';
+import { OwlOptions } from 'ngx-owl-carousel-o';
 
 @Component({
   selector: 'app-top',
@@ -11,14 +11,17 @@ import { CarouselComponent, OwlOptions } from 'ngx-owl-carousel-o';
 export class TopComponent implements OnInit {
   customOptions: OwlOptions = {
     loop: true,
+    autoplay: true,
+    autoplaySpeed: 500,
     nav: false,
     dots: true,
-    mouseDrag: true,  
-    touchDrag: true,
-    pullDrag: true,
+    mouseDrag: false,  
+    touchDrag: false,
+    pullDrag: false,
     // lazyLoad: true,
     center: true,
-    margin: 10,
+    margin: 37,
+    stagePadding: 51,
     autoplayHoverPause: true,
     navSpeed: 700,
     navText: ['&lsaquo;', '&rsaquo;'],
@@ -27,10 +30,12 @@ export class TopComponent implements OnInit {
         items: 1
       },
       414: {
-        items: 1
+        items: 1,
       },
       768: {
-        items: 2
+        items: 3,
+        margin: 64,
+        stagePadding: 0,
       }
     }
   };
@@ -120,6 +125,7 @@ export class TopComponent implements OnInit {
     }).catch(err => {
       this.listCategorys = err;
     });
+
     this.activatedRoute.queryParams.subscribe((res: any) => {
       this.listCategorys.forEach(e => {
         e.active = false;
@@ -160,9 +166,7 @@ export class TopComponent implements OnInit {
         }
 
         this.topService.getListWorkByCategory(element._id, this.panigation.currentPage,
-          this.panigation.pageSize).subscribe(res => {
-            console.log(res);
-            
+          this.panigation.pageSize).subscribe(res => { 
             let datas = res.docs.map((e: any) => {
               return {
                 id: e._id,
