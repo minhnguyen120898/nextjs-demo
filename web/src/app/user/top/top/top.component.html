@@ -69,7 +69,8 @@
     </div>
     <div class="content">
         <owl-carousel-o [options]="customOptions2">
-            <ng-template *ngFor="let child of item.datas" carouselSlide>
+            <ng-template *ngFor="let child of item.datas" carouselSlide 
+            [id]="child.id" [width]="customWidth">
                 <div class="element" [ngStyle]="{'background-image': child.background}">
                     <div class="content-element">
                         <div>

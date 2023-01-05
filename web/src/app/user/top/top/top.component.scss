@@ -38,7 +38,7 @@
                             }
                         }
 
-                        + .owl-item {
+                        +.owl-item {
                             .element {
                                 &:before {
                                     right: 0;
@@ -182,13 +182,13 @@
             }
 
             &:nth-child(1) {
-                > div img {
+                >div img {
                     margin-left: 0;
                 }
             }
 
             &:nth-child(3) {
-                > div img {
+                >div img {
                     margin-right: 0;
                 }
             }
@@ -198,20 +198,36 @@
 
 .tab {
     background-color: #10161B;
-    border-bottom: 0.2rem solid white;
-    padding-top: 2rem;
-    padding-bottom: 1rem;
-    padding-right: 4rem;
-    padding-left: 4rem;
+    padding: 0 0 5.7rem;
 
     ul {
         margin: 0;
-        padding: 0;
+        padding: 2rem 4rem 1rem;
         display: flex;
+        overflow: auto;
+        border-bottom: 0.2rem solid white;
+
+        &::-webkit-scrollbar {
+            width: .8rem;
+            height: .8rem;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: transparent;
+        }
+
+        &::-webkit-scrollbar-thumb:hover {
+            background: rgba(255,255,255,0.4);
+        }
+
+        &::-webkit-scrollbar-thumb:active {
+            background: rgba(255,255,255,.9);
+        }
 
         li {
-            margin-right: 5.5rem;
+            padding: 0 2.75rem;
             position: relative;
+            flex-shrink: 0;
 
             &:hover {
                 opacity: 0.7;
@@ -244,7 +260,7 @@
                 height: 0.8rem;
                 background-color: white;
                 position: absolute;
-                bottom: -1.2rem;
+                bottom: -1rem;
                 left: 0;
                 right: 0;
             }
@@ -257,8 +273,8 @@
     }
 }
 
-.tab + .building {
-    padding-top: 5.7rem;
+.tab+.building {
+    padding-top: 0;
 }
 
 .building {
@@ -278,15 +294,15 @@
             font-family: 'SourceHanSerif-Medium';
             margin: 0;
         }
-    
-    
+
+
         img {
             width: 4.8rem;
             height: 4.8rem;
             object-fit: cover;
             margin-right: 1rem;
         }
-    
+
         a {
             border-radius: 2.4rem;
             color: #fff;
@@ -300,7 +316,7 @@
             text-decoration: unset;
             font-family: 'SourceHanSerif-Medium';
             transition: 0.4s all ease-in-out;
-    
+
             &:hover {
                 color: #c82c2c;
                 background-color: #fff;
@@ -313,6 +329,7 @@
             owl-carousel-o {
                 .owl-carousel {
                     .owl-nav {
+
                         .owl-prev,
                         .owl-next {
                             font-size: 5rem;
@@ -335,7 +352,6 @@
                             right: 0;
                         }
                     }
-
                 }
             }
         }
@@ -408,20 +424,22 @@
 
     #sub-banner {
         padding: 3rem 0 1.4rem;
+
         ::ng-deep {
             owl-carousel-o {
                 .owl-carousel {
 
                     .owl-item {
+
                         // max-width: calc(100vw - 10.2rem);
                         .element::before {
                             content: none;
                         }
                     }
-    
+
                     .owl-dots {
                         margin-top: 1.6rem;
-    
+
                         .owl-dot {
                             span {
                                 width: 0.9rem;
@@ -429,7 +447,7 @@
                                 margin: 0 0.9rem;
                             }
                         }
-    
+
                         .owl-dot.active {
                             span {
                                 width: 1.2rem !important;
@@ -440,6 +458,7 @@
                 }
             }
         }
+
         .element {
             height: 16.3rem;
         }
@@ -450,24 +469,24 @@
         padding-bottom: 6rem;
 
         h3 {
-           span {
-            font-size: 1.8rem;
-            padding: 0 1.2rem;
+            span {
+                font-size: 1.8rem;
+                padding: 0 1.2rem;
 
-            &::after {
-                width: 4.9rem;
-                height: 0.1rem;
-                left: -4.9rem;
-                top: 1.3rem;
-            }
+                &::after {
+                    width: 4.9rem;
+                    height: 0.1rem;
+                    left: -4.9rem;
+                    top: 1.3rem;
+                }
 
-            &::before {
-                width: 4.9rem;
-                height: 0.1rem;
-                right: -4.9rem;
-                top: 1.3rem;
+                &::before {
+                    width: 4.9rem;
+                    height: 0.1rem;
+                    right: -4.9rem;
+                    top: 1.3rem;
+                }
             }
-           } 
         }
 
         ul {
@@ -484,11 +503,11 @@
                     font-size: 1.3rem;
                 }
 
-                &:nth-child(1) > div img {
+                &:nth-child(1)>div img {
                     margin-left: auto;
                 }
 
-                &:nth-child(3) > div img {
+                &:nth-child(3)>div img {
                     margin-right: auto;
                 }
             }
@@ -496,31 +515,24 @@
     }
 
     .tab {
-        padding-right: 1.5rem;
-        padding-left: 1.5rem;
-
+        padding-bottom: 1.8rem;
         ul {
-
-
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
             li {
-
-
+                padding: 0;
+                margin-right: 1.7rem;
                 a {
                     font-size: 1.4rem;
-
+                    padding-bottom: 0.6rem;
 
                     img {
                         width: 2rem;
                         height: 2rem;
                     }
                 }
-
             }
         }
-    }
-
-    .tab + .building {
-        padding-top: 1.8rem;
     }
 
     .building {
@@ -582,6 +594,7 @@
                 .content-element {
                     span {
                         font-size: 1.3rem;
+                        line-height: 1.9rem;
                     }
 
                     div {

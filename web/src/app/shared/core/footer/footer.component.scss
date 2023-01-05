@@ -1,6 +1,6 @@
 footer {
     background-color: #262626;
-    padding: 7rem 4rem;
+    padding: 7.6rem 4rem 1.2rem;
     #copired {
         text-align: center;
         font-size: 1.6rem;
@@ -18,17 +18,21 @@ footer {
             padding-left: 0;
             display: flex;
             flex-wrap: wrap;
-            max-width: 762px;
+            column-gap: 4.2rem;
+            max-width: 77.6rem;
 
             li {
-                padding-right: 3rem;
-                margin-bottom: 1rem;
+                margin-bottom: 0.8rem;
 
                 a {
                     font-size: 1.6rem;
                     font-family: 'SourceHanSerif-Medium';
                     color: white;
                     text-decoration: unset;
+
+                    &:hover {
+                        opacity: 0.7;
+                    }
                 }
             }
         }
@@ -40,9 +44,30 @@ footer {
                 padding-left: 0;
                 padding-right: 0;
                 margin-top: 0;
+                margin-bottom: 2rem;
 
                 li {
                     padding: 0 1rem;
+                }
+
+                a {
+                    overflow: hidden;
+                }
+
+                img {
+                    transition-duration: .3s;
+                    transition-property: transform;
+                    transition-timing-function: ease-out;
+
+                    &:hover {
+                        transform: translateY(-0.8rem);
+                    }
+                }
+            }
+
+            a#logo {
+                img:hover {
+                    opacity: 0.7;
                 }
             }
         }
@@ -51,24 +76,40 @@ footer {
 
 @media(max-width: 768px) {
     footer {
-        padding-left: 1rem;
-        padding-right: 1rem;
+        padding: 1.8rem 1.1rem;
+
+        #copired {
+            margin-top: 6.3rem;
+        }
 
         #inner-footer {
             flex-direction: column;
 
             .left {
+                column-gap: 3rem;
 
                 li {
-                    margin-bottom: 3rem;
+                    margin-bottom: 2.3rem;
 
+                    a {
+                        font-size: 1.4rem;
+                    }
                 }
             }
 
             .right {
                 ul {
                     justify-content: center;
+                    margin-top: 3.1rem;
+                    margin-bottom: 3rem;
+
+                    img {
+                        width: 3.6rem;
+                        height: 3.6rem;
+                        object-fit: cover;
+                    }
                 }
+
                 a#logo{
                    img{
                     display: block;

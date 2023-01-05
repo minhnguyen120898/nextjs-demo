@@ -258,7 +258,7 @@ header {
                 background: url(/assets/images/icons/ic_chevron-right-b.svg) right center no-repeat, #fff;
                 box-shadow: 0 0.2rem 2rem 0 rgba($color: #fff, $alpha: 0.8);
                 transform: scaleX(0);
-                transform-origin: left;
+                transform-origin: right;
                 transition: transform 0.3s ease-in-out;
                 transition-delay: 0s;
             }
@@ -267,7 +267,7 @@ header {
                 
                 &::before{
                     transform: scaleX(1);
-                    transform-origin: right;
+                    transform-origin: left;
                     transition: transform 0.3s ease-in-out;
                     transition-delay: 0.3s;
                 }

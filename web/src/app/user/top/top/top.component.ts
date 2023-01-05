@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TopService } from '../top.service';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { debounceTime, fromEvent, Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-top',
@@ -40,15 +41,17 @@ export class TopComponent implements OnInit {
     }
   };
 
+  customWidth = window.innerWidth < 768 ? 103 : 250;
   customOptions2: OwlOptions = {
-    loop: true,
+    loop: false,
     nav: true,
     dots: false,
     mouseDrag: true,
     touchDrag: true,
     pullDrag: true,
+    autoWidth: true,
     // lazyLoad: true,
-    center: window.innerWidth < 768 ? true : false,
+    center: false,
     margin: 10,
     autoplayHoverPause: true,
     navSpeed: 700,
@@ -100,6 +103,9 @@ export class TopComponent implements OnInit {
     totalPage: 0,
     currentPage: 1
   };
+
+  subscription = new Subject();
+
   constructor(private topService: TopService,
     private activatedRoute: ActivatedRoute,
     private router: Router
@@ -144,6 +150,21 @@ export class TopComponent implements OnInit {
         this.getData(res, this.listCategorys[0]);
       }
     });
+  }
+
+  ngAfterViewInit(): void {
+    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+    //Add 'implements AfterViewInit' to the class.
+    fromEvent(window, 'resize').pipe(
+      debounceTime(100),
+      takeUntil(this.subscription)
+    ).subscribe(res => {
+      if (window.innerWidth < 768) {
+        this.customWidth = 103;
+      } else {
+        this.customWidth = 250;
+      }
+    })
   }
 
   navigateBanner(item: any) {
@@ -191,6 +212,12 @@ export class TopComponent implements OnInit {
         }, fragment: 'inner-delivery-data'
       }
     )
+  }
+
+  initialized(event: any) {
+    const owlStages = document.getElementsByClassName('owl-stage');
+    console.log(owlStages);
+    
   }
 
 
