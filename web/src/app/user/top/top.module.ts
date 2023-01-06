@@ -8,6 +8,7 @@ import { CategoryDataComponent } from './category-data/category-data.component';
 import { PanigationModule } from 'src/app/shared/components/panigation/panigation.module';
 import { NoticeComponent } from './notice/notice.component';
 import { NoticeDetailComponent } from './notice-detail/notice-detail.component';
+import { PipeCustomModule } from 'src/app/shared/pipe/pipe.module';
 
 const routes: Routes = [
   {
@@ -35,7 +36,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     CommonModule,
     CarouselModule,
-    PanigationModule
+    PanigationModule,
+    PipeCustomModule
   ],
   providers: [
     TopService

@@ -156,7 +156,7 @@ export class TopComponent implements OnInit {
     //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
     //Add 'implements AfterViewInit' to the class.
     fromEvent(window, 'resize').pipe(
-      debounceTime(100),
+      debounceTime(10),
       takeUntil(this.subscription)
     ).subscribe(res => {
       if (window.innerWidth < 768) {
@@ -165,6 +165,13 @@ export class TopComponent implements OnInit {
         this.customWidth = 250;
       }
     })
+  }
+
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this.subscription.next(true);
+    this.subscription.complete();
   }
 
   navigateBanner(item: any) {
@@ -213,13 +220,6 @@ export class TopComponent implements OnInit {
       }
     )
   }
-
-  initialized(event: any) {
-    const owlStages = document.getElementsByClassName('owl-stage');
-    console.log(owlStages);
-    
-  }
-
 
   showAsswer(item: any, index: number) {
 

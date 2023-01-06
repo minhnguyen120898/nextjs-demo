@@ -2,7 +2,8 @@
     <div id="inner-data">
         <h3>体験</h3>
         <div id="content">
-            <div *ngFor="let child of listData" class="element-data" [ngStyle]="{'background-image': child.background}">
+            <div *ngFor="let child of listData" class="element-data" >
+                <img [src]="child.background | safe:'url'" class="element-image" alt="">
                 <div class="content-element">
                     <div>
                         <label *ngFor="let tag of child.tag">
@@ -13,10 +14,10 @@
                 </div>
             </div>
         </div>
-        <div class="page">
+        <div class="page" *ngIf="panigation.totalPage > panigation.pageSize">
             <app-panigation (outputPage)="handlePage($event)"
-             [pageSize]="panigation.pageSize"
-             [class]="'circle'"
+                [pageSize]="panigation.pageSize"
+                [class]="'circle'"
                 [totalPage]="panigation.totalPage" 
                 [currentPage]="panigation.currentPage"></app-panigation>
         </div>
@@ -35,11 +36,17 @@
 
 <a id="building"></a>
 <div class="building">
-    <h3>text</h3>
+    <div class="building_top">
+        <img src="{{ '' }}">
+        <h3>{{ 'text' }}</h3>
+        <a [routerLink]="['/']">すべて見る</a>
+    </div>
     <div class="content">
         <owl-carousel-o [options]="customOptions2">
-            <ng-template *ngFor="let child of listData" carouselSlide>
-                <div class="element" [ngStyle]="{'background-image': child.background}">
+            <ng-template *ngFor="let child of listData" carouselSlide 
+                [id]="child.id" [width]="customWidth">
+                <div class="element">
+                    <img [src]="child.background | safe:'url'" class="element-image" alt="">
                     <div class="content-element">
                         <div>
                             <label *ngFor="let tag of child.tag">
