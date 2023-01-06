@@ -4,7 +4,7 @@ import { PricePipe } from './price.pipe';
 import { FormatNumberPipe } from './format-number.pipe';
 import { DateFormat } from './date-format.pipe';
 import { SlideTextPipe } from './slidetext.pipe';
-import { SafeHtml } from './safe.pipe';
+import { SafePipe } from './safe.pipe';
 
 @NgModule({
     declarations: [
@@ -12,7 +12,7 @@ import { SafeHtml } from './safe.pipe';
         FormatNumberPipe,
         DateFormat,
         SlideTextPipe,
-        SafeHtml
+        SafePipe
     ],
     imports: [ CommonModule ],
     exports: [
@@ -20,7 +20,7 @@ import { SafeHtml } from './safe.pipe';
         FormatNumberPipe,
         DateFormat,
         SlideTextPipe,
-        SafeHtml
+        SafePipe
     ],
     providers: [],
 })

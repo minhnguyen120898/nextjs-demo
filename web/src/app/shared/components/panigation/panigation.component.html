@@ -1,22 +1,22 @@
 <ul *ngIf="pager  && pager['pages'].length > 1 && pager['pages'].length" class="pagination"
     [ngClass]="class">
-    <li [ngClass]="{disabled:pager['currentPage'] === 1}">
+    <!-- <li [ngClass]="{disabled:pager['currentPage'] === 1}">
         <a (click)="choosepage(1)">
             <img src="assets/images/double-left.png" alt="">
         </a>
     </li>
     <li [ngClass]="{disabled:pager['currentPage'] === 1}">
         <a (click)="choosepage(pager.currentPage - 1)"> <img src="assets/images/left.png" alt=""> </a>
-    </li>
+    </li> -->
     <li *ngFor="let page of pager['pages']" class="page" [ngClass]="{'active':pager['currentPage'] === page}">
         <a (click)="choosepage(page)">{{page}}</a>
     </li>
-    <li [ngClass]="{disabled:pager['currentPage'] === pager['totalPages']}">
+    <!-- <li [ngClass]="{disabled:pager['currentPage'] === pager['totalPages']}">
         <a (click)="choosepage(pager['currentPage'] + 1)"> <img src="assets/images/right.png" alt="">
         </a>
     </li>
     <li [ngClass]="{disabled:pager['currentPage'] === pager['totalPages']}">
         <a (click)="choosepage(pager['totalPages'])"> <img src="assets/images/double-right.png" alt="">
         </a>
-    </li>
+    </li> -->
 </ul>

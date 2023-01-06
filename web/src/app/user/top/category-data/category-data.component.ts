@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TopService } from '../top.service';
-import { CarouselComponent, OwlOptions } from 'ngx-owl-carousel-o';
+import { OwlOptions } from 'ngx-owl-carousel-o';
+import { fromEvent, debounceTime, takeUntil, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-category-data',
@@ -14,12 +15,13 @@ export class CategoryDataComponent implements OnInit {
     loop: true,
     nav: false,
     dots: true,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
+    mouseDrag: false,
+    touchDrag: false,
+    pullDrag: false,
+    autoplay: true,
+    autoplaySpeed: 500,
     // lazyLoad: true,
     center: true,
-    margin: 10,
     autoplayHoverPause: true,
     navSpeed: 700,
     navText: ['&lsaquo;', '&rsaquo;'],
@@ -31,21 +33,24 @@ export class CategoryDataComponent implements OnInit {
         items: 1
       },
       768: {
-        items: 2
+        items: 3,
       }
     }
   };
 
+  customWidth = window.innerWidth < 768 ? 105 : 250;
+  subscription = new Subject();
   customOptions2: OwlOptions = {
-    loop: true,
+    loop: false,
     nav: true,
     dots: false,
     mouseDrag: true,
     touchDrag: true,
     pullDrag: true,
+    autoWidth: true,
     // lazyLoad: true,
-    center: window.innerWidth < 768 ? true : false,
-    margin: 10,
+    center: false,
+    margin: 5,
     autoplayHoverPause: true,
     navSpeed: 700,
     navText: ['&lsaquo;', '&rsaquo;'],
@@ -57,10 +62,12 @@ export class CategoryDataComponent implements OnInit {
         items: 1
       },
       768: {
-        items: 3
+        items: 3,
+        margin: 15,
       },
       992: {
-        items: 5
+        items: 5,
+        margin: 15,
       }
     }
   };
@@ -101,6 +108,29 @@ export class CategoryDataComponent implements OnInit {
     }
   }
 
+  ngAfterViewInit(): void {
+    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+    //Add 'implements AfterViewInit' to the class.
+    fromEvent(window, 'resize').pipe(
+      debounceTime(10),
+      takeUntil(this.subscription)
+    ).subscribe(res => {
+      if (window.innerWidth < 768) {
+        this.customWidth = 105;
+      } else {
+        this.customWidth = 250;
+      }
+      this.customOptions2 = {...this.customOptions2};
+    })
+  }
+
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this.subscription.next(true);
+    this.subscription.complete();
+  }
+
   navigateBanner(item: any) {
     window.open(item.url, 'target=_black');
   }
@@ -113,7 +143,7 @@ export class CategoryDataComponent implements OnInit {
         let datas = res.docs.map((e: any) => {
           return {
             id: e._id,
-            background: `url(${e.eye_catching})`,
+            background: e.eye_catching,
             title: e.title,
             tag: e.tag
           }

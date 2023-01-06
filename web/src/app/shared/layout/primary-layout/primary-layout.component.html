@@ -24,7 +24,7 @@
       <ul>
         <li *ngFor="let item of nav, let i =index;" class="nav-item">
           <a (click)="clickNav(item, i)" class="nav-item-link" [ngClass]="{'router-link-active' : item.active}">
-            <div [innerHTML]="item.img | safeHtml">
+            <div [innerHTML]="item.img | safe:'html'">
             </div>{{item.name | translate}}
           </a>
           <ul class="nav-child" *ngIf="item.sub_nav" id="nav_child_{{i}}">

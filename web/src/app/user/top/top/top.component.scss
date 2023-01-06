@@ -374,8 +374,8 @@
                 right: 0;
                 left: 0;
                 bottom: 0;
-                padding-left: 1rem;
-                padding-right: 1rem;
+                padding: 1.6rem 1rem;
+                background-color: rgba($color: #000000, $alpha: .55);
 
                 span {
                     display: inline-block;
@@ -592,6 +592,7 @@
                 max-width: 15.6rem;
 
                 .content-element {
+                    padding: .5rem .4rem;
                     span {
                         font-size: 1.3rem;
                         line-height: 1.9rem;
