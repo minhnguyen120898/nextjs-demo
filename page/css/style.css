@@ -1,3 +1,24 @@
+@font-face {
+  font-family: "SourceHanSerif";
+  src: url(./font/SourceHanSerif-Bold.otf) format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SourceHanSerif";
+  src: url(./font/SourceHanSerif-Medium.otf) format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SourceHanSerif";
+  src: url(./font/SourceHanSerif-Regular.otf) format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
 html {
   font-size: 62.5%;
   min-width: 320px;
@@ -6,9 +27,9 @@ html {
 
 html body {
   margin: 0;
-  font-family: "SourceHanSansJP-Regular", "Lato", "Noto Sans JP",
-    "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo,
-    "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+  font-family: "SourceHanSerif", "ヒラギノ角ゴ ProN",
+    "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, "ＭＳ Ｐゴシック",
+    "MS PGothic", sans-serif;
 }
 
 * {
@@ -16,76 +37,14 @@ html body {
 }
 
 ul {
-    padding: 0;
-    padding: 0;
-    list-style: none;
+  padding: 0;
+  padding: 0;
+  list-style: none;
 }
 
 a {
-    text-decoration: none;
-    cursor: pointer;
-}
-
-@font-face {
-  font-family: "SourceHanSansJP-Bold";
-  src: url(./font/SourceHanSansJP-Bold.otf);
-}
-
-@font-face {
-  font-family: "Notosan";
-  src: url(./font/NotoSansJP-Regular.otf);
-}
-
-@font-face {
-  font-family: "SourceHanSansJP-Light";
-  src: url(./font/SourceHanSansJP-Light.otf);
-}
-
-@font-face {
-  font-family: "SourceHanSansJP-Regular";
-  src: url(./font/SourceHanSansJP-Regular.otf);
-}
-
-@font-face {
-  font-family: "SourceHanSansJP-Medium";
-  src: url(./font/SourceHanSansJP-Medium.otf);
-}
-
-@font-face {
-  font-family: "SourceHanSansJP-Normal";
-  src: url(./font/SourceHanSansJP-Normal.otf);
-}
-
-@font-face {
-  font-family: "SourceHanSansJP-Heavy";
-  src: url(./font/SourceHanSansJP-Heavy.otf);
-}
-
-@font-face {
-  font-family: "SFCompactDisplay-Bold";
-  src: url(./font/SFCompactDisplay-Bold.ttf);
-}
-
-@font-face {
-  font-family: "Rounded Mgen+ 1m Medium";
-  src: url(./font/rounded-mgenplus-1m-medium.ttf);
-}
-
-html {
-  font-size: 62.5%;
-  min-width: 320px;
-  scroll-behavior: smooth;
-}
-
-html body {
-  margin: 0;
-  font-family: "SourceHanSansJP-Regular", "Lato", "Noto Sans JP",
-    "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo,
-    "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
-}
-
-* {
-  box-sizing: border-box;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 /* COMMON  */
@@ -112,7 +71,7 @@ header {
   padding-right: 4rem;
   padding-top: 2.5rem;
   padding-bottom: 2.5rem;
-  background-color: #101010A1;
+  background-color: #101010a1;
   transition: 0.4s all ease-in-out;
 }
 header.bg-white {
@@ -305,8 +264,7 @@ header #right ul li:last-child {
   text-align: center;
   position: relative;
   border-bottom: 0.1rem solid rgba(229, 229, 229, 0.5);
-  background: url(../image/icons/ic_chevron-right.svg) right center
-    no-repeat;
+  background: url(../image/icons/ic_chevron-right.svg) right center no-repeat;
 }
 .side-nav__list .item a::before {
   content: attr(data-text);
@@ -320,8 +278,7 @@ header #right ul li:last-child {
   font-size: 1.2rem;
   line-height: 6.9rem;
   display: block;
-  background: url(../image/icons/ic_chevron-right-b.svg) right center
-      no-repeat,
+  background: url(../image/icons/ic_chevron-right-b.svg) right center no-repeat,
     #fff;
   box-shadow: 0 0.2rem 2rem 0 rgba(255, 255, 255, 0.8);
   transform: scaleX(0);
@@ -387,18 +344,24 @@ header #right ul li:last-child {
 #banner {
   width: 100%;
   min-height: 77.05rem;
-  background-image: url('../image/banner2@2x.png');
+  background-image: url("../image/banner2@2x.png");
   background-position: bottom center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 @media (max-width: 1280px) {
-    #banner {
-        min-height: 64.7rem;
-        background-image: url('../image/banner2.png');
-        background-position: center;
-    }
+  #banner {
+    min-height: 64.7rem;
+    background-image: url("../image/banner2.png");
+    background-position: center;
+  }
+}
+
+@media (max-width: 768px) {
+  #banner {
+    min-height: 52.7rem;
+  }
 }
 
 /* BUIDING  */
@@ -410,7 +373,6 @@ header #right ul li:last-child {
 .building h3 {
   font-size: 3.5rem;
   color: white;
-  font-family: "Noto Serif JP";
   margin-top: 0;
   margin-bottom: 2rem;
 }
@@ -427,22 +389,21 @@ header #right ul li:last-child {
 }
 
 /* FIELD TOP  */
-
 .field-top {
   background-color: #10161b;
   padding: 0 1rem;
 }
 
 .field-top .inner-field {
-  max-width: 102.3rem;
+  max-width: 101.3rem;
   margin-left: auto;
   margin-right: auto;
-  padding-top: 4rem;
+  padding-top: 4.3rem;
 }
 
 .field-top .collection-video {
-  padding-top: 3rem;
-  padding-bottom: 10rem;
+  padding-top: 5.5rem;
+  padding-bottom: 8.1rem;
 }
 
 .field-top .collection-video video {
@@ -456,27 +417,26 @@ header #right ul li:last-child {
 
 .field-top h3 {
   margin-top: 0;
-  margin-bottom: 0;
-  font-family: "Noto Serif JP";
+  margin-bottom: 1rem;
 }
 
 .field-top h3 span {
-  font-size: 3.2rem;
-  font-family: "Noto Serif JP";
+  font-size: 4.2rem;
+  line-height: 6rem;
   color: white;
-  padding-bottom: 1rem;
-  padding-right: 8rem;
 }
 
 .field-top h3 small {
   display: block;
   font-size: 1.6rem;
+  line-height: 2.3rem;
   color: white;
 }
 
 .field-top .social {
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
 }
 
 .field-top .social .left {
@@ -495,61 +455,63 @@ header #right ul li:last-child {
   margin-right: 1rem;
 }
 
-.field-top .social .right {
-}
-
 .field-top .social .right ul {
   display: flex;
   justify-content: flex-end;
-  padding-left: 0;
-  padding-right: 0;
-  margin-top: 0;
+  column-gap: 2.8rem;
+  padding: 0;
+  margin: 0;
   list-style: none;
 }
 
-.field-top .social .right ul li {
-  padding: 0 1rem;
+.field-top .social .right ul li img {
+  transition-duration: 0.3s;
+  transition-property: transform;
+  transition-timing-function: ease-out;
+}
+
+.field-top .social .right ul li img:hover {
+  transform: translateY(-0.8rem);
 }
 
 @media (max-width: 768px) {
   .field-top {
+    padding: 0 1.6rem;
   }
 
   .field-top .inner-field {
+    padding-top: 4.97rem;
+    position: relative;
   }
 
   .field-top .collection-video {
+    padding-top: 1.4rem;
+    padding-bottom: 3.3rem;
   }
 
   .field-top .collection-video video {
+    height: 25rem;
   }
-
-  .field-top h3 {
-  }
-
+  
   .field-top h3 span {
-    font-size: 2.8rem;
-  }
-
-  .field-top h3 small {
-  }
-
-  .field-top .social {
-  }
-
-  .field-top .social .left {
-  }
-
-  .field-top .social .left span {
+    font-size: 3.4rem;
+    line-height: 3.6rem;
   }
 
   .field-top .social .right {
+    position: absolute;
+    top: 2.18rem;
+    right: 0;
   }
 
   .field-top .social .right ul {
+    column-gap: 1.6rem;
   }
 
-  .field-top .social .right ul li {
+  .field-top .social .right ul li img {
+    width: 2.8rem;
+    height: 2.8rem;
+    object-fit: contain;
   }
 }
 
@@ -573,7 +535,6 @@ header #right ul li:last-child {
 
 .field h3 span {
   font-size: 3.2rem;
-  font-family: "Noto Serif JP";
   color: white;
   border-bottom: 1px solid white;
   padding-bottom: 1rem;
@@ -603,7 +564,6 @@ header #right ul li:last-child {
 .field p {
   font-size: 1.6rem;
   color: white;
-  font-family: "Notosan";
   margin-top: 0;
   margin-bottom: 0;
   padding-right: 3rem;
@@ -630,7 +590,6 @@ header #right ul li:last-child {
 .field table tr td span {
   font-size: 1.8rem;
   color: #bfbfbf;
-  font-family: "Notosan";
   display: block;
   margin-bottom: 1rem;
 }
@@ -640,7 +599,6 @@ header #right ul li:last-child {
   color: white;
   display: block;
   margin-bottom: 0.5rem;
-  font-family: "Notosan";
 }
 
 @media (max-width: 768px) {
@@ -698,98 +656,98 @@ header #right ul li:last-child {
 
 /* FOOTER  */
 footer {
-    background-color: #262626;
-    padding: 7.6rem 4rem 1.2rem;
+  background-color: #262626;
+  padding: 7.6rem 4rem 1.2rem;
 }
 footer #copired {
-    text-align: center;
-    font-size: 1.6rem;
-    color: white;
-    text-decoration: unset;
-    margin: 4rem 0 0;
-    font-family: 'SourceHanSerif-Medium';
+  text-align: center;
+  font-size: 1.6rem;
+  color: white;
+  text-decoration: unset;
+  margin: 4rem 0 0;
+  font-family: "SourceHanSerif-Medium";
 }
 footer #inner-footer {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 footer #inner-footer .left {
-    padding-left: 0;
-    display: flex;
-    flex-wrap: wrap;
-    column-gap: 4.2rem;
-    max-width: 77.6rem;
+  padding-left: 0;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 4.2rem;
+  max-width: 77.6rem;
 }
 footer #inner-footer .left li {
-    margin-bottom: 0.8rem;
+  margin-bottom: 0.8rem;
 }
 footer #inner-footer .left li a {
-    font-size: 1.6rem;
-    font-family: 'SourceHanSerif-Medium';
-    color: white;
-    text-decoration: unset;
-    cursor: pointer;
+  font-size: 1.6rem;
+  font-family: "SourceHanSerif-Medium";
+  color: white;
+  text-decoration: unset;
+  cursor: pointer;
 }
 footer #inner-footer .left li a:hover {
-    opacity: 0.7;
+  opacity: 0.7;
 }
 footer #inner-footer .right ul {
-    display: flex;
-    justify-content: flex-end;
-    padding-left: 0;
-    padding-right: 0;
-    margin-top: 0;
-    margin-bottom: 2rem;
+  display: flex;
+  justify-content: flex-end;
+  padding-left: 0;
+  padding-right: 0;
+  margin-top: 0;
+  margin-bottom: 2rem;
 }
 footer #inner-footer .right ul li {
-    padding: 0 1rem;
+  padding: 0 1rem;
 }
 footer #inner-footer .right ul a {
-    overflow: hidden;
+  overflow: hidden;
 }
 footer #inner-footer .right ul img {
-    transition-duration: 0.3s;
-    transition-property: transform;
-    transition-timing-function: ease-out;
+  transition-duration: 0.3s;
+  transition-property: transform;
+  transition-timing-function: ease-out;
 }
 footer #inner-footer .right ul img:hover {
-    transform: translateY(-0.8rem);
+  transform: translateY(-0.8rem);
 }
 footer #inner-footer .right a#logo img:hover {
-    opacity: 0.7;
+  opacity: 0.7;
 }
 @media (max-width: 768px) {
-    footer {
-        padding: 1.8rem 1.1rem;
-   }
-    footer #copired {
-        margin-top: 6.3rem;
-   }
-    footer #inner-footer {
-        flex-direction: column;
-   }
-    footer #inner-footer .left {
-        column-gap: 3rem;
-   }
-    footer #inner-footer .left li {
-        margin-bottom: 2.3rem;
-   }
-    footer #inner-footer .left li a {
-        font-size: 1.4rem;
-   }
-    footer #inner-footer .right ul {
-        justify-content: center;
-        margin-top: 3.1rem;
-        margin-bottom: 3rem;
-   }
-    footer #inner-footer .right ul img {
-        width: 3.6rem;
-        height: 3.6rem;
-        object-fit: cover;
-   }
-    footer #inner-footer .right a#logo img {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-   }
+  footer {
+    padding: 1.8rem 1.1rem;
+  }
+  footer #copired {
+    margin-top: 6.3rem;
+  }
+  footer #inner-footer {
+    flex-direction: column;
+  }
+  footer #inner-footer .left {
+    column-gap: 3rem;
+  }
+  footer #inner-footer .left li {
+    margin-bottom: 2.3rem;
+  }
+  footer #inner-footer .left li a {
+    font-size: 1.4rem;
+  }
+  footer #inner-footer .right ul {
+    justify-content: center;
+    margin-top: 3.1rem;
+    margin-bottom: 3rem;
+  }
+  footer #inner-footer .right ul img {
+    width: 3.6rem;
+    height: 3.6rem;
+    object-fit: cover;
+  }
+  footer #inner-footer .right a#logo img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
