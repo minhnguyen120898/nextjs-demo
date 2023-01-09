@@ -367,25 +367,180 @@ header #right ul li:last-child {
 /* BUIDING  */
 .building {
   background-color: #10161b;
-  padding: 4rem 4rem;
+  padding: 13.2rem 0 7.4rem 4rem;
 }
 
-.building h3 {
-  font-size: 3.5rem;
+.building .building_top {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.7rem;
+}
+.building .building_top h3 {
+  font-size: 3.2rem;
+  line-height: 4.6rem;
+  letter-spacing: 0.33rem;
   color: white;
-  margin-top: 0;
-  margin-bottom: 2rem;
+  font-family: "SourceHanSerif-Medium";
+  margin: 0;
 }
-
-.building h3 span {
+.building .building_top img {
+  width: 4.8rem;
+  height: 4.8rem;
+  object-fit: cover;
+  margin-right: 1.4rem;
+}
+.building .building_top a {
   border-radius: 2.4rem;
   color: #fff;
   background-color: #c82c2c;
   line-height: 2;
   font-size: 2.4rem;
   display: inline-block;
-  margin-left: 10rem;
+  margin-left: 3.8rem;
   padding: 0 3rem;
+  text-decoration: unset;
+  font-family: "SourceHanSerif-Medium";
+  transition: 0.4s all ease-in-out;
+}
+.building .building_top a:hover {
+  color: #c82c2c;
+  background-color: #fff;
+}
+
+.building .content {
+  position: relative;
+}
+
+.building .content .element {
+  height: 35rem;
+  width: 25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #686868;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  margin-right: 1.5rem;
+}
+.building .content .element .element-image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  top: 0;
+  left: 0;
+  transition: 0.4s all ease;
+}
+.building .content .element:hover .element-image {
+  transform: scale(1.1);
+}
+.building .content .element .content-element {
+  position: absolute;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  padding: 1.6rem 1rem;
+  background-color: rgba(0, 0, 0, 0.55);
+}
+.building .content .element .content-element span {
+  font-size: 2.4rem;
+  line-height: 3.2rem;
+  color: white;
+  font-family: "SourceHanSerif-Medium";
+}
+.building .content .element .content-element div label {
+  font-size: 1.5rem;
+  color: white;
+  font-family: "SourceHanSerif-Medium";
+  padding: 0.2rem 1.6rem;
+  border-radius: 2rem;
+  background-color: #667cf2;
+}
+
+.building .content .slick-prev2,
+.building .content .slick-next2 {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  font-size: 5rem;
+  width: 3.3rem;
+  height: 5.6rem;
+  position: absolute;
+  background-color: transparent;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+  line-height: 0.9;
+}
+
+.building .content .slick-prev2 {
+  left: 0;
+}
+
+.building .content .slick-next2 {
+  right: 0;
+}
+@media screen and (max-width: 768px) {
+  .building {
+    padding: 3.2rem 0 2.2rem 1.2rem;
+  }
+  .building .building_top {
+    margin-bottom: 0.6rem;
+  }
+  .building .building_top h3 {
+    font-size: 1.8rem;
+  }
+  .building .building_top img {
+    width: 2.6rem;
+    height: 2.6rem;
+    margin-right: 0.8rem;
+  }
+  .building .building_top a {
+    color: #fff;
+    font-size: 1.1rem;
+    padding: 0 0.7rem;
+    margin-left: auto;
+    margin-right: 2.2rem;
+  }
+  .building .content .slick-prev2,
+  .building .content .slick-next2 {
+    font-size: 3.5rem;
+  }
+  .building .content .slick-prev2 {
+    left: 0;
+  }
+  .building .content .slick-next2 {
+    right: 0;
+  }
+  .building .content .element {
+    height: 13.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #686868;
+    max-width: 9.9rem;
+    margin-right: 0.5rem;
+  }
+  .building .content .element .content-element {
+    padding: 0.5rem 0.4rem;
+  }
+  .building .content .element .content-element span {
+    font-size: 1.3rem;
+    line-height: 1.7rem;
+  }
+  .building .content .element .content-element div label {
+    font-size: 0.5rem;
+    padding: 0.2rem 0.7rem;
+  }
 }
 
 /* FIELD TOP  */
@@ -530,36 +685,61 @@ header #right ul li:last-child {
 
 .field h3 {
   margin-top: 0;
-  margin-bottom: 3rem;
+  margin-bottom: 2.7rem;
 }
 
 .field h3 span {
   font-size: 3.2rem;
   color: white;
-  border-bottom: 1px solid white;
-  padding-bottom: 1rem;
-  padding-right: 8rem;
+  padding-bottom: 0.6rem;
+  padding-right: 7.6rem;
+  position: relative;
+}
+
+.field h3 span::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  border: none;
+  width: 70%;
+  border-bottom: 0.1rem solid white;
+}
+
+.field h3 span::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  border: none;
+  width: 30%;
+  border-bottom: 0.1rem solid #667cf2;
 }
 
 .field .collection-image {
   display: flex;
   flex-wrap: wrap;
-  margin-left: -7px;
-  margin-right: -7px;
+  gap: 1.5rem;
   padding-bottom: 10rem;
 }
 
 .field .collection-image div {
   height: 20rem;
   display: block;
-  width: calc(100% / 3);
-  padding: 7px;
+  width: calc((100% / 3) - 1rem);
+  overflow: hidden;
 }
 
 .field .collection-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  cursor: pointer;
+  transition: 0.4s all ease;
+}
+
+.field .collection-image img:hover {
+  transform: scale(1.1);
 }
 
 .field p {
@@ -569,7 +749,7 @@ header #right ul li:last-child {
   margin-bottom: 0;
   padding-right: 3rem;
   padding-left: 3rem;
-  padding-bottom: 8rem;
+  padding-bottom: 8.5rem;
 }
 
 .field table {
@@ -577,14 +757,10 @@ header #right ul li:last-child {
   border-collapse: collapse;
   margin-right: 3rem;
   margin-left: 3rem;
-  margin-top: -1rem;
-}
-
-.field table tr {
 }
 
 .field table tr td {
-  padding: 1rem 0;
+  padding: 1.6rem 0;
   border-bottom: 1px dashed #bfbfbf;
 }
 
@@ -592,7 +768,6 @@ header #right ul li:last-child {
   font-size: 1.8rem;
   color: #bfbfbf;
   display: block;
-  margin-bottom: 1rem;
 }
 
 .field table tr td label {

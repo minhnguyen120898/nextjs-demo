@@ -1,5 +1,53 @@
 function main() {
   document.addEventListener('scroll', debounce(() => onScroll()));
+
+  $(document).on("ready", function () {
+    $(".slick-slider").slick({
+      dots: true,
+      arrows: true,
+      prevArrow: $('.prev'),
+      nextArrow: $('.next'),
+      // autoplay: true,
+      // infinite: true,
+      // autoplaySpeed: 3000,
+      // speed: 500,
+      slidesToScroll: 1,
+      slidesToShow: 3,
+      centerMode: true,
+      responsive: [
+        {
+          breakpoint: 1366,
+          settings: {
+            slidesToShow: 3,
+          }
+        },
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 1,
+          },
+        },
+      ],
+    });
+
+    $(".slick-slider2").slick({
+      dots: false,
+      infinite: false,
+      slidesToShow: 4,
+      slidesToScroll: 1,
+      prevArrow: $('.slick-prev2'),
+      nextArrow: $('.slick-next2'),
+      variableWidth: true,
+      responsive: [
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 3,
+          }
+        }
+      ]
+    });
+  });
 }
 
 function onScroll() {
