@@ -22,6 +22,8 @@ export class CategoryDataComponent implements OnInit {
     autoplaySpeed: 500,
     // lazyLoad: true,
     center: true,
+    margin: 37,
+    stagePadding: 51,
     autoplayHoverPause: true,
     navSpeed: 700,
     navText: ['&lsaquo;', '&rsaquo;'],
@@ -34,6 +36,8 @@ export class CategoryDataComponent implements OnInit {
       },
       768: {
         items: 3,
+        margin: 64,
+        stagePadding: 0,
       }
     }
   };

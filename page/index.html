@@ -1,459 +1,437 @@
 <!DOCTYPE html>
 <html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+    <!-- For Google -->
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="application-name" content="" />
+    <!-- For Facebook -->
+    <meta property="og:title" content="" />
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="" />
+    <meta property="og:description" content="Essential Shelf" />
+    <!-- For Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Essential Shelf" />
+    <meta name="twitter:description" content="Essential Shelf" />
+    <meta name="twitter:image" content="" />
 
-  <!-- For Google -->
-  <meta name="description" content="">
-  <meta name="keywords" content="">
-  <meta name="application-name" content="">
-  <!-- For Facebook -->
-  <meta property="og:title" content="">
-  <meta property="og:type" content="article">
-  <meta property="og:image" content="">
-  <meta property="og:description" content="Essential Shelf">
-  <!-- For Twitter -->
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Essential Shelf">
-  <meta name="twitter:description" content="Essential Shelf">
-  <meta name="twitter:image" content="">
+    <link rel="stylesheet" href="./css/style.css" />
+    <!-- Add the slick-theme.css if you want default styling -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
+    />
+    <!-- Add the slick-theme.css if you want default styling -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"
+    />
+  </head>
 
-
-  <link rel="stylesheet" href="./css/style.css">
-  <link rel="stylesheet" href="./css/slide.css">
-  <link rel="stylesheet" type="text/css" href="./slick/slick.css">
-  <link rel="stylesheet" type="text/css" href="./slick/slick-theme.css">
-</head>
-
-<body>
-  <header id="header">
-    <div id="header-content">
-      <div id="left">
-        <a id="logo" href="/">
-          <img src="./image/logo.png" alt="">
-        </a>
-      </div>
-      <div id="right">
-        <ul>
-          <li class="search-box" id="search-box">
-            <input 
-              id="search-text-header"
-              type="text" 
-              class="search-text" 
-              placeholder="Type to search..."
-            >
-            <button class="icon search-btn" onclick="showSearch()">
-              <img src="./image/icons/ic_search-w.svg" alt="search">
-            </button>
-          </li>
-          <!-- <li>
+  <body>
+    <header id="header">
+      <div id="header-content">
+        <div id="left">
+          <a id="logo" href="/">
+            <img src="./image/logo.png" alt="" />
+          </a>
+        </div>
+        <div id="right">
+          <ul>
+            <li class="search-box" id="search-box">
+              <input
+                id="search-text-header"
+                type="text"
+                class="search-text"
+                placeholder="Type to search..."
+              />
+              <button class="icon search-btn" onclick="showSearch()">
+                <img src="./image/icons/ic_search-w.svg" alt="search" />
+              </button>
+            </li>
+            <!-- <li>
           <a href="/auth/login" class="icon">
             <img src="assets/images/icons/ic_logout-w.svg" alt="search">
           </a>
           </li> -->
-          <li>
-            <div class="toggle">
-              <div class="toggle-button" id="toggle-button" onclick="toogleMenu()">
-                <span></span>
+            <li>
+              <div class="toggle">
+                <div
+                  class="toggle-button"
+                  id="toggle-button"
+                  onclick="toogleMenu()"
+                >
+                  <span></span>
+                </div>
               </div>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="side-nav" id="side-nav">
-      <div class="close-side-nav" onclick="toogleMenu()">
-        <img
-        src="./image/icons/ic_close.svg"
-        alt="close-side-nav"
-      />
-      </div>
-      <h2 class="side-nav__title">Menu</h2>
-      <p class="side-nav__desc">メニュー</p>
-      <ul class="side-nav__list">
-        <li class="item">
-          <a href="" data-text="item1">item1</a>
-        </li>
-        <li class="item">
-          <a href="" data-text="item2">item2</a>
-        </li>
-        <li class="item">
-          <a href="" data-text="item3">item3</a>
-        </li>
-        <li class="item">
-          <a href="" data-text="item4">item4</a>
-        </li>
-      </ul>
-    </div>
-  </header>
-
-  <section id="banner">
-  </section>
-
-  <div class="field-top">
-    <div class="inner-field">
-      <h3>
-        <small>めいふつ</small>
-        <span>天むすの千寿</span>
-      </h3>
-      <div class="social">
-        <div class="left">
-          <span>#春</span>
-          <span>#晴れ</span>
-        </div>
-        <div class="right">
-          <ul>
-            <li>
-              <a href="">
-                <img src="./image/instagram.png" alt="">
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <img src="./image/tw.png" alt="">
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <img src="./image/fb.png" alt="">
-              </a>
             </li>
           </ul>
         </div>
       </div>
-      <div class="collection-video">
-        <video controls>
-          <source src="https://www.youtube.com/watch?v=tk31vD3AhHA&ab_channel=MINHHI%E1%BA%BEUAG" type="video/mp4">
-          <source src="https://www.youtube.com/watch?v=tk31vD3AhHA&ab_channel=MINHHI%E1%BA%BEUAG" type="video/ogg">
-          Your browser does not support the video tag.
-        </video>
-      </div>
-    </div>
-  </div>
-
-  <div class="field">
-    <div class="inner-field">
-      <h3><span>施設写真</span></h3>
-      <div class="collection-image">
-        <div>
-          <img src="./image/img_facility1.png" alt="">
+      <div class="side-nav" id="side-nav">
+        <div class="close-side-nav" onclick="toogleMenu()">
+          <img src="./image/icons/ic_close.svg" alt="close-side-nav" />
         </div>
-        <div>
-          <img src="./image/img_facility2.png" alt="">
-        </div>
-        <div>
-          <img src="./image/img_facility3.png" alt="">
-        </div>
-        <div>
-          <img src="./image/img_facility1.png" alt="">
-        </div>
-        <div>
-          <img src="./image/img_facility2.png" alt="">
-        </div>
-        <div>
-          <img src="./image/img_facility3.png" alt="">
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="field">
-    <div class="inner-field">
-      <h3><span>施設紹介</span></h3>
-      <p>
-        千寿は天むす発祥のお店です。現在では「天むす」という名前は全国に知れ渡っておりますが、初代の水谷ヨネが夫の為に栄養のあるものを―という愛情から天むすは生まれました。<br><br>
-
-        それから絶え間ない試行錯誤の上、今でも皆様に愛される昔懐かしい味として親しまれております。<br><br>
-
-        是非、一度、千寿の「めいふつ天むす」の天むすをご賞味くださいませ。皆様のご来店を心よりお待ちしております。<br>
-      </p>
-    </div>
-  </div>
-
-  <div class="field">
-    <div class="inner-field">
-      <h3><span>詳細情報</span></h3>
-      <table>
-        <tr>
-          <td>
-            <label for="">場所</label>
-            <span>三重県津市大門９−７</span>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <label for="">電話番号</label>
-            <span>059-228-6798</span>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <label for="">利用時間</label>
-            <span>9:30～17:30 (但し、ご注文は17：00までの承りとなります)</span>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <label for="">休日</label>
-            <span>毎週日曜日、第3月曜日</span>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <label for="">利用料金</label>
-            <span>1000円〜</span>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <label for="">駐車場</label>
-            <span>5台あり</span>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <label for="">決済情報</label>
-            <span>VISA、MASTER、AMEX、JCB、PAYPAY</span>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <label for="">備考</label>
-            <span>-</span>
-          </td>
-        </tr>
-      </table>
-    </div>
-  </div>
-
-  <div class="building">
-    <div class="content">
-      <section class="regular2 slider">
-        <div class="element">
-          <div>
-            <span>text</span>
-          </div>
-        </div>
-        <div class="element">
-          <div>
-            <span>text</span>
-          </div>
-        </div>
-        <div class="element">
-          <div>
-            <span>text</span>
-          </div>
-        </div>
-        <div class="element">
-          <div>
-            <span>text</span>
-          </div>
-        </div>
-        <div class="element">
-          <div>
-            <span>text</span>
-          </div>
-        </div>
-        <div class="element">
-          <div>
-            <span>text</span>
-          </div>
-        </div>
-      </section>
-    </div>
-  </div>
-
-  <div class="building">
-    <h3>おすすめ<span>すべて見る</span></h3>
-    <div class="content">
-      <section class="regular slider">
-        <div class="element">
-          <img src="./image/banner2.png?text=1">
-
-        </div>
-        <div class="element">
-          <img src="./image/banner2.png?text=2">
-
-        </div>
-        <div class="element">
-          <img src="./image/banner2.png?text=3">
-
-        </div>
-        <div class="element">
-          <img src="./image/banner2.png?text=4">
-
-        </div>
-        <div class="element">
-          <img src="./image/banner2.png?text=5">
-
-        </div>
-        <div class="element">
-          <img src="./image/banner2.png?text=6">
-        </div>
-      </section>
-    </div>
-  </div>
-  <footer>
-    <div id="inner-footer">
-      <ul class="left">
-        <li>
-          <a href="">サイトマップ</a>
-        </li>
-        <li>
-          <a href="">プライバシーポリシー</a>
-        </li>
-        <li>
-          <a href="">個人情報保護方針</a>
-        </li>
-        <li>
-          <a href="">運営会社情報</a>
-        </li>
-        <li>
-          <a href="">広告掲載について</a>
-        </li>
-        <li>
-          <a href="">会員利用規約</a>
-        </li>
-        <li>
-          <a href="">メールマガジンについて</a>
-        </li>
-        <li>
-          <a href="">退会について</a>
-        </li>
-        <li>
-          <a href="">お問い合わせ</a>
-        </li>
-      </ul>
-      <div class="right">
-
-        <ul>
-          <li>
-            <a href="">
-              <img src="./image/instagram.png" alt="">
-            </a>
+        <h2 class="side-nav__title">Menu</h2>
+        <p class="side-nav__desc">メニュー</p>
+        <ul class="side-nav__list">
+          <li class="item">
+            <a href="" data-text="item1">item1</a>
           </li>
-          <li>
-            <a href="">
-              <img src="./image/tw.png" alt="">
-            </a>
+          <li class="item">
+            <a href="" data-text="item2">item2</a>
           </li>
-          <li>
-            <a href="">
-              <img src="./image/fb.png" alt="">
-            </a>
+          <li class="item">
+            <a href="" data-text="item3">item3</a>
+          </li>
+          <li class="item">
+            <a href="" data-text="item4">item4</a>
           </li>
         </ul>
+      </div>
+    </header>
 
-        <a id="logo" href="/">
-          <img src="./image/logo-bottom.png" alt="">
-        </a>
+    <section id="banner"></section>
+
+    <div class="field-top">
+      <div class="inner-field">
+        <h3>
+          <small>めいふつ</small>
+          <span>天むすの千寿</span>
+        </h3>
+        <div class="social">
+          <div class="left">
+            <span>#春</span>
+            <span>#晴れ</span>
+          </div>
+          <div class="right">
+            <ul>
+              <li>
+                <a href="">
+                  <img src="./image/instagram.png" alt="" />
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <img src="./image/tw.png" alt="" />
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <img src="./image/fb.png" alt="" />
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="collection-video">
+          <video controls>
+            <source
+              src="https://www.youtube.com/watch?v=tk31vD3AhHA&ab_channel=MINHHI%E1%BA%BEUAG"
+              type="video/mp4"
+            />
+            <source
+              src="https://www.youtube.com/watch?v=tk31vD3AhHA&ab_channel=MINHHI%E1%BA%BEUAG"
+              type="video/ogg"
+            />
+            Your browser does not support the video tag.
+          </video>
+        </div>
       </div>
     </div>
-    <p id="copired">copired</p>
-  </footer>
-</body>
-<script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
-<script src="./slick/slick.js" type="text/javascript" charset="utf-8"></script>
-<script src="./js/index.js"></script>
-<script type="text/javascript">
-  $(document).on('ready', function () {
-    if (window.innerWidth < 768) {
-      $(".regular").slick({
-        dots: false,
-        infinite: true,
-        slidesToShow: 1,
-        slidesToScroll: 1
-      });
-      $(".regular2").slick({
-        dots: true,
-        infinite: true,
-        slidesToShow: 1,
-        slidesToScroll: 1
-      });
-      $(".center").slick({
-        dots: true,
-        infinite: true,
-        centerMode: true,
-        slidesToShow: 1,
-        slidesToScroll: 1
-      });
-      $(".variable").slick({
-        dots: true,
-        infinite: true,
-        variableWidth: true,
-        slidesToShow: 1,
-      });
-      $(".lazy").slick({
-        lazyLoad: 'ondemand', // ondemand progressive anticipated
-        infinite: true
-      });
-    } else if (window.innerWidth < 992) {
-      $(".regular").slick({
-        dots: false,
-        infinite: true,
-        slidesToShow: 3,
-        slidesToScroll: 3
-      });
-      $(".regular2").slick({
-        dots: true,
-        infinite: true,
-        slidesToShow: 3,
-        slidesToScroll: 3
-      });
-      $(".center").slick({
-        dots: true,
-        infinite: true,
-        centerMode: true,
-        slidesToShow: 3,
-        slidesToScroll: 3
-      });
-      $(".variable").slick({
-        dots: true,
-        infinite: true,
-        variableWidth: true,
-        slidesToShow: 3,
-      });
-      $(".lazy").slick({
-        lazyLoad: 'ondemand', // ondemand progressive anticipated
-        infinite: true
-      });
-    } else {
-      $(".regular").slick({
-        dots: false,
-        infinite: true,
-        slidesToShow: 5,
-        slidesToScroll: 3
-      });
-      $(".regular2").slick({
-        dots: true,
-        infinite: true,
-        slidesToShow: 3,
-        slidesToScroll: 3
-      });
-      $(".center").slick({
-        dots: true,
-        infinite: true,
-        centerMode: true,
-        slidesToShow: 5,
-        slidesToScroll: 3
-      });
-      $(".variable").slick({
-        dots: true,
-        infinite: true,
-        variableWidth: true,
-        slidesToShow: 5,
-      });
-      $(".lazy").slick({
-        lazyLoad: 'ondemand', // ondemand progressive anticipated
-        infinite: true
-      });
-    }
 
-  });
-</script>
+    <div class="field">
+      <div class="inner-field">
+        <h3><span>施設写真</span></h3>
+        <div class="collection-image">
+          <div>
+            <img src="./image/img_facility1.png" alt="" />
+          </div>
+          <div>
+            <img src="./image/img_facility2.png" alt="" />
+          </div>
+          <div>
+            <img src="./image/img_facility3.png" alt="" />
+          </div>
+          <div>
+            <img src="./image/img_facility1.png" alt="" />
+          </div>
+          <div>
+            <img src="./image/img_facility2.png" alt="" />
+          </div>
+          <div>
+            <img src="./image/img_facility3.png" alt="" />
+          </div>
+        </div>
+      </div>
+    </div>
 
+    <div class="field">
+      <div class="inner-field">
+        <h3><span>施設紹介</span></h3>
+        <p>
+          千寿は天むす発祥のお店です。現在では「天むす」という名前は全国に知れ渡っておりますが、初代の水谷ヨネが夫の為に栄養のあるものを―という愛情から天むすは生まれました。<br /><br />
+
+          それから絶え間ない試行錯誤の上、今でも皆様に愛される昔懐かしい味として親しまれております。<br /><br />
+
+          是非、一度、千寿の「めいふつ天むす」の天むすをご賞味くださいませ。皆様のご来店を心よりお待ちしております。<br />
+        </p>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="inner-field">
+        <h3><span>詳細情報</span></h3>
+        <table>
+          <tr>
+            <td>
+              <label for="">場所</label>
+              <span>三重県津市大門９−７</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for="">電話番号</label>
+              <span>059-228-6798</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for="">利用時間</label>
+              <span
+                >9:30～17:30 (但し、ご注文は17：00までの承りとなります)</span
+              >
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for="">休日</label>
+              <span>毎週日曜日、第3月曜日</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for="">利用料金</label>
+              <span>1000円〜</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for="">駐車場</label>
+              <span>5台あり</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for="">決済情報</label>
+              <span>VISA、MASTER、AMEX、JCB、PAYPAY</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for="">備考</label>
+              <span>-</span>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="banner">
+      <div class="slick-slider">
+        <div class="element">
+          <img src="./image/img_facility1.png" class="element-image" alt="" />
+          <div class="content-element">
+            <div>
+              <label> #123 </label>
+            </div>
+            <span>#123 </span>
+          </div>
+        </div>
+        <div class="element">
+          <img src="./image/img_facility1.png" class="element-image" alt="" />
+          <div class="content-element">
+            <div>
+              <label> #123 </label>
+            </div>
+            <span>#123 </span>
+          </div>
+        </div>
+        <div class="element">
+          <img src="./image/img_facility1.png" class="element-image" alt="" />
+          <div class="content-element">
+            <div>
+              <label> #123 </label>
+            </div>
+            <span>#123 </span>
+          </div>
+        </div>
+        <div class="element">
+          <img src="./image/img_facility1.png" class="element-image" alt="" />
+          <div class="content-element">
+            <div>
+              <label> #123 </label>
+            </div>
+            <span>#123 </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="building">
+      <div class="building_top">
+        <img src="./image/img_facility3.png">
+        <h3>おすすめ</h3>
+        <a href="">すべて見る</a>
+      </div>
+      <div class="content">
+        <section class="slick-slider2">
+          <div class="element">
+            <img src="./image/img_facility1.png" class="element-image" alt="" />
+            <div class="content-element">
+              <div>
+                <label> #123 </label>
+              </div>
+              <span>#123 </span>
+            </div>
+          </div>
+          <div class="element">
+            <img src="./image/img_facility2.png" class="element-image" alt="" />
+            <div class="content-element">
+              <div>
+                <label> #123 </label>
+              </div>
+              <span>#123 </span>
+            </div>
+          </div>
+          <div class="element">
+            <img src="./image/img_facility3.png" class="element-image" alt="" />
+            <div class="content-element">
+              <div>
+                <label> #123 </label>
+              </div>
+              <span>#123 </span>
+            </div>
+          </div>
+          <div class="element">
+            <img src="./image/img_facility1.png" class="element-image" alt="" />
+            <div class="content-element">
+              <div>
+                <label> #123 </label>
+              </div>
+              <span>#123 </span>
+            </div>
+          </div>
+          <div class="element">
+            <img src="./image/img_facility2.png" class="element-image" alt="" />
+            <div class="content-element">
+              <div>
+                <label> #123 </label>
+              </div>
+              <span>#123 </span>
+            </div>
+          </div>
+          <div class="element">
+            <img src="./image/img_facility3.png" class="element-image" alt="" />
+            <div class="content-element">
+              <div>
+                <label> #123 </label>
+              </div>
+              <span>#123 </span>
+            </div>
+          </div>
+          <div class="element">
+            <img src="./image/img_facility1.png" class="element-image" alt="" />
+            <div class="content-element">
+              <div>
+                <label> #123 </label>
+              </div>
+              <span>#123 </span>
+            </div>
+          </div>
+        </section>
+        <button type="button" class="slick-prev2">&lsaquo;</button>
+        <button type="button" class="slick-next2">&rsaquo;</button>
+      </div>
+    </div>
+
+    <footer>
+      <div id="inner-footer">
+        <ul class="left">
+          <li>
+            <a href="">サイトマップ</a>
+          </li>
+          <li>
+            <a href="">プライバシーポリシー</a>
+          </li>
+          <li>
+            <a href="">個人情報保護方針</a>
+          </li>
+          <li>
+            <a href="">運営会社情報</a>
+          </li>
+          <li>
+            <a href="">広告掲載について</a>
+          </li>
+          <li>
+            <a href="">会員利用規約</a>
+          </li>
+          <li>
+            <a href="">メールマガジンについて</a>
+          </li>
+          <li>
+            <a href="">退会について</a>
+          </li>
+          <li>
+            <a href="">お問い合わせ</a>
+          </li>
+        </ul>
+        <div class="right">
+          <ul>
+            <li>
+              <a href="">
+                <img src="./image/instagram.png" alt="" />
+              </a>
+            </li>
+            <li>
+              <a href="">
+                <img src="./image/tw.png" alt="" />
+              </a>
+            </li>
+            <li>
+              <a href="">
+                <img src="./image/fb.png" alt="" />
+              </a>
+            </li>
+          </ul>
+
+          <a id="logo" href="/">
+            <img src="./image/logo-bottom.png" alt="" />
+          </a>
+        </div>
+      </div>
+      <p id="copired">copired</p>
+    </footer>
+  </body>
+  <script
+    type="text/javascript"
+    src="//code.jquery.com/jquery-1.11.0.min.js"
+  ></script>
+  <script
+    type="text/javascript"
+    src="//code.jquery.com/jquery-migrate-1.2.1.min.js"
+  ></script>
+  <script
+    type="text/javascript"
+    src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
+  ></script>
+  <script src="./js/index.js"></script>
 </html>
