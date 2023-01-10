@@ -5,26 +5,30 @@ function main() {
     $(".slick-slider").slick({
       dots: true,
       arrows: true,
-      prevArrow: $('.prev'),
-      nextArrow: $('.next'),
+      prevArrow: $('.slick-prev1'),
+      nextArrow: $('.slick-next1'),
       // autoplay: true,
       // infinite: true,
       // autoplaySpeed: 3000,
       // speed: 500,
       slidesToScroll: 1,
-      slidesToShow: 3,
+      slidesToShow: 1,
       centerMode: true,
+      variableWidth: true,
+      variableHeight: true,
       responsive: [
         {
-          breakpoint: 1366,
+          breakpoint: 1280,
           settings: {
-            slidesToShow: 3,
+            centerMode: true,
+            slidesToShow: 1
           }
         },
         {
           breakpoint: 768,
           settings: {
             slidesToShow: 1,
+            arrows: false
           },
         },
       ],
