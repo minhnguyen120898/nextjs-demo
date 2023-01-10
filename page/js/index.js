@@ -12,7 +12,7 @@ function main() {
       // autoplaySpeed: 3000,
       // speed: 500,
       slidesToScroll: 1,
-      slidesToShow: 3,
+      slidesToShow: 1,
       centerMode: true,
       variableWidth: true,
       variableHeight: true,
@@ -21,14 +21,14 @@ function main() {
           breakpoint: 1280,
           settings: {
             centerMode: true,
-            slidesToShow: 1,
-            centerPadding: '110px',
+            slidesToShow: 1
           }
         },
         {
           breakpoint: 768,
           settings: {
             slidesToShow: 1,
+            arrows: false
           },
         },
       ],
