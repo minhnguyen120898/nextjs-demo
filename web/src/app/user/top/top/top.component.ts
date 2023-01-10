@@ -181,7 +181,7 @@ export class TopComponent implements OnInit {
   getData(qparam: any, category: any) {
 
     this.panigation.currentPage = qparam && qparam.page ? Number(qparam.page) : 1;
-    this.panigation.pageSize = qparam && qparam.pagesize ? Number(qparam.pagesize) : 6;
+    this.panigation.pageSize = qparam && qparam.pagesize ? Number(qparam.pagesize) : 12;
     this.listData = [];
     if (category) {
       for (let index = 0; index < category.childs.length; index++) {
