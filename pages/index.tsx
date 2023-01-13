@@ -43,7 +43,7 @@ export default function Home() {
         </div>
 
         <Link href="/mie/detail/id">
-        Go to detail page
+          Go to detail page
         </Link>
 
         <div className={styles.center}>
