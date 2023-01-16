@@ -146,7 +146,6 @@ const getList = async (locals, query) => {
         q.category = { $in: cq }
     }
 
-    let q = {}
     if (query.search){
         q.title = RegExp(query.search)
     } 
