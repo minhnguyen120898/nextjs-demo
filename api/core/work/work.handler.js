@@ -146,6 +146,11 @@ const getList = async (locals, query) => {
         q.category = { $in: cq }
     }
 
+    let q = {}
+    if (query.search){
+        q.title = RegExp(query.search)
+    } 
+
     const work = await workModel.getByPagination(q, pagination)
     return work
 }
@@ -158,7 +163,12 @@ const getList = async (locals, query) => {
  */
 const admminGetList = async (locals, query) => {
     const pagination = validUtils.paginationValidator(query)
-    const work = await workModel.getByPagination({}, pagination)
+    let q = {}
+    if (query.search){
+        q.title = RegExp(query.search)
+    } 
+
+    const work = await workModel.getByPagination(q, pagination)
     return work
 }
 

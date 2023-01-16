@@ -93,7 +93,11 @@ const removeById = async (locals, id) => {
  */
 const getList = async (locals, query) => {
     const pagination = validUtils.paginationValidatorArr(query)
-    const category = await categoryModel.getByPagination({}, pagination)
+    let q = {}
+    if (query.search){
+        q.title = RegExp(query.search)
+    } 
+    const category = await categoryModel.getByPagination(q, pagination)
     return category
 }
 
