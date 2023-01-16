@@ -30,7 +30,7 @@ const getByPagination = async (query, pagination) => {
     return new Promise((resolve, reject) => {
         Model
         .find(query)
-        .sort({updated_at: -1})
+        .sort(pagination.sort)
         .skip(pagination.limit*(pagination.page-1))
         .limit(pagination.limit)
         .lean()
