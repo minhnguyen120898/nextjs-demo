@@ -41,8 +41,29 @@ const isBase64 = (string) => {
 const isValidFile = (extension) => {
     return Object.values(appConstant.FILE.EXTENSION).indexOf(extension.toLowerCase()) >= 0
 }
+
+const paginationValidatorArr = (query) => {
+    let page = query.page && query.page>0 ? Number(query.page) : appConstant.PAGINATION.PAGE_DEFAULT
+    let limit = query.limit && query.limit>0 ? Number(query.limit) : appConstant.PAGINATION.LIMIT_DEFAULT
+    let sortQ = query.sort
+    let fieldF = query.field 
+    let sort={}
+    if(fieldF){
+        fieldF=fieldF.split(",")
+        sortQ=sortQ.split(",")
+        for(let i=0;i<fieldF.length;i++){
+            sort[fieldF[i]]=sortQ.length>i?Number(sortQ[i]):appConstant.PAGINATION.SORT_DEFAULT
+        }
+    }else{
+        sort["created_at"]=-1
+    }
+   
+    return { page, limit, sort}
+}
+
 module.exports = {
     mongoValidator,
+    paginationValidatorArr,
     asciiCharacterValidator,
     paginationValidator,
     isValidParams,

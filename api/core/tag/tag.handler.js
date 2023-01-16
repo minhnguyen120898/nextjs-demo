@@ -79,7 +79,7 @@ const removeById = async (locals, id) => {
  * @return data
  */
 const getList = async (locals, query) => {
-    const pagination = validUtils.paginationValidator(query)
+    const pagination = validUtils.paginationValidatorArr(query)
     const tag = await tagModel.getByPagination({}, pagination)
     return tag
 }

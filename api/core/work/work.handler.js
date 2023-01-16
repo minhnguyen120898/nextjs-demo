@@ -135,7 +135,7 @@ const removeById = async (locals, id) => {
  * @return data
  */
 const getList = async (locals, query) => {
-    const pagination = validUtils.paginationValidator(query)
+    const pagination = validUtils.paginationValidatorArr(query)
     const q={status:{$in:[0]}}
     if (query.category_id) {
         const cq = query.category_id.split(",");

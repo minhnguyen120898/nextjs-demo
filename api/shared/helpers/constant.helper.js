@@ -62,7 +62,8 @@ module.exports = Object.freeze({
     },
     PAGINATION: {
         PAGE_DEFAULT: 1,
-        LIMIT_DEFAULT: 50
+        LIMIT_DEFAULT: 50,
+        SORT_DEFAULT:-1
     },
     FILE: {
         EXTENSION: {
