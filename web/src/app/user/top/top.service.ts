@@ -15,13 +15,14 @@ export class TopService extends BaseService {
         return this.getData(`work?category_id=${id}&page=${page}&limit=${limit}`);
     }
 
-    getListBanner(page: number, limit: number) {
-        return this.getData(`banner?page=${page}&limit=${limit}`);
+    getListBanner(page: number, limit: number, query?: string) {
+        return query ? this.getData(`banner?page=${page}&limit=${limit}&${query}`) : this.getData(`banner?page=${page}&limit=${limit}`);
     }
 
-    getCategory() {
+    getCategory(query?: string) {
         return new Promise((resolve, reject) => {
-            return this.getData('category').subscribe(res => {
+            const observable = query ? this.getData(`category?${query}`) : this.getData(`category`);
+            return observable.subscribe(res => {
                 let docs = res.docs.filter((e: any) => {
                     return e.parent.length == 0;
                 });

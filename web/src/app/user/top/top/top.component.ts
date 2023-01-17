@@ -113,7 +113,7 @@ export class TopComponent implements OnInit {
 
   async ngOnInit() {
 
-    this.topService.getListBanner(1, 50).subscribe(res => {
+    this.topService.getListBanner(1, 50, 'field=created_at&sort=1').subscribe(res => {
       let datas = res.docs.map((e: any) => {
         return {
           id: e._id,
@@ -126,7 +126,7 @@ export class TopComponent implements OnInit {
     }, err => {
     });
 
-    await this.topService.getCategory().then((res: any) => {
+    await this.topService.getCategory('field=created_at&sort=1').then((res: any) => {
       this.listCategorys = res;
     }).catch(err => {
       this.listCategorys = err;
