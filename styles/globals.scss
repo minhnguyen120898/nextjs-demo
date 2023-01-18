@@ -1,0 +1,162 @@
+html {
+  font-size: 62.5%;
+  min-width: 320px;
+  scroll-behavior: smooth;
+}
+
+html body {
+  margin: 0;
+  font-family: "SourceHanSerif", "ヒラギノ角ゴ ProN",
+    "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, "ＭＳ Ｐゴシック",
+    "MS PGothic", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+ul {
+  padding: 0;
+  padding: 0;
+  list-style: none;
+}
+
+
+/* COMMON  */
+.btn-blue {
+  background-color: #004499;
+  color: white;
+  border: 0;
+}
+
+.btn-default {
+  color: #979797;
+  background-color: white;
+  border: 1px solid #e4e4e4;
+}
+
+// Detail page
+.slider-banner {
+  .slick-dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: -5rem;
+
+    li {
+      button {
+        &:before {
+          font-size: 1.5rem;
+          color: #aeaeae;
+        }
+      }
+
+      &.slick-active {
+        button {
+          &:before {
+            font-size: 2.1rem;
+            color: #e8e8e8 !important;
+          }
+        }
+      }
+    }
+  }
+
+  .slick-arrow.slick-prev,
+  .slick-arrow.slick-next {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    width: 3.3rem;
+    height: 5.6rem;
+    background-color: transparent;
+    color: transparent;
+    text-align: center;
+    cursor: pointer;
+
+    &::before {
+      content: "";
+      background-image: url(/image/icons/ic_arrow-right.svg);
+      background-position: center;
+      background-size: cover;
+      position: absolute;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      width: 1.2rem;
+      height: 2.7rem;
+    }
+  }
+
+  .slick-arrow.slick-next {
+    right: 4rem;
+  }
+
+  .slick-arrow.slick-prev {
+    left: 4rem;
+
+    &::before {
+      right: unset;
+      left: 0;
+      transform: translateY(-50%) rotate(-180deg);
+    }
+  }
+}
+
+.building {
+  .slider-slider2 {
+    .slick-arrow.slick-prev,
+    .slick-arrow.slick-next {
+      position: absolute;
+      z-index: 1;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: none;
+      width: 3.3rem;
+      height: 5.6rem;
+      background-color: transparent;
+      color: transparent;
+      text-align: center;
+      cursor: pointer;
+
+      &::before {
+        content: "";
+        background-image: url(/image/icons/ic_arrow-right.svg);
+        background-position: center;
+        background-size: cover;
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+        width: 1.2rem;
+        height: 2.7rem;
+      }
+    }
+
+    .slick-arrow.slick-next {
+      right: 4rem;
+    }
+
+    .slick-arrow.slick-prev {
+      left: 4rem;
+
+      &::before {
+        right: unset;
+        left: 0;
+        transform: translateY(-50%) rotate(-180deg);
+      }
+    }
+  }
+}

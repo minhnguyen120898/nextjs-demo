@@ -1,6 +1,18 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
+import '../styles/globals.scss';
+// Import css files
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 
-export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+import { EmptyLayoutComponent } from '@/layout/empty';
+import { AppPropsWithLayout } from '@/models/common';
+
+export default function App({ Component, pageProps }: AppPropsWithLayout) {
+
+  const Layout = Component.Layout ?? EmptyLayoutComponent;
+
+  return (
+    <Layout>
+      <Component {...pageProps} />
+    </Layout>
+  )
 }
