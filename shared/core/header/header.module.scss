@@ -25,10 +25,6 @@
   .left {
     #logo {
       display: block;
-
-      img {
-        max-width: 11rem;
-      }
     }
   }
 
@@ -42,7 +38,6 @@
       margin: 0;
       align-items: center;
       column-gap: 3.2rem;
-      column-gap: 2.2rem;
 
       li {
         .icon {
@@ -59,8 +54,6 @@
           border-radius: 50%;
           padding: 0;
           cursor: pointer;
-          width: 3.3rem;
-          height: 3.3rem;
 
           img {
             width: 2.6rem;
@@ -80,7 +73,6 @@
           align-items: center;
           padding: 0;
           transition: all 0.4s;
-          height: 3.3rem;
 
           .search-text {
             border: none;
@@ -92,7 +84,6 @@
             transition: all 0.4s;
             width: 0;
             color: white;
-            line-height: 3.3rem;
           }
 
           &.active {
@@ -103,10 +94,9 @@
             .search-text {
               width: 24rem;
               padding: 0 1rem;
-              width: 10rem;
 
               &::placeholder {
-                font-size: 1.2rem;
+                font-size: 1.6rem;
               }
             }
 
@@ -116,8 +106,6 @@
               img {
                 width: 2rem;
                 height: 2rem;
-                width: 1.4rem;
-                height: 1.4rem;
               }
             }
           }
@@ -205,7 +193,7 @@
   background-color: #10161b;
   box-shadow: 0 -0.3rem 0.1rem #fff;
   z-index: 10;
-  transition: 0.6s all;
+  transition: 0.6s all ease-in-out;
 
   &.open {
     right: 0;

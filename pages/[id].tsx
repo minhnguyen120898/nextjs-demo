@@ -54,6 +54,7 @@ export default function DetailPage(props: DetailPageProps) {
         breakpoint: 768,
         settings: {
           slidesToShow: 3,
+          arrows: false,
         },
       },
     ],

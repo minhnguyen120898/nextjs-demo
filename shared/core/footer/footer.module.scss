@@ -8,7 +8,8 @@
 		color: white;
 		text-decoration: unset;
 		margin: 4rem 0 0;
-		font-family: "SourceHanSerif-Medium";
+		font-family: "SourceHanSerif";
+		font-weight: 500;
 	}
 	.inner-footer {
 		display: flex;
@@ -23,7 +24,8 @@
 				margin-bottom: 0.8rem;
 				a {
 					font-size: 1.6rem;
-					font-family: "SourceHanSerif-Medium";
+					font-family: "SourceHanSerif";
+					font-weight: 500;
 					color: white;
 					text-decoration: unset;
 					cursor: pointer;
