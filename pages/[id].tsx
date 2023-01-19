@@ -12,6 +12,17 @@ export default function DetailPage(props: DetailPageProps) {
 
   const router = useRouter();
   const { id } = router.query;
+  const recommentList = [
+    { id: 1, title: 'title', tags: ['#123'], image: '/image/img_facility1.png' },
+    { id: 2, title: 'title', tags: ['#123'], image: '/image/img_facility2.png' },
+    { id: 3, title: 'title', tags: ['#123'], image: '/image/img_facility3.png' },
+    { id: 4, title: 'title', tags: ['#123'], image: '/image/img_facility1.png' },
+    { id: 5, title: 'title', tags: ['#123'], image: '/image/img_facility2.png' },
+    { id: 6, title: 'title', tags: ['#123'], image: '/image/img_facility3.png' },
+    { id: 7, title: 'title', tags: ['#123'], image: '/image/img_facility1.png' },
+    { id: 8, title: 'title', tags: ['#123'], image: '/image/img_facility2.png' },
+    { id: 9, title: 'title', tags: ['#123'], image: '/image/img_facility3.png' },
+  ];
 
   const settingsBanner = {
     dots: true,
@@ -46,15 +57,15 @@ export default function DetailPage(props: DetailPageProps) {
   const settingsNextCategory = {
     dots: false,
     infinite: false,
-    slidesToShow: 4,
+    slidesToShow: Math.min(recommentList.length, 4),
     slidesToScroll: 1,
     variableWidth: true,
     responsive: [
       {
         breakpoint: 768,
         settings: {
-          slidesToShow: 3,
           arrows: false,
+          slidesToShow: Math.min(recommentList.length, 3),
         },
       },
     ],
@@ -262,76 +273,34 @@ export default function DetailPage(props: DetailPageProps) {
           <div className={styles.building_top}>
             <img src="/image/img_facility3.png" alt="" />
             <h3>おすすめ</h3>
-            <Link href="">すべて見る</Link>
+            <Link href="/">すべて見る</Link>
           </div>
           <div className={styles.content}>
             <Slider
               className={styles["slick-slider2"] + " " + "slider-slider2"}
               {...settingsNextCategory}
             >
-              <div className={styles.element}>
-                <img src="/image/img_facility1.png" className={styles['element-image']} alt="" />
-                <div className={styles["content-element"]}>
-                  <div>
-                    <label> #123 </label>
-                  </div>
-                  <span>#123 </span>
-                </div>
-              </div>
-              <div className={styles.element}>
-                <img src="/image/img_facility2.png" className={styles['element-image']} alt="" />
-                <div className={styles["content-element"]}>
-                  <div>
-                    <label> #123 </label>
-                  </div>
-                  <span>#123 </span>
-                </div>
-              </div>
-              <div className={styles.element}>
-                <img src="/image/img_facility3.png" className={styles['element-image']} alt="" />
-                <div className={styles["content-element"]}>
-                  <div>
-                    <label> #123 </label>
-                  </div>
-                  <span>#123 </span>
-                </div>
-              </div>
-              <div className={styles.element}>
-                <img src="/image/img_facility1.png" className={styles['element-image']} alt="" />
-                <div className={styles["content-element"]}>
-                  <div>
-                    <label> #123 </label>
-                  </div>
-                  <span>#123 </span>
-                </div>
-              </div>
-              <div className={styles.element}>
-                <img src="/image/img_facility2.png" className={styles['element-image']} alt="" />
-                <div className={styles["content-element"]}>
-                  <div>
-                    <label> #123 </label>
-                  </div>
-                  <span>#123 </span>
-                </div>
-              </div>
-              <div className={styles.element}>
-                <img src="/image/img_facility3.png" className={styles['element-image']} alt="" />
-                <div className={styles["content-element"]}>
-                  <div>
-                    <label> #123 </label>
-                  </div>
-                  <span>#123 </span>
-                </div>
-              </div>
-              <div className={styles.element}>
-                <img src="/image/img_facility1.png" className={styles['element-image']} alt="" />
-                <div className={styles["content-element"]}>
-                  <div>
-                    <label> #123 </label>
-                  </div>
-                  <span>#123 </span>
-                </div>
-              </div>
+              {
+                recommentList.map((item, index) => {
+                  return (
+                    <div className={styles.element} key={item.id}>
+                      <img src={item.image} className={styles['element-image']} alt="" />
+                      <div className={styles["content-element"]}>
+                        <div>
+                          {
+                            item.tags.map((tag, j) => {
+                              return (
+                                <label key={tag + j}>{tag}</label>
+                              )
+                            })
+                          }
+                        </div>
+                        <span>{item.title}</span>
+                      </div>
+                    </div>
+                  )
+                })
+              }
             </Slider>
           </div>
         </div>
