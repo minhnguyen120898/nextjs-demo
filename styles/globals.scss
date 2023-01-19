@@ -1,25 +1,4 @@
 
-@font-face {
-  font-family: "SourceHanSerif";
-  src: url(/fonts/SourceHanSerif-Bold.otf) format("truetype");
-  font-weight: bold;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "SourceHanSerif";
-  src: url(/fonts/SourceHanSerif-Medium.otf) format("truetype");
-  font-weight: 500;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "SourceHanSerif";
-  src: url(/fonts/SourceHanSerif-Regular.otf) format("truetype");
-  font-weight: 400;
-  font-style: normal;
-}
-
 html {
   font-size: 62.5%;
   min-width: 320px;
@@ -28,9 +7,7 @@ html {
 
 html body {
   margin: 0;
-  font-family: "SourceHanSerif", "ヒラギノ角ゴ ProN",
-    "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, "ＭＳ Ｐゴシック",
-    "MS PGothic", sans-serif;
+  font-family: var(--font-base);
 }
 
 * {
