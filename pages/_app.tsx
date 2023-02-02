@@ -30,7 +30,6 @@ const SourceHanSerif = localFont({
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const Layout = Component.Layout ?? EmptyLayoutComponent;
-
   return (
     <>
       <style jsx global>{`

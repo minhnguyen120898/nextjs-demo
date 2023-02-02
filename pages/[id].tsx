@@ -1,4 +1,6 @@
+
 import { MainLayoutComponent } from "@/layout/main";
+import BannerComponent from "@/components/banner";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -9,7 +11,6 @@ export interface DetailPageProps {}
 DetailPage.Layout = MainLayoutComponent;
 
 export default function DetailPage(props: DetailPageProps) {
-
   const router = useRouter();
   const { id } = router.query;
   const recommentList = [
@@ -23,36 +24,6 @@ export default function DetailPage(props: DetailPageProps) {
     { id: 8, title: 'title', tags: ['#123'], image: '/image/img_facility2.png' },
     { id: 9, title: 'title', tags: ['#123'], image: '/image/img_facility3.png' },
   ];
-
-  const settingsBanner = {
-    dots: true,
-    arrows: true,
-    autoplay: true,
-    infinite: true,
-    autoplaySpeed: 3000,
-    speed: 500,
-    slidesToScroll: 1,
-    slidesToShow: 1,
-    centerMode: true,
-    variableWidth: true,
-    variableHeight: true,
-    responsive: [
-      {
-        breakpoint: 1280,
-        settings: {
-          centerMode: true,
-          slidesToShow: 1,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
-          arrows: false,
-        },
-      },
-    ],
-  };
 
   const settingsNextCategory = {
     dots: false,
@@ -96,7 +67,6 @@ export default function DetailPage(props: DetailPageProps) {
       </Head>
       <div>
         <section id={styles.banner}></section>
-
         <div className={styles["field-top"]}>
           <div className={styles["inner-field"]}>
             <h3>
@@ -252,22 +222,7 @@ export default function DetailPage(props: DetailPageProps) {
           </div>
         </div>
 
-        <div className={styles["slider-banner"] + " " + "slider-banner"}>
-          <Slider className={styles["slick-slider"]} {...settingsBanner}>
-            <div className={styles.item + " " + "item"}>
-              <img src="/image/img_facility1.png" alt="" />
-            </div>
-            <div className={styles.item + " " + "item"}>
-              <img src="/image/img_facility1.png" alt="" />
-            </div>
-            <div className={styles.item + " " + "item"}>
-              <img src="/image/img_facility1.png" alt="" />
-            </div>
-            <div className={styles.item + " " + "item"}>
-              <img src="/image/img_facility1.png" alt="" />
-            </div>
-          </Slider>
-        </div>
+        <BannerComponent></BannerComponent>
 
         <div className={styles.building + " building"}>
           <div className={styles.building_top}>
