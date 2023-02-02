@@ -37,9 +37,6 @@ export default function BannerComponent(props: BannerComponentProps) {
       },
     ],
   };
-  
-console.log("Banner render");
-
 
   useEffect(() => {
     const getBannerList = async () => {
