@@ -5,7 +5,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Slider from "react-slick";
-import styles from "../styles/DetailPage.module.scss";
+import styles from "@/styles/detail-page.module.scss";
 
 export interface DetailPageProps {}
 DetailPage.Layout = MainLayoutComponent;
@@ -49,21 +49,6 @@ export default function DetailPage(props: DetailPageProps) {
         <meta name="description" content="Title for detail page" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
-
-        <meta
-          property="og:title"
-          content="Starter is a safest, trust, multi-chain launchpad. Boosting high-quality projects reach successful fundraising."
-        />
-        <meta property="og:type" content="article" />
-        <meta
-          property="og:image"
-          content="https://scontent.fdad1-4.fna.fbcdn.net/v/t39.30808-6/302430261_522613886532675_1589346098537115887_n.png?_nc_cat=103&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=jVnVhWQ3GMIAX-4IhTW&_nc_ht=scontent.fdad1-4.fna&oh=00_AfCtL0gaVCEJCrWEc5WdV7kCF9HjY0FMj5kJwMBjWDFg0A&oe=63C4F2DF"
-        />
-        <meta property="og:url" content="https://x-starter.org" />
-        <meta
-          property="og:description"
-          content="Starter will be a cutting-edge launchpad and a multi-chain fundraising platform helping projects raise capital and bringing safe investment opportunities to early investors in GameFi, NFT and Metaverse."
-        />
       </Head>
       <div>
         <section id={styles.banner}></section>
@@ -222,7 +207,7 @@ export default function DetailPage(props: DetailPageProps) {
           </div>
         </div>
 
-        <BannerComponent></BannerComponent>
+        <BannerComponent />
 
         <div className={styles.building + " building"}>
           <div className={styles.building_top}>
