@@ -6,6 +6,8 @@ import "slick-carousel/slick/slick-theme.css";
 
 import { EmptyLayoutComponent } from "@/layout/empty";
 import { AppPropsWithLayout } from "@/models/common";
+import { SWRConfig } from "swr";
+import axiosClient from "@/service/base-service";
 
 const SourceHanSerif = localFont({
   src: [
@@ -37,9 +39,11 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
           --font-base: ${SourceHanSerif.style.fontFamily};
         }
       `}</style>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <SWRConfig value={{fetcher: (url) => axiosClient.get(url), shouldRetryOnError: false}}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </SWRConfig>
     </>
   );
 }
