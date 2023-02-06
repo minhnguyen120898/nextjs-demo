@@ -327,7 +327,7 @@ const getListUser = async (query) => {
         q.status_coach = Number(query.status_coach);
     }
 
-    const members = await userModel.getListUser(q, pagination)
+    const members = await userModel.findByQuery(q, pagination)
 
     return members
 }
