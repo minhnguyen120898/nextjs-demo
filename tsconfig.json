@@ -22,7 +22,8 @@
       "@/layout/*": ["shared/layout/*"],
       "@/constants/*": ["shared/constants/*"],
       "@/service/*": ["shared/service/*"],
-      "@/core/*": ["shared/core/*"]
+      "@/core/*": ["shared/core/*"],
+      "@/hooks/*": ["shared/hooks/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "shared"],
