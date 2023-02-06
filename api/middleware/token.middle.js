@@ -53,8 +53,8 @@ const verifiedTokenAdmin = async (req, res, next) => {
         let lang = req.header('locale');
         if (reqToken) {
             const token = await userAuthentication.verifyToken(reqToken, lang)
-            console.log(token)
                 const user = await userModel.findById(token.user._id.toString());
+                console.log(user.role)
                 if (user.role !== 0) {
                     next(102)
                 } else {
