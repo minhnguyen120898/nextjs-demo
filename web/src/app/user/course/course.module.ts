@@ -4,9 +4,11 @@ import { RouterModule, Routes } from "@angular/router";
 import { TranslateModule } from "@ngx-translate/core";
 import { BannerModule } from "src/app/shared/components/banner/banner.module";
 import { CreateModelComponent } from './create-model/create-model.component';
+import { ViewModelComponent } from './view-model/view-model.component';
 
 export const routes: Routes = [
-  { path: 'create', component: CreateModelComponent }
+  { path: 'create', component: CreateModelComponent },
+  { path: 'view', component: ViewModelComponent }
 ]
 
 @NgModule({
@@ -17,7 +19,8 @@ export const routes: Routes = [
     TranslateModule.forChild()
   ],
   declarations: [
-    CreateModelComponent
+    CreateModelComponent,
+    ViewModelComponent
   ]
 })
 
