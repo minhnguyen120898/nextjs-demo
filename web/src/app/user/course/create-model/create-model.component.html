@@ -1,0 +1,283 @@
+<app-banner [title]="'モデルコース'"></app-banner>
+<div class="wrapper">
+  <h1 class="title">
+    <span class="f-sm">{{ "あなたの" | translate }}</span>
+    <span class="f-lg">{{ "好み" | translate }}</span>
+    <span class="f-sm">{{ "に合わせて" | translate }}</span>
+    <span class="f-lg">{{ "コースを作成！" | translate }}</span>
+  </h1>
+  <div class="content">
+    <div class="process"></div>
+    <div class="information">
+      <section class="section person">
+        <h3 class="title">{{ "誰と行く？" | translate }}</h3>
+        <div class="list-img">
+          <div class="item">
+            <img src="assets/images/v2/img_person1.png" alt="">
+            <p>{{ 'ひとり旅' | translate }}</p>
+          </div>
+          <div class="item">
+            <img src="assets/images/v2/img_person1.png" alt="">
+            <p>{{ 'ひとり旅' | translate }}</p>
+          </div>
+          <div class="item">
+            <img src="assets/images/v2/img_person1.png" alt="">
+            <p>{{ 'ひとり旅' | translate }}</p>
+          </div>
+          <div class="item">
+            <img src="assets/images/v2/img_person1.png" alt="">
+            <p>{{ 'ひとり旅' | translate }}</p>
+          </div>
+          <div class="item">
+            <img src="assets/images/v2/img_person1.png" alt="">
+            <p>{{ 'ひとり旅' | translate }}</p>
+          </div>
+          <div class="item">
+            <img src="assets/images/v2/img_person1.png" alt="">
+            <p>{{ 'ひとり旅' | translate }}</p>
+          </div>
+        </div>
+      </section>
+      <section class="section person hobby">
+        <h3 class="title">{{ "旅の好みは？" | translate }}</h3>
+        <div class="list-img">
+          <div class="item">
+            <img src="assets/images/v2/img_hobby.png" alt="">
+            <p>{{ '自然を楽しむ旅' | translate }}</p>
+          </div>
+          <div class="item">
+            <img src="assets/images/v2/img_hobby.png" alt="">
+            <p>{{ '自然を楽しむ旅' | translate }}</p>
+          </div>
+          <div class="item">
+            <img src="assets/images/v2/img_hobby.png" alt="">
+            <p>{{ '自然を楽しむ旅' | translate }}</p>
+          </div>
+          <div class="item">
+            <img src="assets/images/v2/img_hobby.png" alt="">
+            <p>{{ '自然を楽しむ旅' | translate }}</p>
+          </div>
+          <div class="item">
+            <img src="assets/images/v2/img_hobby.png" alt="">
+            <p>{{ '自然を楽しむ旅' | translate }}</p>
+          </div>
+          <div class="item">
+            <img src="assets/images/v2/img_hobby.png" alt="">
+            <p>{{ '自然を楽しむ旅' | translate }}</p>
+          </div>
+        </div>
+      </section>
+      <section class="section form-travel">
+        <h3 class="title">{{ "あなたはどっち派？" | translate }}</h3>
+        <ng-container
+          *ngTemplateOutlet="
+            customRangeInput;
+            context: { $implicit: 'LIGHT', start: '軽ニッチ', end: '超ニッチ' }
+          "
+        >
+        </ng-container>
+        <div class="form">
+          <div class="group-form">
+            <label for="">出発地点</label>
+            <div class="dropdown">
+              <p class="selected" (click)="openDropdown('showStartPoint')">岡山駅</p>
+              <div class="dropdown-content" *ngIf="actions.showStartPoint">
+                <p>text</p>
+                <p>text</p>
+                <p>text</p>
+              </div>
+            </div>
+          </div>
+          <div class="group-form">
+            <label for="">曜日</label>
+            <div class="dropdown">
+              <p class="selected" (click)="openDropdown('showDayOfWeek')">未設定</p>
+              <div class="dropdown-content" *ngIf="actions.showDayOfWeek">
+                <p>text</p>
+                <p>text</p>
+                <p>text</p>
+              </div>
+            </div>
+          </div>
+          <div class="group-form">
+            <label for="">観光時間</label>
+            <div class="dropdown">
+              <p class="selected" (click)="openDropdown('showSightSeeingTime')">5時間</p>
+              <div class="dropdown-content" *ngIf="actions.showSightSeeingTime">
+                <p>text</p>
+                <p>text</p>
+                <p>text</p>
+              </div>
+            </div>
+          </div>
+          <div class="group-form">
+            <label for="">交通手段</label>
+            <div class="dropdown">
+              <p class="selected" (click)="openDropdown('showTransportation')">車</p>
+              <div class="dropdown-content" *ngIf="actions.showTransportation">
+                <p>text</p>
+                <p>text</p>
+                <p>text</p>
+              </div>
+            </div>
+          </div>
+          <div class="group-form">
+            <label for="">出発時間</label>
+            <div class="dropdown">
+              <p class="selected" (click)="openDropdown('showDepartureTime')">未設定</p>
+              <div class="dropdown-content" *ngIf="actions.showDepartureTime">
+                <p>text</p>
+                <p>text</p>
+                <p>text</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-red">
+          あなたにピッタリな <br>
+          コースを表示
+        </button>
+      </section>
+      <section class="section form-travel theme">
+        <h3 class="title">{{ "テーマ・関心" | translate }}</h3>
+        <div class="form">
+          <div class="group-form">
+            <label for="">体験</label>
+            <ng-container
+              *ngTemplateOutlet="
+                customRangeInput;
+                context: { $implicit: 'EXPERIENCE' }
+              "
+            >
+            </ng-container>
+          </div>
+          <div class="group-form">
+            <label for="">ニッチ度</label>
+            <ng-container
+              *ngTemplateOutlet="
+                customRangeInput;
+                context: { $implicit: 'DEGREE' }
+              "
+            >
+            </ng-container>
+          </div>
+          <div class="group-form">
+            <label for="">歴史</label>
+            <ng-container
+              *ngTemplateOutlet="
+                customRangeInput;
+                context: { $implicit: 'HISTORY' }
+              "
+            >
+            </ng-container>
+          </div>
+          <div class="group-form">
+            <label for="">癒し</label>
+            <ng-container
+              *ngTemplateOutlet="
+                customRangeInput;
+                context: { $implicit: 'HEALING' }
+              "
+            >
+            </ng-container>
+          </div>
+          <div class="group-form">
+            <label for="">アクティブ</label>
+            <ng-container
+              *ngTemplateOutlet="
+                customRangeInput;
+                context: { $implicit: 'ACTIVE' }
+              "
+            >
+            </ng-container>
+          </div>
+          <div class="group-form">
+            <label for="">グルメ</label>
+            <ng-container
+              *ngTemplateOutlet="
+                customRangeInput;
+                context: { $implicit: 'GOURMET' }
+              "
+            >
+            </ng-container>
+          </div>
+          <div class="group-form">
+            <label for="">自然</label>
+            <ng-container
+              *ngTemplateOutlet="
+                customRangeInput;
+                context: { $implicit: 'NATURE' }
+              "
+            >
+            </ng-container>
+          </div>
+          <div class="group-form">
+            <label for="">一人/グループ</label>
+            <ng-container
+              *ngTemplateOutlet="
+                customRangeInput;
+                context: { $implicit: 'PERSON/GROUP' }
+              "
+            >
+            </ng-container>
+          </div>
+          <div class="group-form">
+            <label for="">お値打ち度</label>
+            <ng-container
+              *ngTemplateOutlet="
+                customRangeInput;
+                context: { $implicit: 'MONEY' }
+              "
+            >
+            </ng-container>
+          </div>
+          <div class="group-form">
+            <label for="">こども/おとな</label>
+            <ng-container
+              *ngTemplateOutlet="
+                customRangeInput;
+                context: { $implicit: 'CHILD/ADULT' }
+              "
+            >
+            </ng-container>
+          </div>
+          <div class="group-form">
+            <label for="">設定を変更して</label>
+            <ng-container
+              *ngTemplateOutlet="
+                customRangeInput;
+                context: { $implicit: 'SETTING' }
+              "
+            >
+            </ng-container>
+          </div>
+          <div class="group-form">
+            <label for="">更に自分好みに</label>
+            <ng-container
+              *ngTemplateOutlet="
+                customRangeInput;
+                context: { $implicit: 'LINKING' }
+              "
+            >
+            </ng-container>
+          </div>
+        </div>
+        <button class="btn btn-red">
+          設定を変更して <br>
+          更に自分好みに
+        </button>
+      </section>
+    </div>
+  </div>
+</div>
+
+<div id="alias-modal" class="alias-modal" *ngIf="actions.isShowAliasModal" (click)="closeDropdown()">
+</div>
+
+<ng-template #customRangeInput let-key let-start="start" let-end="end">
+  <div class="range-input">
+    <span>{{ start || "小" }}</span>
+    <input type="range" min="0" max="100" value="50" />
+    <span>{{ end || "大" }}</span>
+  </div>
+</ng-template>
