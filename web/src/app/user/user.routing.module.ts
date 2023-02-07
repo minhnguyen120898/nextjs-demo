@@ -4,6 +4,9 @@ import { ModuleWithProviders } from '@angular/core';
 export const routes: Routes = [
     {
         path: '', loadChildren: () => import('./top/top.module').then(m => m.TopModule)
+    },
+    {
+        path: 'course', loadChildren: () => import('./course/course.module').then(m => m.CousreModule)
     }
 ];
 
