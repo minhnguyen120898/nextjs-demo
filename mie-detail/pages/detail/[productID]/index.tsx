@@ -1,51 +1,97 @@
-
-import { MainLayoutComponent } from "@/layout/main";
-import BannerComponent from "@/components/banner";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import Slider from "react-slick";
-import styles from "@/styles/detail-page.module.scss";
+import styles from "./detail-page.module.scss";
+import { BannerModel } from "@/models/banner.models";
+import { useEffect, useState } from "react";
+import { ApiService } from "@/service/api-service";
+import { MainLayoutComponent } from "@/layout/main";
+import { ProductModel } from "@/models/product.models";
+import ProductComponent from "@/components/products";
+import BannerComponent from "@/components/banner";
 
-export interface DetailPageProps {}
 DetailPage.Layout = MainLayoutComponent;
 
-export default function DetailPage(props: DetailPageProps) {
+export default function DetailPage() {
   const router = useRouter();
-  const { id } = router.query;
-  const recommentList = [
-    { id: 1, title: 'title', tags: ['#123'], image: '/image/img_facility1.png' },
-    { id: 2, title: 'title', tags: ['#123'], image: '/image/img_facility2.png' },
-    { id: 3, title: 'title', tags: ['#123'], image: '/image/img_facility3.png' },
-    { id: 4, title: 'title', tags: ['#123'], image: '/image/img_facility1.png' },
-    { id: 5, title: 'title', tags: ['#123'], image: '/image/img_facility2.png' },
-    { id: 6, title: 'title', tags: ['#123'], image: '/image/img_facility3.png' },
-    { id: 7, title: 'title', tags: ['#123'], image: '/image/img_facility1.png' },
-    { id: 8, title: 'title', tags: ['#123'], image: '/image/img_facility2.png' },
-    { id: 9, title: 'title', tags: ['#123'], image: '/image/img_facility3.png' },
-  ];
+  const { productID } = router.query;
+  const [product, setProduct] = useState<ProductModel | null>(null);
+  const [productList, setProductList] = useState<ProductModel[]>([]);
+  const [bannerList, setBannerList] = useState<BannerModel[]>([]);
+  useEffect(() => {
+    const getBannerList = async () => {
+      try {
+        const { data } = await ApiService.getBanners(1, 10);
+        const convertData: BannerModel[] = data.docs.map((el: any) => {
+          return {
+            ...el,
+            id: el._id,
+          };
+        });
+        setBannerList(convertData);
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-  const settingsNextCategory = {
-    dots: false,
-    infinite: false,
-    slidesToShow: Math.min(recommentList.length, 4),
-    slidesToScroll: 1,
-    variableWidth: true,
-    responsive: [
-      {
-        breakpoint: 768,
-        settings: {
-          arrows: false,
-          slidesToShow: Math.min(recommentList.length, 3),
-        },
-      },
-    ],
-  };
+    getBannerList();
+  }, []);
+
+  useEffect(() => {
+    if (!productID) return;
+    const getProductDetail = async () => {
+      try {
+        const { data } = await ApiService.getProductDetail(productID as string);
+        const product: ProductModel = {
+          ...data,
+          id: data._id,
+          category: data.category.map((e: any) => {
+            return {
+              ...e,
+              id: e._id
+            }
+          })
+        };
+        
+        setProduct(product);
+        getProductList(product.category[0]?.id);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    const getProductList = async (categoryID: string) => {
+      if (!categoryID) return;
+      try {
+        const { data } = await ApiService.getProductsByCategoryID(
+          categoryID,
+          1,
+          10
+        );
+        const productList: ProductModel[] = data.docs.map((el: any) => {
+          return {
+            ...el,
+            id: el._id,
+            tags: el.tag
+          };
+        });
+        setProductList(productList);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    getProductDetail();
+
+    return () => {
+      console.log('clean up');
+    }
+  }, [productID]);
 
   return (
     <>
       <Head>
-        <title>{id}</title>
+        <title>{productID}</title>
         <meta name="description" content="Title for detail page" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
@@ -207,43 +253,8 @@ export default function DetailPage(props: DetailPageProps) {
           </div>
         </div>
 
-        <BannerComponent />
-
-        <div className={styles.building + " building"}>
-          <div className={styles.building_top}>
-            <img src="/image/img_facility3.png" alt="" />
-            <h3>おすすめ</h3>
-            <Link href="/">すべて見る</Link>
-          </div>
-          <div className={styles.content}>
-            <Slider
-              className={styles["slick-slider2"] + " " + "slider-slider2"}
-              {...settingsNextCategory}
-            >
-              {
-                recommentList.map((item, index) => {
-                  return (
-                    <div className={styles.element} key={item.id}>
-                      <img src={item.image} className={styles['element-image']} alt="" />
-                      <div className={styles["content-element"]}>
-                        <div>
-                          {
-                            item.tags.map((tag, j) => {
-                              return (
-                                <label key={tag + j}>{tag}</label>
-                              )
-                            })
-                          }
-                        </div>
-                        <span>{item.title}</span>
-                      </div>
-                    </div>
-                  )
-                })
-              }
-            </Slider>
-          </div>
-        </div>
+        <BannerComponent bannerList={bannerList} />
+        <ProductComponent productList={productList} />
       </div>
     </>
   );
