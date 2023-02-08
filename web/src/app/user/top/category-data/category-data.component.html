@@ -2,7 +2,7 @@
     <div id="inner-data">
         <h3>体験</h3>
         <div id="content">
-            <a *ngFor="let child of listData" href="{{ host + '/detail/' + child.id }}" class="element-data" >
+            <a *ngFor="let child of listData" href="{{ '/detail/' + child.id }}" class="element-data" >
                 <img [src]="child.background | safe:'url'" class="element-image" alt="">
                 <div class="content-element">
                     <div>
@@ -45,7 +45,7 @@
         <owl-carousel-o [options]="customOptions2">
             <ng-template *ngFor="let child of listData" carouselSlide 
                 [id]="child.id" [width]="customWidth">
-                <a class="element" href="{{ host + '/detail/' + child.id }}">
+                <a class="element" href="{{ '/detail/' + child.id }}">
                     <img [src]="child.background | safe:'url'" class="element-image" alt="">
                     <div class="content-element">
                         <div>
