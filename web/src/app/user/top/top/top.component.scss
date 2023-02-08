@@ -153,10 +153,11 @@
             width: calc(100% / 3);
 
             div {
-                min-height: 24.5rem;
+                // min-height: 24.5rem;
                 margin-bottom: 0.5rem;
 
                 img {
+                    height: 24.5rem;
                     max-width: 100%;
                     margin: 0 auto;
                     display: block;
