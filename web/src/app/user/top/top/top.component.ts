@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TopService } from '../top.service';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { debounceTime, fromEvent, Subject, takeUntil } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-top',
@@ -105,6 +106,8 @@ export class TopComponent implements OnInit {
   };
 
   subscription = new Subject();
+
+  host = environment.host;
 
   constructor(private topService: TopService,
     private activatedRoute: ActivatedRoute,

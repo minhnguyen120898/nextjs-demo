@@ -71,7 +71,7 @@
         <owl-carousel-o [options]="customOptions2">
             <ng-template *ngFor="let child of item.datas" carouselSlide 
             [id]="child.id" [width]="customWidth">
-                <div class="element" [ngStyle]="{'background-image': child.background}">
+                <a class="element" href="{{ host + '/detail/' + child.id }}" [ngStyle]="{'background-image': child.background}">
                     <div class="content-element">
                         <div>
                             <label *ngFor="let tag of child.tag">
@@ -80,7 +80,7 @@
                         </div>
                         <span>{{child.title}}</span>
                     </div>
-                </div>
+                </a>
             </ng-template>
         </owl-carousel-o>
     </div>

@@ -2,7 +2,7 @@
     <div id="inner-data">
         <h3>体験</h3>
         <div id="content">
-            <div *ngFor="let child of listData" class="element-data" >
+            <a *ngFor="let child of listData" href="{{ host + '/detail/' + child.id }}" class="element-data" >
                 <img [src]="child.background | safe:'url'" class="element-image" alt="">
                 <div class="content-element">
                     <div>
@@ -12,7 +12,7 @@
                     </div>
                     <span>{{child.title}}</span>
                 </div>
-            </div>
+            </a>
         </div>
         <div class="page" *ngIf="panigation.totalPage > panigation.pageSize">
             <app-panigation (outputPage)="handlePage($event)"
@@ -45,7 +45,7 @@
         <owl-carousel-o [options]="customOptions2">
             <ng-template *ngFor="let child of listData" carouselSlide 
                 [id]="child.id" [width]="customWidth">
-                <div class="element">
+                <a class="element" href="{{ host + '/detail/' + child.id }}">
                     <img [src]="child.background | safe:'url'" class="element-image" alt="">
                     <div class="content-element">
                         <div>
@@ -55,7 +55,7 @@
                         </div>
                         <span>{{child.title}}</span>
                     </div>
-                </div>
+                </a>
             </ng-template>
         </owl-carousel-o>
     </div>
