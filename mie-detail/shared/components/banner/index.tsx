@@ -39,6 +39,7 @@ export default function BannerComponent(props: BannerComponentProps) {
   };
 
   useEffect(() => {
+    console.log(process.env.host);
     const getBannerList = async () => {
       try {
         const { data } = await BannerService.getBanners(1,50);
