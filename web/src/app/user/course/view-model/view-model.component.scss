@@ -1,0 +1,305 @@
+.wrapper {
+  background-color: #000000;
+  padding: 15.7rem 4rem 13.5rem;
+
+  .btn.btn-red {
+    width: 100%;
+    max-width: 59.2rem;
+    margin: 0 auto 11rem;
+    padding: 1.1rem 0;
+    text-align: center;
+    font-size: 2.4rem;
+    line-height: 3.5rem;
+    color: #fff;
+    background-color: #c82c2c;
+    border-radius: 4.6rem;
+    border: 0.1rem solid transparent;
+    transition: 0.4s all ease-in-out;
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:hover {
+      background-color: #fff;
+      color: #c82c2c;
+      border-color: #c82c2c;
+    }
+  }
+
+  .roadmap {
+    width: 100%;
+    max-width: 128rem;
+    padding: 29rem 0 30.5rem 6.1rem;
+    margin: 0 auto;
+    background-image: url(/assets/images/v2/img_roadmap.png);
+    background-repeat: no-repeat;
+    background-position: left top;
+  }
+
+  .card {
+    position: relative;
+    display: flex;
+    background-color: #fff;
+    border-radius: 2.4rem;
+    width: 100%;
+    max-width: 90.6rem;
+    margin-left: auto;
+    margin-right: 0;
+    margin-bottom: 20.7rem;
+    padding: 6.6rem 2.8rem 2.8rem 5.5rem;
+    max-height: 35.9rem;
+
+    &:nth-child(2n) {
+      margin-right: auto;
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .card-title {
+      position: absolute;
+      top: -4.7rem;
+      left: -6.1rem;
+      background-color: #000;
+      border: 0.4rem solid #fff;
+      border-radius: 4.6rem;
+      width: 100%;
+      max-width: 82.7rem;
+
+      &::before {
+        content: attr(data-step);
+        position: absolute;
+        left: -0.4rem;
+        top: -2.5rem;
+        width: 13rem;
+        height: 13rem;
+        border-radius: 50%;
+        background-color: #000;
+        border: 0.4rem solid #fff;
+        font-size: 8.2rem;
+        line-height: 11.7rem;
+        color: #fff;
+        font-weight: bold;
+        text-align: center;
+      }
+
+      p {
+        margin: 0;
+        padding: 3rem 0 3rem 15.3rem;
+        font-size: 2.4rem;
+        line-height: 3.5rem;
+        color: #fff;
+      }
+    }
+
+    .card-body {
+      flex: 1;
+      padding-left: 2.4rem;
+      position: relative;
+    }
+
+    .card-desc {
+      font-size: 1.6rem;
+      line-height: 2.3rem;
+      color: #000;
+      margin: 0;
+    }
+
+    .card-image {
+      width: 31.6rem;
+      height: 26.5rem;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .card-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding-left: 2.4rem;
+    }
+
+    .card-tags {
+      .tag {
+        font-size: 1.4rem;
+        line-height: 2rem;
+        color: #fff;
+        background-color: #667cf2;
+        border-radius: 2rem;
+        padding: 0 0.9rem;
+        margin: 0;
+      }
+    }
+
+    .btn.btn-red {
+      margin: 0;
+      max-width: 25.4rem;
+      padding: 0.7rem 0;
+    }
+  }
+
+  .btn-white {
+    display: block;
+    width: 100%;
+    max-width: 59.2rem;
+    margin: 0 auto 13.5rem;
+    border-radius: 2.4rem;
+    background-color: #fff;
+    padding: 3.9rem 0;
+    font-size: 2.4rem;
+    line-height: 3.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: none;
+
+    img {
+      object-fit: contain;
+      display: block;
+      margin-right: 2.7rem;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .btn.btn-bottom {
+    margin-bottom: 0;
+    padding: 0.8rem;
+    display: block;
+    width: 100%;
+    max-width: 59.2rem;
+    margin: 0 auto;
+    border-radius: 4.6rem;
+
+    &.btn-gray {
+      background-color: #dee2e6;
+      color: #000;
+      margin-top: 6.8rem;
+
+      &:hover {
+        background-color: #dee2e6;
+        color: #000;
+        border-color: transparent;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .wrapper {
+    padding: 4.9rem 1rem;
+
+    .btn.btn-red {
+      font-size: 1.8rem;
+      line-height: 2.6rem;
+      margin-bottom: 7.3rem;
+      max-width: 30.2rem;
+
+      span {
+        display: block;
+      }
+    }
+
+    .roadmap {
+      background-image: url(/assets/images/v2/img_roadmap-sp.png);
+      background-position: center top;
+      padding: 13.7rem 0 0;
+      margin-bottom: 19.8rem;
+    }
+
+    .card {
+      max-height: unset;
+      padding: 6.8rem 1.4rem 3.1rem;
+      flex-direction: column;
+      margin-bottom: 7.3rem;
+
+      &::after {
+        content: "";
+        position: absolute;
+        height: 7.7rem;
+        bottom: -7.3rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0.3rem;
+        background-image: repeating-linear-gradient(to bottom,
+            #fff,
+            #fff 0.3rem,
+            transparent 0.3rem,
+            transparent 0.6rem)
+      }
+
+      &:last-child {
+        &::after {
+          background-image: url(/assets/images/v2/img_roadmap-sp-b.png);
+          background-position: center;
+          background-repeat: no-repeat;
+          height: 12.7rem;
+          bottom: -12.3rem;
+          width: 100%;
+        }
+      }
+
+      .card-image {
+        width: 21rem;
+        height: 17.7rem;
+      }
+
+      .card-body {
+        padding-left: 0;
+        position: unset;
+      }
+
+      .card-title {
+        top: 0;
+        left: 0;
+
+        p {
+          font-size: 1.8rem;
+          line-height: 2.6rem;
+          font-weight: bold;
+          padding: 0.9rem 0 0.9rem 8.45rem;
+        }
+
+        &::before {
+          top: -1.8rem;
+          width: 6.7rem;
+          height: 6.7rem;
+          font-size: 4.2rem;
+          line-height: 6rem;
+        }
+      }
+
+      .card-actions {
+        position: unset;
+        justify-content: center;
+        margin-top: 2.7rem;
+        padding-left: 0;
+      }
+
+      .card-tags {
+        position: absolute;
+        left: 23.4rem;
+        top: 6.7rem;
+      }
+    }
+
+    .btn-white {
+      max-width: 30.2rem;
+    }
+  }
+}
