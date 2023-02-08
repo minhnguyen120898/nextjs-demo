@@ -1,13 +1,14 @@
 import { BannerModel } from "@/models/banner.models";
-import { BannerService } from "@/service/index";
-import React, {useEffect, useState} from "react";
+import React from "react";
 import Slider from "react-slick";
 import styles from "./banner.module.scss";
 
-export interface BannerComponentProps {}
+export interface BannerComponentProps {
+  bannerList: BannerModel[]
+}
 
 export default function BannerComponent(props: BannerComponentProps) {
-  const [bannerList, setBannerList] = useState<BannerModel[]>([]); 
+  const { bannerList } = props;
   const settingsBanner = {
     dots: true,
     arrows: true,
@@ -37,26 +38,6 @@ export default function BannerComponent(props: BannerComponentProps) {
       },
     ],
   };
-
-  useEffect(() => {
-    console.log(process.env.host);
-    const getBannerList = async () => {
-      try {
-        const { data } = await BannerService.getBanners(1,50);
-        const convertData: BannerModel[] = data.docs.map((el: any) => {
-          return {
-            ...el,
-            id: el._id
-          }
-        })
-        setBannerList(convertData);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-
-    getBannerList();
-  }, [])
 
   return (
     <div className={styles["slider-banner"] + " " + "slider-banner"}>
