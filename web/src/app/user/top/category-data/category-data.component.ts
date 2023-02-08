@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TopService } from '../top.service';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { fromEvent, debounceTime, takeUntil, Subject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-category-data',
@@ -85,6 +86,8 @@ export class CategoryDataComponent implements OnInit {
   };
 
   category_id: any = null;
+  host = environment.host;
+
   constructor(private topService: TopService,
     private activatedRoute: ActivatedRoute,
     private router: Router
