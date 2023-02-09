@@ -42,7 +42,7 @@ export class TopComponent implements OnInit {
     }
   };
 
-  customWidth = window.innerWidth < 768 ? 103 : 250;
+  customWidth = window.innerWidth < 768 ? 156 : 250;
   customOptions2: OwlOptions = {
     loop: false,
     nav: true,
@@ -163,7 +163,7 @@ export class TopComponent implements OnInit {
       takeUntil(this.subscription)
     ).subscribe(res => {
       if (window.innerWidth < 768) {
-        this.customWidth = 103;
+        this.customWidth = 156;
       } else {
         this.customWidth = 250;
       }
