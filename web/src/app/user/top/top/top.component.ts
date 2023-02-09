@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TopService } from '../top.service';
 import { OwlOptions } from 'ngx-owl-carousel-o';
-import { debounceTime, forkJoin, fromEvent, map, repeat, startWith, Subject, takeUntil } from 'rxjs';
-import { environment } from 'src/environments/environment';
-
+import { debounceTime, forkJoin, fromEvent, Subject, takeUntil } from 'rxjs';
 @Component({
   selector: 'app-top',
   templateUrl: './top.component.html',
