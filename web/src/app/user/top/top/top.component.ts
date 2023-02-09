@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TopService } from '../top.service';
 import { OwlOptions } from 'ngx-owl-carousel-o';
-import { debounceTime, fromEvent, Subject, takeUntil } from 'rxjs';
+import { debounceTime, forkJoin, fromEvent, map, repeat, startWith, Subject, takeUntil } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -73,7 +73,7 @@ export class TopComponent implements OnInit {
     }
   };
   listBanner: any[] = [1, 2, 3, 4, 5, 6];
-  listCategorys: any[] = [];
+  listCategories: any[] = [];
   listData: any[] = []
 
   dataFaq = [
@@ -107,7 +107,10 @@ export class TopComponent implements OnInit {
 
   subscription = new Subject();
 
-  host = environment.host;
+  isDragging = false;
+  currentX: number;
+  initialX: number;
+  xOffset = 0;
 
   constructor(private topService: TopService,
     private activatedRoute: ActivatedRoute,
@@ -130,36 +133,20 @@ export class TopComponent implements OnInit {
     });
 
     await this.topService.getCategory('field=created_at&sort=1').then((res: any) => {
-      this.listCategorys = res;
+      this.listCategories = res;
+      this.listCategories[0].active = true;
     }).catch(err => {
-      this.listCategorys = err;
+      this.listCategories = err;
     });
 
-    this.activatedRoute.queryParams.subscribe((res: any) => {
-      this.listCategorys.forEach(e => {
-        e.active = false;
-      });
-      if (res.category_id) {
-        const element = this.listCategorys.find((e: any) => {
-          return e._id == res.category_id;
-        });
-        if (element) {
-          element.active = true;
-        }
-
-        this.getData(res, element);
-      } else {
-        this.listCategorys[0].active = true;
-        this.getData(res, this.listCategorys[0]);
-      }
-    });
+    this.getData();
   }
 
   ngAfterViewInit(): void {
     //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
     //Add 'implements AfterViewInit' to the class.
     fromEvent(window, 'resize').pipe(
-      debounceTime(10),
+      debounceTime(100),
       takeUntil(this.subscription)
     ).subscribe(res => {
       if (window.innerWidth < 768) {
@@ -167,51 +154,76 @@ export class TopComponent implements OnInit {
       } else {
         this.customWidth = 250;
       }
+      this.listData = JSON.parse(JSON.stringify(this.listData));
     })
+
+    const element = document.getElementById("scrollContainer");
+
+    if (element) {
+      element.addEventListener("mousedown", this.dragStart);
+      element.addEventListener("mouseup", this.dragEnd);
+      element.addEventListener("mouseleave", this.dragEnd);
+      element.addEventListener("mousemove", this.drag);
+    }
   }
 
   ngOnDestroy(): void {
     //Called once, before the instance is destroyed.
     //Add 'implements OnDestroy' to the class.
+    const element = document.getElementById("scrollContainer");
+
+    if (element) {
+      element.removeEventListener("mousedown", this.dragStart);
+      element.removeEventListener("mouseup", this.dragEnd);
+      element.removeEventListener("mouseleave", this.dragEnd);
+      element.removeEventListener("mousemove", this.drag);
+    }
     this.subscription.next(true);
     this.subscription.complete();
   }
 
   navigateBanner(item: any) {
-    window.open(item.url, 'target=_black');
+    window.open("https://google.com", 'target=_black');
   }
 
-  getData(qparam: any, category: any) {
-
-    this.panigation.currentPage = qparam && qparam.page ? Number(qparam.page) : 1;
-    this.panigation.pageSize = qparam && qparam.pagesize ? Number(qparam.pagesize) : 12;
+  getData() {
+    this.panigation.currentPage = 1;
+    this.panigation.pageSize = 12;
     this.listData = [];
-    if (category) {
-      for (let index = 0; index < category.childs.length; index++) {
-        const element = category.childs[index];
-        let obj: any = {
-          title: element.title,
-          id: element._id,
-          image: element.image,
-          datas: []
-        }
-
-        this.topService.getListWorkByCategory(element._id, this.panigation.currentPage,
-          this.panigation.pageSize).subscribe(res => { 
-            let datas = res.docs.map((e: any) => {
-              return {
-                id: e._id,
-                background: `url(${e.eye_catching})`,
-                title: e.title,
-                tag: e.tag
-              }
-            });
-            obj.datas = datas;
-            this.listData.push(obj);
-          }, err => {
-          });
+    
+    let observables = [];
+    for (let index = 0; index < this.listCategories.length; index++) {
+      const element = this.listCategories[index];
+      let obj: any = {
+        title: element.title,
+        id: element._id,
+        image: element.image,
+        datas: []
       }
+      this.listData.push(obj);
+      observables.push(
+        this.topService.getListWorkByCategory(
+          element._id, 
+          this.panigation.currentPage,
+          this.panigation.pageSize
+        )
+      )
     }
+
+    forkJoin(observables).subscribe(res => { 
+      this.listData.forEach((e, index) => {
+        let datas = res[index].docs.map((e: any) => {
+          return {
+            id: e._id,
+            background: `url(${e.eye_catching})`,
+            title: e.title,
+            tag: e.tag
+          }
+        });
+        e.datas = e.datas.concat(datas);
+      })
+    }, err => {
+    });
   }
 
   handleAction(event: any) {
@@ -233,6 +245,42 @@ export class TopComponent implements OnInit {
     } else {
       element.style.maxHeight = `${element.scrollHeight}px`;
       item['isShowAnswer'] = true;
+    }
+  }
+
+  scrollToSection(id: string) {
+    this.listCategories.forEach(e => {
+      if (e._id === id) {
+        e.active = true;
+      } else {
+        e.active = false;
+      }
+    })
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({behavior: "smooth", block: "center"});
+    }
+  }
+
+  dragStart = (e: MouseEvent) => {
+    this.initialX = e.clientX;
+    this.isDragging = true;
+  }
+
+  dragEnd = (e: MouseEvent) => {
+    this.isDragging = false;
+  }
+
+  drag = (e: MouseEvent) => {
+    if (this.isDragging) {
+      e.preventDefault();
+      this.currentX = e.clientX;
+      this.xOffset = this.currentX - this.initialX;
+      const element = document.getElementById("scrollContainer");
+      if (element) {
+        element.scrollLeft -= this.xOffset;
+      }
+      this.initialX = this.currentX;
     }
   }
 }
