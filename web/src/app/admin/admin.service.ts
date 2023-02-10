@@ -196,4 +196,13 @@ export class AdminService extends BaseService {
         return this.delete(`new/${id}`);
 
     }
+
+    // portal code
+    getAddressFromZipcode(zip_code: string) {
+        return this.getData(`list/location/${zip_code}`);
+    }
+    
+    getPrefectures() {
+        return this.getData(`list/prefectures/jp`);
+    }
 }

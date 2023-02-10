@@ -217,7 +217,7 @@
                     <div class="content-field">
                         <div class="dflex">
                             <input formControlName="zip_code" type="text">
-                            <button class="btn-blue">郵便番号から検索</button>
+                            <button class="btn-blue" (click)="handleAutofill()">郵便番号から検索</button>
                         </div>
                         <div>
                             <input formControlName="address" type="text">
@@ -232,7 +232,7 @@
             </div>
             <div class="form-group-box">
                 <div class="form-group">
-                    <label>利用時間</label>
+                    <label>電話番号</label>
                     <div class="content-field">
                         <input formControlName="phone" type="text">
                         <p class="errors" class="errors" *ngIf="formErrors.phone">
@@ -246,7 +246,7 @@
 
             <div class="form-group-box">
                 <div class="form-group">
-                    <label>休日</label>
+                    <label>利用時間</label>
                     <div class="content-field">
                         <input formControlName="utilization_time" type="text">
                         <p class="errors" class="errors" *ngIf="formErrors.utilization_time">
@@ -259,7 +259,7 @@
             </div>
             <div class="form-group-box">
                 <div class="form-group">
-                    <label>利用料金</label>
+                    <label>休日</label>
                     <div class="content-field">
                         <input formControlName="holiday" type="text">
                         <p class="errors" class="errors" *ngIf="formErrors.holiday">
@@ -420,6 +420,33 @@
                             formErrors.time_end
                             }}
                         </p>
+                    </div>
+                </div>
+            </div>
+            <!-- facebook -->
+            <div class="form-group-box">
+                <div class="form-group">
+                    <label>Facebook</label>
+                    <div class="content-field">
+                        <input formControlName="facebook" type="text">
+                    </div>
+                </div>
+            </div>
+            <!-- Instagram -->
+            <div class="form-group-box">
+                <div class="form-group">
+                    <label>Instagram</label>
+                    <div class="content-field">
+                        <input formControlName="instagram" type="text">
+                    </div>
+                </div>
+            </div>
+            <!-- Twitter -->
+            <div class="form-group-box">
+                <div class="form-group">
+                    <label>Twitter</label>
+                    <div class="content-field">
+                        <input formControlName="twitter" type="text">
                     </div>
                 </div>
             </div>

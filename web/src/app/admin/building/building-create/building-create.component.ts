@@ -5,7 +5,6 @@ import { UUID } from 'angular2-uuid';
 import { ComponentActions } from 'src/app/shared/components/alert/component-actions';
 import { CrudType } from 'src/app/shared/enums/crud-type.enum';
 import { ACTION_TYPE, Utils, WORK_STATUS } from 'src/app/shared/enums/utils';
-import { TimeService } from 'src/app/shared/services/helpers/time.service';
 import { UploadFileService } from 'src/app/shared/services/helpers/upload-file.service';
 import { ValidationService } from 'src/app/shared/services/helpers/validation.service';
 import { environment as config } from 'src/environments/environment';
@@ -92,7 +91,7 @@ export class BuildingCreateComponent implements OnInit {
     image: '',
     time_start: '',
     time_end: '',
-    is_featured: ''
+    is_featured: '',
   };
   validationMessages = {
     status: {
@@ -195,7 +194,6 @@ export class BuildingCreateComponent implements OnInit {
   constructor(private componentActions: ComponentActions,
     private activatedRoute: ActivatedRoute,
     private adminService: AdminService,
-    private timeService: TimeService,
     private router: Router,
     private formBuilder: FormBuilder,
     private validatorService: ValidationService,
@@ -268,7 +266,10 @@ export class BuildingCreateComponent implements OnInit {
         image: res.image,
         time_start: res.time_start,
         time_end: res.time_end,
-        is_featured: res.is_featured
+        is_featured: res.is_featured,
+        facebook: res.social?.facebook,
+        instagram: res.social?.instagram,
+        twitter: res.social?.twitter
       });
       // CATEGORY 
       this.category.name_select = res.category.map((e: any) => { return e.title }).join(' ,');
@@ -322,38 +323,44 @@ export class BuildingCreateComponent implements OnInit {
   }
 
   create() {
+    const formValue = this.formWork.value;
     const body = {
-      status: this.formWork.value.status,
-      title: this.formWork.value.title,
-      eye_catching: this.formWork.value.eye_catching,
-      description: this.formWork.value.description,
-      category: this.formWork.value.category,
-      tag: this.formWork.value.tag,
-      video: this.formWork.value.video_up ? this.formWork.value.video_up : this.formWork.value.video_link,
-      meta_title: this.formWork.value.meta_title,
-      meta_description: this.formWork.value.meta_description,
-      content_id: this.formWork.value.content_id,
-      spot_name: this.formWork.value.spot_name,
-      explanatory_text: this.formWork.value.explanatory_text,
-      url: this.formWork.value.url,
-      zip_code: this.formWork.value.zip_code,
-      address: this.formWork.value.address,
-      phone: this.formWork.value.phone,
-      utilization_time: this.formWork.value.utilization_time,
-      holiday: this.formWork.value.holiday,
-      fee: this.formWork.value.fee,
-      parking: this.formWork.value.parking,
-      remark: this.formWork.value.remark,
-      stay_time: this.formWork.value.stay_time,
-      lng: this.formWork.value.lng,
-      lat: this.formWork.value.lat,
-      category1: this.formWork.value.category1,
+      status: formValue.status,
+      title: formValue.title,
+      eye_catching: formValue.eye_catching,
+      description: formValue.description,
+      category: formValue.category,
+      tag: formValue.tag,
+      video: formValue.video_up ? formValue.video_up : formValue.video_link,
+      meta_title: formValue.meta_title,
+      meta_description: formValue.meta_description,
+      content_id: formValue.content_id,
+      spot_name: formValue.spot_name,
+      explanatory_text: formValue.explanatory_text,
+      url: formValue.url,
+      zip_code: formValue.zip_code,
+      address: formValue.address,
+      phone: formValue.phone,
+      utilization_time: formValue.utilization_time,
+      holiday: formValue.holiday,
+      fee: formValue.fee,
+      parking: formValue.parking,
+      remark: formValue.remark,
+      stay_time: formValue.stay_time,
+      lng: formValue.lng,
+      lat: formValue.lat,
+      category1: formValue.category1,
       image: this.imageList.map(e => {
         return e.image
       }),
-      time_start: this.formWork.value.time_start,
-      time_end: this.formWork.value.time_end,
-      is_featured: this.formWork.value.is_featured
+      time_start: formValue.time_start,
+      time_end: formValue.time_end,
+      is_featured: formValue.is_featured,
+      social: {
+        facebook: formValue.facebook,
+        instagram: formValue.instagram,
+        twitter: formValue.twitter
+      }
     };
 
     if (this.id) {
@@ -419,7 +426,10 @@ export class BuildingCreateComponent implements OnInit {
       image: [[], []],
       time_start: [''],
       time_end: [''],
-      is_featured: ['']
+      is_featured: [''],
+      facebook: [''],
+      twitter: [''],
+      instagram: ['']
     });
     this.formWork.valueChanges.subscribe((data: object) => this.onValueChanged(data));
   }
@@ -441,7 +451,6 @@ export class BuildingCreateComponent implements OnInit {
       });
     }
   }
-
 
   handleDelete() {
     this.componentActions.showPopup({
@@ -491,7 +500,6 @@ export class BuildingCreateComponent implements OnInit {
     this.status.name_select = event.value.itemName;
     this.formWork.get('status')?.setValue(Number(event.value.type));
   }
-
 
   handleReset() {
     this.formErrors = {
@@ -558,7 +566,6 @@ export class BuildingCreateComponent implements OnInit {
     document.getElementById('input-file-main-video')?.click();
   }
 
-
   async onChangeVideo(event: any) {
     const file = event.target.files[0];
     if (file) {
@@ -583,7 +590,6 @@ export class BuildingCreateComponent implements OnInit {
     this.imageList.push({ id: UUID.UUID(), image: null, is_delete: true });
   }
 
-
   onDeleteSubImg(item: any, index: number) {
     this.imageList.splice(index, 1)
   }
@@ -599,6 +605,25 @@ export class BuildingCreateComponent implements OnInit {
         this.imageList[i].image = image.base64_default;
       }
     }
+  }
+
+  handleAutofill() {
+    let zip_code = this.formWork.value.zip_code;
+    if (!zip_code) return false;
+    this.componentActions.showLoading();
+    this.adminService.getAddressFromZipcode(zip_code).subscribe({
+      next: (res) => {
+        if (res.location) {
+          let address = res.location.split(',');
+          this.formWork.patchValue({ address: address.toString() });
+        }
+        this.componentActions.hideLoading();
+      },
+      error: (err) => {
+        this.componentActions.hideLoading();
+      },
+    });
+    return;
   }
 
   ngOnDestroy() {
