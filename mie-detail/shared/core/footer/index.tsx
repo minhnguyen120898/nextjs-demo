@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import * as React from "react";
 import styles from "./footer.module.scss";
@@ -42,23 +43,43 @@ export default function FooterComponent(props: FooterComponentProps) {
             <ul>
               <li>
                 <Link href="">
-                  <img src="/image/instagram.png" alt="" />
+                  <Image
+                    src={"/image/instagram.png"}
+                    alt=""
+                    fill
+                    className={styles.image}
+                  />
                 </Link>
               </li>
               <li>
                 <Link href="">
-                  <img src="/image/tw.png" alt="" />
+                  <Image
+                    src={"/image/tw.png"}
+                    alt=""
+                    fill
+                    className={styles.image}
+                  />
                 </Link>
               </li>
               <li>
                 <Link href="">
-                  <img src="/image/fb.png" alt="" />
+                  <Image
+                    src={"/image/fb.png"}
+                    alt=""
+                    fill
+                    className={styles.image}
+                  />
                 </Link>
               </li>
             </ul>
 
             <Link id={styles.logo} href="/">
-              <img src="/image/logo_wht@3x.svg" alt="" />
+              <Image
+              src={"/image/logo_wht@3x.svg"}
+              alt=""
+              fill
+              className={styles.image}
+            />
             </Link>
           </div>
         </div>
