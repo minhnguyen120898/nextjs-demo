@@ -9,7 +9,7 @@ export default function HomePage (props: HomePageProps) {
 
   useEffect(() => {
     router.push('/404')
-  }, []);
+  }, [router]);
 
   return (
     <div></div>

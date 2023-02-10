@@ -10,13 +10,17 @@ import { ProductModel } from "@/models/product.models";
 import ProductComponent from "@/components/products";
 import BannerComponent from "@/components/banner";
 import Image from "next/image";
+import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
 
 DetailPage.Layout = MainLayoutComponent;
+export interface DetailPageProps {
+  product: ProductModel
+}
 
-export default function DetailPage() {
+export default function DetailPage({ product } : DetailPageProps) {
   const router = useRouter();
   const { productID } = router.query;
-  const [product, setProduct] = useState<ProductModel | null>(null);
+  // const [product, setProduct] = useState<ProductModel | null>(null);
   const [productList, setProductList] = useState<ProductModel[]>([]);
   const [bannerList, setBannerList] = useState<BannerModel[]>([]);
   useEffect(() => {
@@ -39,33 +43,33 @@ export default function DetailPage() {
   }, []);
 
   useEffect(() => {
-    if (!productID) return;
-    const getProductDetail = async () => {
-      try {
-        const { data } = await ApiService.getProductDetail(productID as string);
-        const product: ProductModel = {
-          ...data,
-          id: data._id,
-          tags: data.tag.map((e: any) => {
-            return {
-              ...e,
-              id: e._id,
-            };
-          }),
-          category: data.category.map((e: any) => {
-            return {
-              ...e,
-              id: e._id,
-            };
-          }),
-        };
+    // if (!productID) return;
+    // const getProductDetail = async () => {
+    //   try {
+    //     const { data } = await ApiService.getProductDetail(productID as string);
+    //     const product: ProductModel = {
+    //       ...data,
+    //       id: data._id,
+    //       tags: data.tag.map((e: any) => {
+    //         return {
+    //           ...e,
+    //           id: e._id,
+    //         };
+    //       }),
+    //       category: data.category.map((e: any) => {
+    //         return {
+    //           ...e,
+    //           id: e._id,
+    //         };
+    //       }),
+    //     };
 
-        setProduct(product);
-        getProductList(product.category[0]?.id);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+    //     setProduct(product);
+    //     getProductList(product.category[0]?.id);
+    //   } catch (error) {
+    //     console.error(error);
+    //   }
+    // };
 
     const getProductList = async (categoryID: string) => {
       if (!categoryID) return;
@@ -88,12 +92,12 @@ export default function DetailPage() {
       }
     };
 
-    getProductDetail();
-
+    // getProductDetail();
+    getProductList(product.category[0]?.id);
     return () => {
       console.log("clean up");
     };
-  }, [productID]);
+  }, []);
 
   return (
     <>
@@ -276,4 +280,45 @@ export default function DetailPage() {
       </div>
     </>
   );
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+
+  const { data } = await ApiService.getProducts(1, 10);
+
+  return {
+    paths: data.docs.map((product: any) => ({ params : { productID: product._id }})),
+    fallback: "blocking"
+  }
+}
+
+export const getStaticProps: GetStaticProps<DetailPageProps> = async (
+  context: GetStaticPropsContext
+) => {
+  const productID = context.params?.productID;
+  if (!productID) return { notFound: true };
+
+  const { data } = await ApiService.getProductDetail(productID as string);
+  const product: ProductModel = {
+    ...data,
+    id: data._id,
+    tags: data.tag.map((e: any) => {
+      return {
+        ...e,
+        id: e._id,
+      };
+    }),
+    category: data.category.map((e: any) => {
+      return {
+        ...e,
+        id: e._id,
+      };
+    }),
+  }
+
+  return {
+    props: {
+      product: product
+    }, // will be passed to the page component as props
+  }
 }

@@ -10,12 +10,12 @@ const axiosClient = axios.create({
 // Add a request interceptor
 axiosClient.interceptors.request.use(function (config) {
   // Get the token from local storage
-  const token = localStorage.getItem('token');
+  // const token = localStorage.getItem('token');
 
   // If there is a token, add it to the header
-  if (token) {
-    config.headers.Authorization = `${token}`;
-  }
+  // if (token) {
+  //   config.headers.Authorization = `${token}`;
+  // }
   
   return config;
 }, function (error) {
