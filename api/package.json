@@ -22,6 +22,7 @@
     "imap": "^0.8.19",
     "iplocation": "^7.2.0",
     "is-base64": "^1.1.0",
+    "jp-zipcode-lookup": "^0.2.3",
     "jp-prefecture": "^0.2.1",
     "js-md5": "^0.7.3",
     "jsonwebtoken": "^8.5.1",

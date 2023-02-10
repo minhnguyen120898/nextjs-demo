@@ -50,4 +50,16 @@ router.route('/bank/jp/branch/:bank_code').get(async (req, res) => {
     }
 })
 
+/**
+ * get jp prefectures
+ */
+router.route('/location/:zip_code').get(async (req, res) => {
+    try {
+        let response = await listHandler.getJPLocationByPostalCode(req.params.zip_code);
+        resHelper.sendResponse(res,response)
+    } catch (error) {
+        resHelper.sendError(res,error);
+    }
+})
+
 module.exports = router

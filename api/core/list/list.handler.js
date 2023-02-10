@@ -3,6 +3,8 @@ const jpPrefecture = require("jp-prefecture");
 const settingModel = require('../../shared/models/setting')
 const baseService = require('../../shared/helpers/baseService.helper')
 const _ = require('lodash')
+const Oaza = require('jp-zipcode-lookup').Oaza
+
 /**
  * @method GET
  * @path /prefectures/jp
@@ -64,9 +66,25 @@ const getJPBankBranch = async (bank_code) => {
     return bank ? _.map(bank.branches, branch => Object({name: branch.name, code: branch.code})) : []
 }
 
+/**
+ * @method GET
+ * @path /jp/address/:postal_code
+ * @param locals {uid, lang}
+ * @param postal_code
+ * @return 
+ */
+const getJPLocationByPostalCode = async (postal_code) => {
+    const oaza = Oaza.byZipcode(postal_code)[0];
+    return {
+        location: oaza ? `${oaza.name},${oaza.city.name},${oaza.pref.name}` : null
+    }
+}
+
+
 module.exports = {
     getJapanPrefectures,
     getSettings,
     getJPBankName,
-    getJPBankBranch
+    getJPBankBranch,
+    getJPLocationByPostalCode
 }
