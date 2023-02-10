@@ -12,37 +12,37 @@ export default function FooterComponent(props: FooterComponentProps) {
         <div className={styles["inner-footer"]}>
           <ul className={styles.left}>
             <li>
-              <Link href="">サイトマップ</Link>
+              <Link href="/abc">サイトマップ</Link>
             </li>
             <li>
-              <Link href="">プライバシーポリシー</Link>
+              <Link href="/abc">プライバシーポリシー</Link>
             </li>
             <li>
-              <Link href="">個人情報保護方針</Link>
+              <Link href="/abc">個人情報保護方針</Link>
             </li>
             <li>
-              <Link href="">運営会社情報</Link>
+              <Link href="/abc">運営会社情報</Link>
             </li>
             <li>
-              <Link href="">広告掲載について</Link>
+              <Link href="/abc">広告掲載について</Link>
             </li>
             <li>
-              <Link href="">会員利用規約</Link>
+              <Link href="/abc">会員利用規約</Link>
             </li>
             <li>
-              <Link href="">メールマガジンについて</Link>
+              <Link href="/abc">メールマガジンについて</Link>
             </li>
+            {/* <li>
+              <Link href="/abc">退会について</Link>
+            </li> */}
             <li>
-              <Link href="">退会について</Link>
-            </li>
-            <li>
-              <Link href="">お問い合わせ</Link>
+              <Link href="/abc">お問い合わせ</Link>
             </li>
           </ul>
           <div className={styles.right}>
             <ul>
               <li>
-                <Link href="">
+                <Link href="/abc">
                   <Image
                     src={"/image/instagram.png"}
                     alt=""
@@ -52,7 +52,7 @@ export default function FooterComponent(props: FooterComponentProps) {
                 </Link>
               </li>
               <li>
-                <Link href="">
+                <Link href="/abc">
                   <Image
                     src={"/image/tw.png"}
                     alt=""
@@ -62,7 +62,7 @@ export default function FooterComponent(props: FooterComponentProps) {
                 </Link>
               </li>
               <li>
-                <Link href="">
+                <Link href="/abc">
                   <Image
                     src={"/image/fb.png"}
                     alt=""
