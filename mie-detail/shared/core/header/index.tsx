@@ -10,6 +10,7 @@ export default function HeaderComponent(props: HeaderComponentProps) {
   const [openSearchBox, setSearchBox] = useState(false);
   const [background, setBackground] = useState(false);
   const inputSearchRef = useRef<HTMLInputElement>(null);
+  const domain = process.env.domain;
 
   useEffect(() => {
     if (openSearchBox) {
@@ -41,7 +42,7 @@ export default function HeaderComponent(props: HeaderComponentProps) {
     >
       <div className={styles["header-content"]}>
         <div className={styles.left}>
-          <a id={styles.logo} href="/">
+          <a id={styles.logo} href={domain}>
             <Image
               src={"/image/logo_wht@3x.svg"}
               alt=""
