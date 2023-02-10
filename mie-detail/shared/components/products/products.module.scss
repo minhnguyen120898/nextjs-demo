@@ -16,11 +16,19 @@
 			font-weight: 500;
 			margin: 0;
 		}
-		img {
+		.imageContainer {
 			width: 4.8rem;
 			height: 4.8rem;
 			object-fit: cover;
 			margin-right: 1.4rem;
+			position: relative;
+
+			.image {
+				object-fit: cover;
+				width: 100% !important;
+				position: relative !important;
+				height: 100% !important;
+			}
 		}
 		a {
 			border-radius: 2.4rem;
@@ -57,10 +65,15 @@
 			position: relative;
 			overflow: hidden;
 			margin-right: 1.5rem;
+
+			&:focus {
+				outline: none;
+			}
+
 			.element-image {
-				position: absolute;
-				width: 100%;
-				height: 100%;
+				width: 100% !important;
+				position: relative !important;
+				height: 100% !important;
 				object-fit: cover;
 				top: 0;
 				left: 0;
@@ -86,6 +99,10 @@
 					font-weight: 500;
 				}
 				div {
+					display: flex;
+					flex-wrap: wrap;
+					gap: 0.3rem;
+
 					label {
 						font-size: 1.5rem;
 						color: white;

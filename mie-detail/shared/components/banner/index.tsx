@@ -1,4 +1,5 @@
 import { BannerModel } from "@/models/banner.models";
+import Image from "next/image";
 import React from "react";
 import Slider from "react-slick";
 import styles from "./banner.module.scss";
@@ -45,7 +46,12 @@ export default function BannerComponent(props: BannerComponentProps) {
         { bannerList.map((banner: BannerModel) => {
           return (
             <div className={styles.item + " " + "item"} key={banner.id}>
-              <img src={banner.image} alt={banner.url} />
+              <Image
+                src={banner.image}
+                alt={banner.url}
+                fill
+                className={styles.image}
+              />
             </div>
           )
         })}

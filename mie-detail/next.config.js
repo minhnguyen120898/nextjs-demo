@@ -2,13 +2,19 @@
 const path = require("path");
 
 const environment = process.env.MODE_BUILD;
+const jsonSetting = getEnvConfig();
 
 const nextConfig = {
   reactStrictMode: false,
   sassOptions: {
     includePaths: [path.join(__dirname, "styles")],
   },
-  env: getEnvConfig(),
+  env: jsonSetting.env,
+  images: {
+    remotePatterns: [
+      jsonSetting.images
+    ],
+  },
 };
 
 function getEnvConfig() {

@@ -9,6 +9,7 @@ import { MainLayoutComponent } from "@/layout/main";
 import { ProductModel } from "@/models/product.models";
 import ProductComponent from "@/components/products";
 import BannerComponent from "@/components/banner";
+import Image from "next/image";
 
 DetailPage.Layout = MainLayoutComponent;
 
@@ -45,14 +46,20 @@ export default function DetailPage() {
         const product: ProductModel = {
           ...data,
           id: data._id,
+          tags: data.tag.map((e: any) => {
+            return {
+              ...e,
+              id: e._id,
+            };
+          }),
           category: data.category.map((e: any) => {
             return {
               ...e,
-              id: e._id
-            }
-          })
+              id: e._id,
+            };
+          }),
         };
-        
+
         setProduct(product);
         getProductList(product.category[0]?.id);
       } catch (error) {
@@ -72,7 +79,7 @@ export default function DetailPage() {
           return {
             ...el,
             id: el._id,
-            tags: el.tag
+            tags: el.tag,
           };
         });
         setProductList(productList);
@@ -84,8 +91,8 @@ export default function DetailPage() {
     getProductDetail();
 
     return () => {
-      console.log('clean up');
-    }
+      console.log("clean up");
+    };
   }, [productID]);
 
   return (
@@ -97,50 +104,75 @@ export default function DetailPage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div>
-        <section id={styles.banner}></section>
+        <section
+          id={styles.banner}
+          style={{ backgroundImage: "url(" + product?.eye_catching + ")" }}
+        ></section>
         <div className={styles["field-top"]}>
           <div className={styles["inner-field"]}>
             <h3>
               <small>めいふつ</small>
-              <span>天むすの千寿</span>
+              <span>{product?.title}</span>
             </h3>
             <div className={styles.social}>
               <div className={styles.left}>
-                <span>#春</span>
-                <span>#晴れ</span>
+                {product?.tags &&
+                  product?.tags.map((tag) => {
+                    return <span key={tag.id}>#{tag.title}</span>;
+                  })}
               </div>
               <div className={styles.right}>
                 <ul>
-                  <li>
-                    <Link href="">
-                      <img src="/image/instagram.png" alt="" />
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="">
-                      <img src="/image/tw.png" alt="" />
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="">
-                      <img src="/image/fb.png" alt="" />
-                    </Link>
-                  </li>
+                  {product?.social?.facebook && (
+                    <li>
+                      <Link href={product?.social.facebook} target="_blank">
+                        <Image
+                          className={styles.image}
+                          src="/image/fb.png"
+                          alt=""
+                          fill
+                        />
+                      </Link>
+                    </li>
+                  )}
+                  {product?.social?.instagram && (
+                    <li>
+                      <Link href={product?.social.instagram} target="_blank">
+                        <Image
+                          className={styles.image}
+                          src="/image/instagram.png"
+                          alt=""
+                          fill
+                        />
+                      </Link>
+                    </li>
+                  )}
+                  {product?.social?.twitter && (
+                    <li>
+                      <Link href={product?.social.twitter} target="_blank">
+                        <Image
+                          className={styles.image}
+                          src="/image/tw.png"
+                          alt=""
+                          fill
+                        />
+                      </Link>
+                    </li>
+                  )}
                 </ul>
               </div>
             </div>
             <div className={styles["collection-video"]}>
-              <video controls>
-                <source
-                  src="https://www.youtube.com/watch?v=tk31vD3AhHA&ab_channel=MINHHI%E1%BA%BEUAG"
-                  type="video/mp4"
-                />
-                <source
-                  src="https://www.youtube.com/watch?v=tk31vD3AhHA&ab_channel=MINHHI%E1%BA%BEUAG"
-                  type="video/ogg"
-                />
-                Your browser does not support the video tag.
-              </video>
+              {product?.video?.includes("https://www.youtube.com/embed/") ? (
+                <iframe
+                  src={product?.video}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              ) : (
+                <video src={product?.video} controls></video>
+              )}
             </div>
           </div>
         </div>
@@ -150,26 +182,18 @@ export default function DetailPage() {
             <h3>
               <span>施設写真</span>
             </h3>
-            <div className={styles["collection-image"]}>
-              <div>
-                <img src="/image/img_facility1.png" alt="" />
+            {product?.image && product.image.length > 1 && (
+              <div className={styles["collection-image"]}>
+                {product?.image.map((e, index) => {
+                  return (
+                    <div key={e + index}>
+                      <img src={e} alt={e} />
+                    </div>
+                  );
+                })}
               </div>
-              <div>
-                <img src="/image/img_facility2.png" alt="" />
-              </div>
-              <div>
-                <img src="/image/img_facility3.png" alt="" />
-              </div>
-              <div>
-                <img src="/image/img_facility1.png" alt="" />
-              </div>
-              <div>
-                <img src="/image/img_facility2.png" alt="" />
-              </div>
-              <div>
-                <img src="/image/img_facility3.png" alt="" />
-              </div>
-            </div>
+              )
+            }
           </div>
         </div>
 
@@ -178,16 +202,9 @@ export default function DetailPage() {
             <h3>
               <span>施設紹介</span>
             </h3>
-            <p>
-              千寿は天むす発祥のお店です。現在では「天むす」という名前は全国に知れ渡っておりますが、初代の水谷ヨネが夫の為に栄養のあるものを―という愛情から天むすは生まれました。
-              <br />
-              <br />
-              それから絶え間ない試行錯誤の上、今でも皆様に愛される昔懐かしい味として親しまれております。
-              <br />
-              <br />
-              是非、一度、千寿の「めいふつ天むす」の天むすをご賞味くださいませ。皆様のご来店を心よりお待ちしております。
-              <br />
-            </p>
+            <p
+              dangerouslySetInnerHTML={{ __html: product?.description || "-" }}
+            ></p>
           </div>
         </div>
 
@@ -201,39 +218,37 @@ export default function DetailPage() {
                 <tr>
                   <td>
                     <label>場所</label>
-                    <span>三重県津市大門９−７</span>
+                    <span>{product?.address || "-"}</span>
                   </td>
                 </tr>
                 <tr>
                   <td>
                     <label>電話番号</label>
-                    <span>059-228-6798</span>
+                    <span>{product?.phone || "-"}</span>
                   </td>
                 </tr>
                 <tr>
                   <td>
                     <label>利用時間</label>
-                    <span>
-                      9:30～17:30 (但し、ご注文は17：00までの承りとなります)
-                    </span>
+                    <span>{product?.utilization_time || "-"}</span>
                   </td>
                 </tr>
                 <tr>
                   <td>
                     <label>休日</label>
-                    <span>毎週日曜日、第3月曜日</span>
+                    <span>{product?.holiday || "-"}</span>
                   </td>
                 </tr>
                 <tr>
                   <td>
                     <label>利用料金</label>
-                    <span>1000円〜</span>
+                    <span>{product?.fee || "-"}</span>
                   </td>
                 </tr>
                 <tr>
                   <td>
                     <label>駐車場</label>
-                    <span>5台あり</span>
+                    <span>{product?.parking || "-"}</span>
                   </td>
                 </tr>
                 <tr>
@@ -245,7 +260,7 @@ export default function DetailPage() {
                 <tr>
                   <td>
                     <label>備考</label>
-                    <span>-</span>
+                    <span>{product?.remark || "-"}</span>
                   </td>
                 </tr>
               </tbody>
@@ -254,7 +269,10 @@ export default function DetailPage() {
         </div>
 
         <BannerComponent bannerList={bannerList} />
-        <ProductComponent productList={productList} />
+        <ProductComponent
+          productList={productList}
+          categoryID={product?.category[0]?.id}
+        />
       </div>
     </>
   );

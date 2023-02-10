@@ -1,16 +1,19 @@
-
 import React from "react";
 import Slider from "react-slick";
 import { ProductModel } from "@/models/product.models";
 import styles from "./products.module.scss";
 import Link from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/router";
 
 export interface ProductComponentProps {
-  productList: ProductModel[];
+  productList: ProductModel[],
+  categoryID?: string
 }
 
 export default function ProductComponent(props: ProductComponentProps) {
-  const { productList } = props;
+  const router = useRouter();
+  const { productList, categoryID } = props;
 
   const settingsNextCategory = {
     dots: false,
@@ -33,9 +36,16 @@ export default function ProductComponent(props: ProductComponentProps) {
     <>
       <div className={styles.building + " building"}>
         <div className={styles.building_top}>
-          <img src="/image/img_facility3.png" alt="" />
+          <div className={styles.imageContainer}>
+            <Image
+              src={"/image/noimage.png"}
+              className={styles.image}
+              alt=""
+              fill
+            />
+          </div>
           <h3>おすすめ</h3>
-          <Link href="/">すべて見る</Link>
+          <Link href={`/category/${categoryID}`}>すべて見る</Link>
         </div>
         <div className={styles.content}>
           <Slider
@@ -44,11 +54,16 @@ export default function ProductComponent(props: ProductComponentProps) {
           >
             {productList.map((item, index) => {
               return (
-                <div className={styles.element} key={item.id}>
-                  <img
+                <div 
+                  className={styles.element} 
+                  key={item.id}
+                  onClick={() => router.push(`/detail/${item.id}`)}
+                >
+                  <Image
                     src={item.eye_catching}
                     className={styles["element-image"]}
                     alt=""
+                    fill
                   />
                   <div className={styles["content-element"]}>
                     <div>
