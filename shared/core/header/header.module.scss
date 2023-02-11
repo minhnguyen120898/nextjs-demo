@@ -16,6 +16,13 @@
     box-shadow: 0 0.3rem 0.6rem rgba(0, 0, 0, 0.4);
   }
 
+  .image {
+    object-fit: contain;
+    width: 100% !important;
+    position: relative !important;
+    height: unset !important;
+  }
+
   .header-content {
     display: flex;
     align-items: center;
@@ -25,6 +32,7 @@
   .left {
     #logo {
       display: block;
+      position: relative;
     }
   }
 
@@ -55,7 +63,7 @@
           padding: 0;
           cursor: pointer;
 
-          img {
+          .container-image {
             width: 2.6rem;
             height: 2.6rem;
             object-fit: cover;
@@ -201,10 +209,13 @@
   }
 
   .close-side-nav {
-    position: absolute;
+    position: absolute !important;
     top: 0;
     right: 0;
+    width: 1.7rem;
+    height: 2.4rem;
     padding: 1.5rem 3.2rem;
+    box-sizing: content-box;
     cursor: pointer;
 
     img {
@@ -300,7 +311,7 @@
           .icon {
             width: 3.3rem;
             height: 3.3rem;
-            img {
+            .container-image {
               width: 2rem;
               height: 2rem;
             }
@@ -333,9 +344,7 @@
     }
     .left {
       #logo {
-        img {
-          max-width: 11rem;
-        }
+        max-width: 11rem;
       }
     }
   }
