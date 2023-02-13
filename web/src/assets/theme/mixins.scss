@@ -1,6 +1,0 @@
-//MIXIN
-@mixin flex($just-content, $align-item) {
-    display: flex;
-    justify-content: $just-content;
-    align-items: $align-item;
-}
