@@ -11,6 +11,7 @@ import ProductComponent from "@/components/products";
 import BannerComponent from "@/components/banner";
 import Image from "next/image";
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
+import LoadingComponent from "@/core/loading";
 
 DetailPage.Layout = MainLayoutComponent;
 export interface DetailPageProps {
@@ -19,8 +20,7 @@ export interface DetailPageProps {
 
 export default function DetailPage({ product } : DetailPageProps) {
   const router = useRouter();
-  const { productID } = router.query;
-  // const [product, setProduct] = useState<ProductModel | null>(null);
+
   const [productList, setProductList] = useState<ProductModel[]>([]);
   const [bannerList, setBannerList] = useState<BannerModel[]>([]);
   useEffect(() => {
@@ -69,6 +69,10 @@ export default function DetailPage({ product } : DetailPageProps) {
       console.log("clean up");
     };
   }, []);
+
+  if (router.isFallback) {
+    return <LoadingComponent />
+  }
 
   return (
     <>
@@ -272,7 +276,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths: data.docs.map((product: any) => ({ params : { productID: product._id }})),
-    fallback: "blocking"
+    fallback: true
   }
 }
 
@@ -301,8 +305,13 @@ export const getStaticProps: GetStaticProps<DetailPageProps> = async (
   }
 
   return {
+    // will be passed to the page component as props
     props: {
       product: product
-    }, // will be passed to the page component as props
+    },
+    // Next.js will attempt to re-generate the page:
+    // - When a request comes in
+    // - At most once every 10 seconds
+    revalidate: 10 // In seconds
   }
 }
