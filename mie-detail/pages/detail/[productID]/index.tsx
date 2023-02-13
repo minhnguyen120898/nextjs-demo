@@ -47,6 +47,7 @@ export default function DetailPage({ product } : DetailPageProps) {
   }, []);
 
   useEffect(() => {
+    if (!product) return;
     const getProductList = async (categoryID: string) => {
       if (!categoryID) return;
       try {
@@ -286,9 +287,7 @@ export default function DetailPage({ product } : DetailPageProps) {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-
   const { data } = await ApiService.getProducts(1, 10);
-
   return {
     paths: data.docs.map((product: any) => ({ params : { productID: product._id }})),
     fallback: true
