@@ -56,11 +56,9 @@
 			// 	background: linear-gradient(to right, #10161bff 0%, #10161bb5 71%, #10161b00 100%);
 			// }
 
-			.image {
-				object-fit: cover;
-				width: 100% !important;
-				position: relative !important;
-				height: 100% !important;
+			img {
+				width: 100%;
+				height: 28.3rem;
 			}
 		}
 		.slick-center {

@@ -12,6 +12,7 @@ import BannerComponent from "@/components/banner";
 import Image from "next/image";
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
 import LoadingComponent from "@/core/loading";
+import { ImageModal } from "@/components/dialog";
 
 DetailPage.Layout = MainLayoutComponent;
 export interface DetailPageProps {
@@ -23,6 +24,9 @@ export default function DetailPage({ product } : DetailPageProps) {
 
   const [productList, setProductList] = useState<ProductModel[]>([]);
   const [bannerList, setBannerList] = useState<BannerModel[]>([]);
+  const [showModal, setShowModal] = useState(false);
+  const [imageSrc, setImageSrc] = useState('');
+
   useEffect(() => {
     const getBannerList = async () => {
       try {
@@ -43,6 +47,7 @@ export default function DetailPage({ product } : DetailPageProps) {
   }, []);
 
   useEffect(() => {
+    if (!product) return;
     const getProductList = async (categoryID: string) => {
       if (!categoryID) return;
       try {
@@ -69,6 +74,11 @@ export default function DetailPage({ product } : DetailPageProps) {
       console.log("clean up");
     };
   }, []);
+
+  const handleImageModal = (imageSrc?: string) => {
+    setImageSrc(imageSrc || "");
+    setShowModal(!showModal);
+  };
 
   if (router.isFallback) {
     return <LoadingComponent />
@@ -120,7 +130,7 @@ export default function DetailPage({ product } : DetailPageProps) {
                       <Link href={product?.social.facebook} target="_blank">
                         <Image
                           className={styles.image}
-                          src="/image/fb.png"
+                          src={"/image/fb.png"}
                           alt=""
                           fill
                         />
@@ -132,7 +142,7 @@ export default function DetailPage({ product } : DetailPageProps) {
                       <Link href={product?.social.instagram} target="_blank">
                         <Image
                           className={styles.image}
-                          src="/image/instagram.png"
+                          src={"/image/instagram.png"}
                           alt=""
                           fill
                         />
@@ -144,7 +154,7 @@ export default function DetailPage({ product } : DetailPageProps) {
                       <Link href={product?.social.twitter} target="_blank">
                         <Image
                           className={styles.image}
-                          src="/image/tw.png"
+                          src={"/image/tw.png"}
                           alt=""
                           fill
                         />
@@ -178,7 +188,9 @@ export default function DetailPage({ product } : DetailPageProps) {
               <div className={styles["collection-image"]}>
                 {product?.image.map((e, index) => {
                   return (
-                    <div key={e + index}>
+                    <div key={e + index} onClick={() => {
+                      handleImageModal(e)
+                    }}>
                       <img src={e} alt={e} />
                     </div>
                   );
@@ -265,15 +277,17 @@ export default function DetailPage({ product } : DetailPageProps) {
           productList={productList}
           categoryID={product?.category[0]?.id}
         />
+
+        {showModal && (
+          <ImageModal imageSrc={imageSrc} handleImageModal={handleImageModal} />
+        )}
       </div>
     </>
   );
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-
   const { data } = await ApiService.getProducts(1, 10);
-
   return {
     paths: data.docs.map((product: any) => ({ params : { productID: product._id }})),
     fallback: true

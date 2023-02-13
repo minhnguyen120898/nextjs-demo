@@ -59,12 +59,13 @@ export default function ProductComponent(props: ProductComponentProps) {
                   key={item.id}
                   onClick={() => router.push(`/detail/${item.id}`)}
                 >
-                  <Image
+                  {/* <Image
                     src={item.eye_catching}
                     className={styles["element-image"]}
                     alt=""
                     fill
-                  />
+                  /> */}
+                  <img src={item.eye_catching} className={styles["element-image"]} alt="" />
                   <div className={styles["content-element"]}>
                     <div>
                       {item.tags?.map((tag, j) => {
