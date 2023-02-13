@@ -10,13 +10,17 @@ import { ProductModel } from "@/models/product.models";
 import ProductComponent from "@/components/products";
 import BannerComponent from "@/components/banner";
 import Image from "next/image";
+import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
 
 DetailPage.Layout = MainLayoutComponent;
+export interface DetailPageProps {
+  product: ProductModel
+}
 
-export default function DetailPage() {
+export default function DetailPage({ product } : DetailPageProps) {
   const router = useRouter();
   const { productID } = router.query;
-  const [product, setProduct] = useState<ProductModel | null>(null);
+  // const [product, setProduct] = useState<ProductModel | null>(null);
   const [productList, setProductList] = useState<ProductModel[]>([]);
   const [bannerList, setBannerList] = useState<BannerModel[]>([]);
   useEffect(() => {
@@ -39,34 +43,6 @@ export default function DetailPage() {
   }, []);
 
   useEffect(() => {
-    if (!productID) return;
-    const getProductDetail = async () => {
-      try {
-        const { data } = await ApiService.getProductDetail(productID as string);
-        const product: ProductModel = {
-          ...data,
-          id: data._id,
-          tags: data.tag.map((e: any) => {
-            return {
-              ...e,
-              id: e._id,
-            };
-          }),
-          category: data.category.map((e: any) => {
-            return {
-              ...e,
-              id: e._id,
-            };
-          }),
-        };
-
-        setProduct(product);
-        getProductList(product.category[0]?.id);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
     const getProductList = async (categoryID: string) => {
       if (!categoryID) return;
       try {
@@ -88,20 +64,32 @@ export default function DetailPage() {
       }
     };
 
-    getProductDetail();
-
+    getProductList(product.category[0]?.id);
     return () => {
       console.log("clean up");
     };
-  }, [productID]);
+  }, []);
 
   return (
     <>
       <Head>
-        <title>{productID}</title>
-        <meta name="description" content="Title for detail page" />
+        <title>{'MIE | ' + product?.meta_title}</title>
+        <meta name="description" content={product?.meta_description} />
+        <meta name="keywords" content="mie" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href={product?.eye_catching} />
+        {/* <!-- Facebook Meta Tags --> */}
+        <meta property="og:title" content={'MIE | ' + product?.meta_title} />
+        <meta property="og:description" content={product?.meta_description} />
+        <meta property="og:image" content={product?.eye_catching}/>
+        <meta property="og:url" content={process.env.domain} />
+        <meta property="og:type" content="website" />
+        {/* <!-- Twitter Meta Tags --> */}
+        <meta name="twitter:card" content={product?.eye_catching} />
+        <meta name="twitter:title" content={'MIE | ' + product?.meta_title} />
+        <meta name="twitter:description" content={product?.meta_description} />
+        <meta name="twitter:image" content={product?.eye_catching} />
+        <meta name="twitter:url" content={process.env.domain} />
       </Head>
       <div>
         <section
@@ -276,4 +264,45 @@ export default function DetailPage() {
       </div>
     </>
   );
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+
+  const { data } = await ApiService.getProducts(1, 10);
+
+  return {
+    paths: data.docs.map((product: any) => ({ params : { productID: product._id }})),
+    fallback: "blocking"
+  }
+}
+
+export const getStaticProps: GetStaticProps<DetailPageProps> = async (
+  context: GetStaticPropsContext
+) => {
+  const productID = context.params?.productID;
+  if (!productID) return { notFound: true };
+
+  const { data } = await ApiService.getProductDetail(productID as string);
+  const product: ProductModel = {
+    ...data,
+    id: data._id,
+    tags: data.tag.map((e: any) => {
+      return {
+        ...e,
+        id: e._id,
+      };
+    }),
+    category: data.category.map((e: any) => {
+      return {
+        ...e,
+        id: e._id,
+      };
+    }),
+  }
+
+  return {
+    props: {
+      product: product
+    }, // will be passed to the page component as props
+  }
 }

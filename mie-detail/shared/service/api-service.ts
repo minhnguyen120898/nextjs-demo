@@ -14,5 +14,9 @@ export const ApiService = {
 
   getProductDetail(product_id: string) {
     return axiosClient.get(`work/${product_id}`);
+  },
+
+  getProducts(page: number = 1, limit: number = 10) {
+    return axiosClient.get(`work?page=${page}&limit=${limit}`);
   }
 }
