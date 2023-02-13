@@ -47,7 +47,7 @@ export default function BannerComponent(props: BannerComponentProps) {
           return (
             <div className={styles.item + " " + "item"} key={banner.id}>
               <Image
-                src={banner.image}
+                src={`${banner.image}`}
                 alt={banner.url}
                 fill
                 className={styles.image}
