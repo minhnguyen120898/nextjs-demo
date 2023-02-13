@@ -46,12 +46,13 @@ export default function BannerComponent(props: BannerComponentProps) {
         { bannerList.map((banner: BannerModel) => {
           return (
             <div className={styles.item + " " + "item"} key={banner.id}>
-              <Image
+              {/* <Image
                 src={`${banner.image}`}
                 alt={banner.url}
                 fill
                 className={styles.image}
-              />
+              /> */}
+              <img src={banner.image} alt="" />
             </div>
           )
         })}
