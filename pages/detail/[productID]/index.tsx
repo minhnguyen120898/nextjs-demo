@@ -98,6 +98,8 @@ export default function DetailPage({ product } : DetailPageProps) {
         <meta property="og:image" content={product?.eye_catching}/>
         <meta property="og:url" content={process.env.domain} />
         <meta property="og:type" content="website" />
+        <meta property="og:image:width" content="1080" />
+        <meta property="og:image:height" content="600" />
         {/* <!-- Twitter Meta Tags --> */}
         <meta name="twitter:card" content={product?.eye_catching} />
         <meta name="twitter:title" content={'MIE | ' + product?.meta_title} />
