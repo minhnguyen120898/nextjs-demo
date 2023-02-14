@@ -95,7 +95,7 @@ export default function DetailPage({ product } : DetailPageProps) {
         {/* <!-- Facebook Meta Tags --> */}
         <meta property="og:title" content={'MIE | ' + product?.meta_title} />
         <meta property="og:description" content={product?.meta_description} />
-        <meta property="og:image" content={product?.eye_catching}/>
+        <meta property="og:image" content={'https://yt3.googleusercontent.com/0yJ_bk5jB_NR537ItGMCjpvb5gUexwNjI5Qsw3Zvva6L1--xkSOqAPoYLRXG45yz7DuqWJI9FmI=s88-c-k-c0x00ffffff-no-rj'}/>
         <meta property="og:url" content={process.env.domain} />
         <meta property="og:type" content="website" />
         <meta property="og:image:width" content="1080" />
