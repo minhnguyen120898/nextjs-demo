@@ -1,0 +1,119 @@
+/* SLIDER BANNER */
+.slider-banner {
+	background-color: #10161b;
+	padding: 13.2rem 0 7.4rem;
+	position: relative;
+
+	.slick-prev1 {
+		left: 4rem;
+	}
+	.slick-next1 {
+		right: 4rem;
+	}
+	.slick-slider {
+		.item {	
+			width: 66.2rem !important;
+			padding: 0 3.2rem;
+			height: 28.3rem;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background-size: cover;
+			background-position: center;
+			background-repeat: no-repeat;
+			cursor: pointer;
+			position: relative;
+			&::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 13.3rem;
+				width: calc(100% - 13.3rem);
+				height: 100%;
+				background: linear-gradient(to right, #10161bff 0%, #10161bb5 71%, #10161b00 100%);
+			}
+
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+		}
+
+		.slick-center {
+			&::before {
+				background: unset !important;
+			}
+		}
+
+		.slick-next {
+			&::before {
+				right: 0;
+				left: 13.3rem;
+				background: linear-gradient(to left, #10161bff 0%, #10161bb5 71%, #10161b00 100%);
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 1366px) {
+  .slider-banner {
+    .slick-slider {
+      .item {
+        max-width: 44.8rem;
+        &::before {
+          right: 13.3rem;
+          width: calc(100% - 13.3rem);
+        }
+        &.slick-active {
+          & + .item {
+            &:not(.slick-active):before {
+              right: 0;
+              left: 13.3rem;
+            }
+          }
+        }
+      }
+    }
+  }  
+}
+
+@media screen and (max-width: 768px) {
+  .slider-banner {
+    padding-top: 8rem;
+    padding-bottom: 3.2rem;
+    .slick-slider {
+      .item {
+				width: 100% !important;
+				max-width: unset;
+        height: 16.3rem;
+        padding: calc(3.7rem/2);
+
+				&::before {
+					content: none;
+				}
+      }
+    }
+    .slick-dots {
+      li {
+        button {
+          &:before {
+            font-size: 0.9rem;
+          }
+        }
+        &.slick-active {
+          button {
+            &:before {
+              font-size: 1.2rem;
+            }
+          }
+        }
+      }
+    }
+  }
+  .slider-banner .slick-prev1, 
+    .slider-banner .slick-next1 {
+    display: none;
+  }  
+}
